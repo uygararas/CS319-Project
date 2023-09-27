@@ -23,7 +23,7 @@ The primary objectives of CampusConnect include the following aspects:
 CampusConnect addresses an obvious issue within the university community – the fragmentation of digital communication and interaction. Members rely on disparate platforms to fulfill their campus-related requisites, resulting in a lack of cohesion and operational inefficiency. Our web application serves as an integrative solution, unifying these disparate needs and enhancing campus connectivity.
 
 ### Features:
-**Marketplace:** A dedicated digital marketplace for the trading of second-hand goods within the university community. It allows users to negotiate the price of the products with their sellers.
+- **Marketplace:** A dedicated digital marketplace for the trading of second-hand goods within the university community. It allows users to negotiate the price of the products with their sellers.
 - **Messaging:** A built-in communication system allowing members to connect and collaborate.
 - **Lost and Found:** A platform for the documentation and recovery of lost items.
 - **Resource Sharing:** Facilitating the lending and borrowing of academic resources, textbooks, equipment, and similar assets.
@@ -32,13 +32,13 @@ CampusConnect addresses an obvious issue within the university community – the
 
 
 ### Selling Points:
--Exclusivity: CampusConnect is an exclusive digital domain tailored solely for our university, ensuring a close-knit and focused community. It will provide user authentication to ensure that all the users are Bilkent only. 
+- Exclusivity: CampusConnect is an exclusive digital domain tailored solely for our university, ensuring a close-knit and focused community. It will provide user authentication to ensure that all the users are Bilkent only. 
 
 - Convenience: The web application offers a centralized hub for fulfilling a spectrum of lost item tracking, second-hand trading, and collaboration, enhancing operational ease for all constituents.
 
 - Sustainability: The platform actively promotes eco-friendly practices through the promotion of reuse and recycling by its very nature. 
 
-Community Building: CampusConnect seeks to foster a profound sense of community and collaboration within Bilkent University.
+- Community Building: CampusConnect seeks to foster a profound sense of community and collaboration within Bilkent University.
 
 
 ### Distinctive Appeal:
