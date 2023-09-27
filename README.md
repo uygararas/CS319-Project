@@ -1,13 +1,13 @@
 # Project Title: CampusConnect
 
-## Team Members:
+### Team Members:
 - [Yasemin Akın 22101782]
 - [Uygar Aras 22103277]
 - [Bengisu Serinken 22102760]
 - [Ulaş Keskin 22101766]
 - [Murat Ertan 22003067]
 
-## Description:
+### Description:
 CampusConnect is a dedicated social networking platform tailored exclusively for the university community. Regardless of your role as a student, faculty member, or staff in Bilkent University, CampusConnect serves as an online ecosystem for facilitating various functionalities, including but not limited to secondary market transactions, lost and found item management, lending, and borrowing activities, as well as donations, among other features.
 
 ### Motivation:
