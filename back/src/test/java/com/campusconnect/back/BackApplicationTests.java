@@ -1,10 +1,10 @@
-package com.example.campusconnect;
+package com.campusconnect.back;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CampusConnectApplicationTests {
+class BackApplicationTests {
 
     @Test
     void contextLoads() {

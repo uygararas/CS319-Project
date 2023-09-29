@@ -1,13 +1,13 @@
-package com.example.campusconnect;
+package com.campusconnect.back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CampusConnectApplication {
+public class BackApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CampusConnectApplication.class, args);
+        SpringApplication.run(BackApplication.class, args);
     }
 
 }
