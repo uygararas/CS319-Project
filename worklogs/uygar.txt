@@ -1,0 +1,2 @@
+This is the worklog for uygar aras for week of 25 of september.
+This week we had our initial meeting and a broad workshare. started working on java spring myself and initialized the project file in intelliJ
