@@ -1,2 +1,9 @@
-This is the worklog for uygar aras for week of 25 of september.
-This week we had our initial meeting and a broad workshare. started working on java spring myself and initialized the project file in intelliJ
+This is the work log for Uygar Aras for the week of 25 September.
+This week, we had our initial meeting and a broad workshare. started working on Java Spring myself and initialized the project file in IntelliJ
+Week of October 2
+This week, we have discussed the backend part of our project, the class structures, how we should design the use case diagram,
+and the relationship between the classes. We fixed our meeting schedules this week.
+My achievements were: My role changed from the backend developer of the application to the frontend side, so I started 
+improving my skills in React.js.
+Week of October 9
+The whole week, we did a job sharing at the start of the week and then started designing the use case diagram of our project. I was responsible for the getItem part of the use case diagram and the related package. also, Yasemin and I were responsible for writing the NFR in the report file. I also did my work in writing the explanatory part for the cases in the package that I edited throughout the week.
