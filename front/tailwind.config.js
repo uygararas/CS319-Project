@@ -8,6 +8,10 @@ export default {
     './node_modules/flowbite/**/*.js'
   ],
   theme: {
+    colors: {
+      'dark-royal-blue': '#002366',
+      'gold': '#FFD700',
+    },
     extend: {},
   },
   plugins: [flowbite],

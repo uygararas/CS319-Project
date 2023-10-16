@@ -1,12 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom';
 import './index.css'
-import Test from "./test.jsx";
 import Navbar from "./components/navbar.jsx";
-import '../flowbite.min.js';
+import 'flowbite';
+import Sidebar from "./components/sidebar.jsx";
+import Homepage from "./pages/homepage.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Navbar />
-  </React.StrictMode>,
-)
+// eslint-disable-next-line react/no-deprecated
+ReactDOM.render(
+    <React.StrictMode>
+        <Homepage />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
