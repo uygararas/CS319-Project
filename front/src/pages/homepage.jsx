@@ -6,7 +6,6 @@ function Homepage() {
     return(
         <div>
             <Navbar />
-            <Sidebar />
             <HomePageMiddle />
         </div>
     );

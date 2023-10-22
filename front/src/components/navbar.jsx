@@ -1,12 +1,43 @@
 function Navbar () {
     return (
-        <nav className="sticky top-0 bg-white border-gray-200 dark:bg-gray-900">
+        <nav className="sticky top-0 border-1 border-gray-200 bg-gray-900">
             <div className="flex flex-wrap items-center justify-between p-4">
                 <div className="flex">
-                    <a href="https://flowbite.com/" className="flex items-center mr-5">
-                        <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
+                    <a href="/home" className="flex items-center">
+                        <img src="../../public/logo.png" className="h-10 mr-4 rounded-full" alt="Campus Connect Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Campus Connect</span>
                     </a>
+                </div>
+                <div className="flex">
+                    <button className="mr-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button"><a href="/post-item">Post Item</a></button>
+                    <button id="dropdownDefaultButton2" data-dropdown-toggle="dropdown2" className="mr-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Search Item by Category<svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                    </button>
+
+                    <div id="dropdown2" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton2">
+                            <li>
+                                <a href={`/category/${encodeURIComponent('Second Hand Items')}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Second Hand Items</a>
+                            </li>
+                            <li>
+                                <a href={`/category/${encodeURIComponent('Donations')}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Donations</a>
+                            </li>
+                            <li>
+                                <a href={`/category/${encodeURIComponent('Lended Items')}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lended Items</a>
+                            </li>
+                            <li>
+                                <a href={`/category/${encodeURIComponent('Rented Items')}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rented Items</a>
+                            </li>
+                            <li>
+                                <a href={`/category/${encodeURIComponent('Found Items')}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Found Items</a>
+                            </li>
+                            <li>
+                                <a href={`/category/${encodeURIComponent('Lost Items')}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lost Items</a>
+                            </li>
+                        </ul>
+                    </div>
+
                     <form className="flex items-center">
                         <label htmlFor="default-search" className="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                         <div className="relative">
@@ -19,20 +50,10 @@ function Navbar () {
                             <button type="submit" className="text-white absolute right-1.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                         </div>
                     </form>
-                </div>
-                <div className="flex">
-                    <a href="/post-item" className="p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <span className="text-sm font-light text-center">Post Item</span>
-                    </a>
-                    <a href="/chart" className="ml-5 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
-                        </svg>
-                    </a>
                     <div className="flex items-center md:order-2 ml-5">
                         <button type="button" className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span className="sr-only">Open user menu</span>
-                            <img className="w-8 h-8 rounded-full" src="src/components/IMG_3445.PNG" alt="user photo"></img>
+                            <img className="w-8 h-8 rounded-full" src="../../public/IMG_3445.PNG" alt="user photo"></img>
                         </button>
                         <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                             <div className="px-4 py-3">
@@ -41,10 +62,16 @@ function Navbar () {
                             </div>
                             <ul className="py-2" aria-labelledby="user-menu-button">
                                 <li>
-                                    <a href="/user-profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">View Profile</a>
+                                    <a href={`/category/${encodeURIComponent('Active Posts')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">View Active Posts</a>
                                 </li>
                                 <li>
-                                    <a href="/sign-out" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                                    <a href={`/category/${encodeURIComponent('Old Posts')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">View Old Posts</a>
+                                </li>
+                                <li>
+                                    <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Chats</a>
+                                </li>
+                                <li>
+                                    <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                                 </li>
                             </ul>
                         </div>
