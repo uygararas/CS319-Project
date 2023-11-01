@@ -15,3 +15,9 @@ Week 4: 9-13 October
 
 Week 5: 16-20 October
   Worked on class diagram and textualising it. Completed most parts of the UI for mockups. Completed D2 and pushed it to GitHub. Next week, planing to finalise UI and start to make connections to backhend (implement the request-respond logic) and make the app's first post to system.
+
+Week 6: 23-27 October
+  Worked on the use-case diagram of the system more according to the feedbacks have given to it by the TA. Continued to the implementation of the frontend. Next week we will be finalising D1-D2, finish editing them and deliver their last versions to the TA. Also planning to continue frontend implementation.
+
+Week 7: 30 October - 3 November
+  
