@@ -20,4 +20,5 @@ Week 6: 23-27 October
   Worked on the use-case diagram of the system more according to the feedbacks have given to it by the TA. Continued to the implementation of the frontend. Next week we will be finalising D1-D2, finish editing them and deliver their last versions to the TA. Also planning to continue frontend implementation.
 
 Week 7: 30 October - 3 November
+  Worked on D1-D2. Will be finishing the user interface implementation next week.
   
