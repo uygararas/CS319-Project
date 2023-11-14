@@ -9,8 +9,8 @@ export default {
   ],
   theme: {
     colors: {
-      'dark-royal-blue': '#002366',
-      'gold': '#FFD700',
+      'default-background': '#f1f2ed',
+      'navbar-border-shadow': '#9e9e9e',
     },
     extend: {},
   },

@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.body {
+    font-family: 'Plus Jakarta Display', sans-serif;
+    letter-spacing: 0.02em;
+    font-size: 16px;
+    line-height: 1.75em;
+    background-color: #f1f2ed;
+}
