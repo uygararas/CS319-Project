@@ -7,3 +7,7 @@ My achievements were: My role changed from the backend developer of the applicat
 improving my skills in React.js.
 Week of October 9
 The whole week, we did a job sharing at the start of the week and then started designing the use case diagram of our project. I was responsible for the getItem part of the use case diagram and the related package. also, Yasemin and I were responsible for writing the NFR in the report file. I also did my work in writing the explanatory part for the cases in the package that I edited throughout the week.
+Week of October 16
+This week I have worked througly on deliverable 2 with Yasemin I believe that we achieved a lot with the report,We also made progress in the react part of our application
+Week of October 23 
+I have started to study on the backend side of the application for further support then helped Yasemin on the front side of the application.
