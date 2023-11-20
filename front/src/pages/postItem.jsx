@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Navbar from "../components/navbar.jsx";
+import PhotoUpload from "../components/photoUpload.jsx";
 function PostItem() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [productTitle, setProductTitle] = useState("");
@@ -108,7 +109,9 @@ function PostItem() {
     };
 
     return(
-        <section className="bg-white dark:bg-gray-900 h-auto">
+        <div>
+        <Navbar/>
+        <section className="bg-white dark:bg-gray-900 h-auto bg-gradient-to-b from-white to-gray-300">
             <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
                 <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
                 <form onSubmit={handleSubmit}>
@@ -167,6 +170,7 @@ function PostItem() {
                                 <option value="M">M</option>
                             </select>
                         </div>
+                        <PhotoUpload/>
                         <div className="sm:col-span-2">
                             <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                             <textarea id="description" rows="8" onChange={handleDescriptionChange} value={selectedDescription} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>
@@ -178,6 +182,7 @@ function PostItem() {
                 </form>
             </div>
         </section>
+        </div>
     );
 }
 export default PostItem;

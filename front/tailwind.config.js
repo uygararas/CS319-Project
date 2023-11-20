@@ -9,8 +9,8 @@ export default {
   ],
   theme: {
     colors: {
-      'default-background': '#f1f2ed',
-      'navbar-border-shadow': '#9e9e9e',
+      'blue-text': '#1e3a8a',
+      'blue-hover-text': '#3b82f6',
     },
     extend: {},
   },
