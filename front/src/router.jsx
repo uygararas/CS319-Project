@@ -6,6 +6,7 @@ import ChangePassword from "./pages/changePassword.jsx";
 import Homepage from "./pages/homepage.jsx";
 import PostItem from "./pages/postItem.jsx";
 import CategoryPages from "./pages/categoryPages.jsx";
+import ItemDetails from "./pages/itemDetails.jsx";
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -36,6 +37,10 @@ function Router () {
         {
             path: '/category/:categoryName',
             element: <CategoryWrapper/>
+        },
+        {
+            path: '/view-details/:itemId',
+            element: <ItemDetails/>
         },
     ]);
     return (

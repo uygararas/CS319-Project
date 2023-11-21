@@ -2,6 +2,44 @@ import { useState } from 'react';
 import Navbar from "../components/navbar.jsx";
 import PhotoUpload from "../components/photoUpload.jsx";
 function PostItem() {
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (isFormValid()) {
+            // Prepare the data to be sent
+            const postData = {
+                title: productTitle,
+                description: selectedDescription,
+                category: selectedCategory,
+            };
+
+            try {
+                // Send the POST request to the backend server
+                const response = await fetch('http://localhost:5173/api/Items', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Include any additional headers like authentication tokens if needed
+                    },
+                    body: JSON.stringify(postData),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const responseData = await response.json();
+                console.log('Form submitted successfully:', responseData);
+                // Handle the response data as needed, maybe reset the form or redirect the user
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
+        } else {
+            alert('Please fill in all required fields with appropriate values.');
+        }
+    };
+
     const [selectedCategory, setSelectedCategory] = useState("");
     const [productTitle, setProductTitle] = useState("");
     const [selectedCondition, setSelectedCondition] = useState("");
@@ -97,7 +135,7 @@ function PostItem() {
         }
     };
 
-    const handleSubmit = (event) => {
+    /*const handleSubmit = (event) => {
         event.preventDefault();
 
         if (isFormValid()) {
@@ -106,7 +144,7 @@ function PostItem() {
         } else {
             alert('Please fill in all required fields with appropriate values.');
         }
-    };
+    };*/
 
     return(
         <div>

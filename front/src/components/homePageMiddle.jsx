@@ -13,7 +13,7 @@ function HomePageMiddle() {
             <section className="h-screen bg-center bg-no-repeat bg-[url('https://scontent.fesb3-1.fna.fbcdn.net/v/t31.18172-8/21552009_1489979164372853_664001206582317381_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7f8c78&_nc_ohc=BvWX9HNCbB0AX8rZbcq&_nc_ht=scontent.fesb3-1.fna&oh=00_AfCNJSyQLjQUp-vy5P_15esVv079DZNMAz0J7XJPC3AIVA&oe=657C3C63')] bg-gray-700 bg-blend-multiply">
                 <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <h1 className="mb-20 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Welcome to CampusConnect: Your University's Social Marketplace</h1>
+                    <h1 className="mb-20 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Welcome to CampusConnect: Bilkent University's Social Marketplace</h1>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center font-thin sm:space-y-0">
                         <button onClick={scrollToTarget}  className="inline-flex justify-center items-center py-3 px-5 text-lg text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
