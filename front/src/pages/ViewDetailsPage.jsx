@@ -1,7 +1,7 @@
-import Navbar from "../components/navbar.jsx";
+import Navbar from "../components/Navbar.jsx";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-function ItemDetails() {
+function ViewDetailsPage() {
     const [item, setItem] = useState(null);
     const { itemId } = useParams();
     /*useEffect(() => {
@@ -40,4 +40,4 @@ function ItemDetails() {
     );
 }
 
-export default ItemDetails;
+export default ViewDetailsPage;

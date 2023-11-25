@@ -1,26 +1,26 @@
 import React from "react";
 import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
-import LoginPage from "./pages/loginPage.jsx";
-import SignUpForm from "./pages/signUpForm.jsx";
-import ChangePassword from "./pages/changePassword.jsx";
-import Homepage from "./pages/homepage.jsx";
-import PostItem from "./pages/postItem.jsx";
-import CategoryPages from "./pages/categoryPages.jsx";
-import ItemDetails from "./pages/itemDetails.jsx";
+import AuthenticationPage from "./pages/AuthenticationPage.jsx";
+import RegistrationPage from "./pages/RegistrationPage.jsx";
+import ChangePassword from "./pages/PasswordChangePage.jsx";
+import MainPage from "./pages/MainPage.jsx";
+import PostProductPage from "./pages/PostProductPage.jsx";
+import PreviewProductsPages from "./pages/PreviewProductsPages.jsx";
+import ViewDetailsPage from "./pages/ViewDetailsPage.jsx";
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
-    return <CategoryPages categoryName={decodeURIComponent(categoryName)} />;
+    return <PreviewProductsPages categoryName={decodeURIComponent(categoryName)} />;
 }
 function Router () {
     const router = createBrowserRouter([
         {
             path: '/',
-            element: <LoginPage />,
+            element: <AuthenticationPage />,
         },
         {
             path: '/sign-up',
-            element: <SignUpForm />,
+            element: <RegistrationPage />,
         },
         {
             path: '/change-password',
@@ -28,11 +28,11 @@ function Router () {
         },
         {
             path: '/home',
-            element: <Homepage />,
+            element: <MainPage />,
         },
         {
             path: '/post-item',
-            element: <PostItem />,
+            element: <PostProductPage />,
         },
         {
             path: '/category/:categoryName',
@@ -40,7 +40,7 @@ function Router () {
         },
         {
             path: '/view-details/:itemId',
-            element: <ItemDetails/>
+            element: <ViewDetailsPage/>
         },
     ]);
     return (
