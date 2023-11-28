@@ -7,6 +7,13 @@ function AuthenticationPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // For testing purposes, bypass the login logic
+        // and redirect to the home page directly:
+        window.location.href = '/home';
+
+        // Comment out the real login logic during testing
+        /*
         try {
             const response = await axios.post('http://localhost:8080/user/login', { email, password });
             // Assuming the backend returns a successful response for valid credentials
@@ -21,8 +28,8 @@ function AuthenticationPage() {
             console.error('Login error:', error);
             alert('Login error');
         }
+        */
     };
-
     return (
         <div className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900">
             <div className="flex justify-center items-center h-screen">
