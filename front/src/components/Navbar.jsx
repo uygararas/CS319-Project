@@ -9,22 +9,22 @@ function Navbar () {
                     <a href="/post-item" className="text-blue-hover-text hover:text-blue-text">
                         Post Product
                     </a>
-                    <a href={`/category/${encodeURIComponent('Second Hands')}`} className="hover:text-blue-hover-text">
+                    <a href={`/category/${encodeURIComponent('secondHandItem')}`} className="hover:text-blue-hover-text">
                         Second Hands
                     </a>
-                    <a href={`/category/${encodeURIComponent('Donations')}`} className="hover:text-blue-hover-text">
+                    <a href={`/category/${encodeURIComponent('donatedItem')}`} className="hover:text-blue-hover-text">
                         Donations
                     </a>
-                    <a href={`/category/${encodeURIComponent('Lends')}`} className="hover:text-blue-hover-text">
+                    <a href={`/category/${encodeURIComponent('lendItem')}`} className="hover:text-blue-hover-text">
                         Lends
                     </a>
-                    <a href={`/category/${encodeURIComponent('Rentals')}`} className="hover:text-blue-hover-text">
+                    <a href={`/category/${encodeURIComponent('rentedItem')}`} className="hover:text-blue-hover-text">
                         Rentals
                     </a>
-                    <a href={`/category/${encodeURIComponent('Founds')}`} className="hover:text-blue-hover-text">
+                    <a href={`/category/${encodeURIComponent('foundItem')}`} className="hover:text-blue-hover-text">
                         Founds
                     </a>
-                    <a href={`/category/${encodeURIComponent('Losts')}`} className="hover:text-blue-hover-text">
+                    <a href={`/category/${encodeURIComponent('lostItem')}`} className="hover:text-blue-hover-text">
                         Losts
                     </a>
                 </div>

@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Entites;
+package com.example.CampusConnect.Entities;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -36,6 +36,7 @@ public abstract class Item {
     private String description;
     private boolean isGiven = false;
     private String imageUrl;
+    private String category;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

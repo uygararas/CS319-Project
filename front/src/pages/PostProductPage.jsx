@@ -2,9 +2,11 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Navbar from "../components/Navbar.jsx";
+import {useNavigate} from "react-router-dom";
 
 function PostProductPage() {
 
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formattedDate = date.toLocaleString('en-GB', {
@@ -73,6 +75,7 @@ function PostProductPage() {
         } else {
             alert('Please fill in all required fields with appropriate values.');
         }
+        navigate('')
     };
 
     const [type, setType] = useState("");
@@ -341,7 +344,6 @@ function PostProductPage() {
                                         timeCaption="time"
                                         minTime={minTime}
                                         maxTime={maxTime}
-
                             />
                         </div>
                         <div className="sm:col-span-2">

@@ -1,6 +1,6 @@
 package com.example.CampusConnect.Services;
 
-import com.example.CampusConnect.Entites.CCuser;
+import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Repositories.CCuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

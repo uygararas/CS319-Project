@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Entites;
+package com.example.CampusConnect.Entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Entites;
+package com.example.CampusConnect.Entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.persistence.Entity;
@@ -17,4 +17,8 @@ public class RentedItem extends Item{
     private String condition;
     private BigDecimal price;
 
+    public RentedItem() {
+        super();
+        setCategory("rentedItem");
+    }
 }
