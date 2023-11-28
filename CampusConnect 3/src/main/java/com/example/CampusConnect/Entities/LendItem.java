@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Entites;
+package com.example.CampusConnect.Entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.persistence.Entity;
@@ -13,4 +13,9 @@ public class LendItem extends Item{
 
     private String duration;
     private String condition;
+
+    public LendItem() {
+        super();
+        setCategory("lendItem");
+    }
 }

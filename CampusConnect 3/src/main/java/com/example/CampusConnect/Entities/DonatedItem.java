@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Entites;
+package com.example.CampusConnect.Entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.persistence.Entity;
@@ -12,4 +12,9 @@ import lombok.Setter;
 public class DonatedItem extends Item{
 
     private String condition;
+
+    public DonatedItem() {
+        super();
+        setCategory("donatedItem");
+    }
 }

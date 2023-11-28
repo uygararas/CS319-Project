@@ -1,7 +1,6 @@
 package com.example.CampusConnect.Services;
 
-import com.example.CampusConnect.Entites.CCuser;
-import com.example.CampusConnect.Entites.Item;
+import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Repositories.CCuserRepository;
 import com.example.CampusConnect.Repositories.ItemRepository;
 import jakarta.transaction.Transactional;
@@ -50,5 +49,9 @@ public class ItemService {
 
     public List<Item> findAllItemsSorted() {
         return itemRepository.findAllByOrderByCreatedAtDesc();
+    }
+
+    public List<Item> findByType(String category) {
+        return itemRepository.findByCategory(category);
     }
 }

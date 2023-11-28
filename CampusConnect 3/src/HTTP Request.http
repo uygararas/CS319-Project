@@ -5,3 +5,20 @@ Content-Type: application/json
   "email": "uygar.aras@ug.bilkent.edu.tr",
   "password": "u"
 }
+
+###
+GET http://localhost:8080/items?category=lostItem
+
+###
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+    "type": "lostItem",
+    "title": "Your Title",
+    "description": "Your Description",
+    "imageUrl": "Your Image URL",
+    "location": null,
+    "dateLost": null,
+    "given": false
+  }

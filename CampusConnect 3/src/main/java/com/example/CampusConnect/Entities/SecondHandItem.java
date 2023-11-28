@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Entites;
+package com.example.CampusConnect.Entities;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -18,6 +18,7 @@ public class SecondHandItem extends Item{
 
     public SecondHandItem() {
         super(); // Calls the default constructor of Item
+        setCategory("secondHandItem");
     }
 
 }
