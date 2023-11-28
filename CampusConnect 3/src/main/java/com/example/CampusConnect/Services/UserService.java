@@ -32,8 +32,9 @@ public class UserService {
         userRepository.save(user);
 
         // Send verification email
-        String verificationUrl = "http://yourdomain.com/user/verify?token=" + user.getVerificationToken();
+        String verificationUrl = "http://localhost:5173/verify-email?token=" + user.getVerificationToken();
         emailService.sendVerificationEmail(user.getEmail(), verificationUrl);
+
     }
 
     // Verify the user

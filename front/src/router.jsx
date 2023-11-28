@@ -1,5 +1,5 @@
 import React from "react";
-import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
 import AuthenticationPage from "./pages/AuthenticationPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import ChangePassword from "./pages/PasswordChangePage.jsx";
@@ -7,12 +7,14 @@ import MainPage from "./pages/MainPage.jsx";
 import PostProductPage from "./pages/PostProductPage.jsx";
 import PreviewProductsPages from "./pages/PreviewProductsPages.jsx";
 import ViewDetailsPage from "./pages/ViewDetailsPage.jsx";
+import EmailVerificationPage from "./pages/EmailVerificationPage.jsx"; // Import the new component
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
     return <PreviewProductsPages categoryName={decodeURIComponent(categoryName)} />;
 }
-function Router () {
+
+function Router() {
     const router = createBrowserRouter([
         {
             path: '/',
@@ -36,18 +38,23 @@ function Router () {
         },
         {
             path: '/category/:categoryName',
-            element: <CategoryWrapper/>
+            element: <CategoryWrapper />
         },
         {
             path: '/view-details/:itemId',
-            element: <ViewDetailsPage/>
+            element: <ViewDetailsPage />
         },
+        {
+            path: '/verify-email',
+            element: <EmailVerificationPage /> // Add the new route here
+        }
     ]);
+
     return (
         <React.StrictMode>
             <RouterProvider router={router} />
         </React.StrictMode>
     );
 }
-export default Router;
 
+export default Router;
