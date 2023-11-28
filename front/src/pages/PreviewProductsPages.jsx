@@ -1,41 +1,36 @@
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
-//import { useState, useEffect } from 'react';
+import {useState, useEffect} from "react";
 
-function PreviewProductsPages() {
-    //const [items, setItems] = useState([]);
-    /*useEffect(() => {
-        // Fetch items based on categoryName
-        fetch(`https://your-backend-endpoint.com/items?category=${encodeURIComponent(categoryName)}`)
-            .then(response => response.json())
-            .then(data => setItems(data))
-            .catch(error => console.error('Error:', error));
-    }, [categoryName]);*/
+// eslint-disable-next-line react/prop-types
+function PreviewProductsPages({categoryName}) {
+    const [products, setProducts] = useState([])
+    const getProducts = async () => {
+        const res = await fetch(
+            `http://localhost:8080/items?category=${categoryName}`, {
+                method: 'GET',
+            }
+        );
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const json = await res.json();
+        setProducts(json);
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
     return(
         <div>
             <Navbar />
             <div className="px-20 py-10 bg-gradient-to-b from-white to-gray-300">
                 {/* eslint-disable-next-line react/prop-types */}
                 <div className="grid grid-cols-4 gap-20 ">
-                    {//items.map(item => <ProductCard key={item.id} item={item} />)}
-                        <ProductCard />}
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                    {products.map(product => (
+                        <ProductCard key={product.itemId} product={product} />
+                    ))}
                 </div>
             </div>
         </div>

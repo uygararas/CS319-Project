@@ -1,7 +1,7 @@
 package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.Services.ItemService;
-import com.example.CampusConnect.Entites.Item;
+import com.example.CampusConnect.Entities.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,10 +49,15 @@ public class ItemController {
 
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
-
     @GetMapping("/items")
-    public List<Item> getAllItems() {
-        return itemService.findAllItemsSorted();
+    public ResponseEntity<List<Item>> getItemsByCategory(@RequestParam(required = false) String category) {
+        List<Item> items;
+        if (category != null && !category.isEmpty()) {
+            items = itemService.findByType(category);
+        } else {
+            items = itemService.findAllItemsSorted(); // Assuming this method returns all items
+        }
+        return ResponseEntity.ok(items);
     }
 
     @PutMapping("/items/{id}")

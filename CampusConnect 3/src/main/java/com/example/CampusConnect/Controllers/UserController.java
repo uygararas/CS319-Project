@@ -1,7 +1,7 @@
 package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.Services.UserService;
-import com.example.CampusConnect.Entites.CCuser;
+import com.example.CampusConnect.Entities.CCuser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
