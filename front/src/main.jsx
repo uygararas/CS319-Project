@@ -1,10 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import ReactDOM from 'react-dom';
 import './index.css'
+import 'flowbite';
+import Router from "./router.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+// eslint-disable-next-line react/no-deprecated
+ReactDOM.render(
+    <React.StrictMode>
+        <Router />
+    </React.StrictMode>,
+    document.getElementById('root')
+);

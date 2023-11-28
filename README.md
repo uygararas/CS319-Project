@@ -22,7 +22,7 @@ The primary objectives of CampusConnect include the following aspects:
 ### Problem Solving:
 CampusConnect addresses an obvious issue within the university community – the fragmentation of digital communication and interaction. Members rely on disparate platforms to fulfill their campus-related requisites, resulting in a lack of cohesion and operational inefficiency. Our web application serves as an integrative solution, unifying these disparate needs and enhancing campus connectivity.
 
-### Features:
+### Features of Campus Connect:
 - **Marketplace:** A dedicated digital marketplace for the trading of second-hand goods within the university community. It allows users to negotiate the price of the products with their sellers.
 - **Messaging:** A built-in communication system allowing members to connect and collaborate.
 - **Lost and Found:** A platform for the documentation and recovery of lost items.

@@ -1,9 +1,24 @@
 Week 1: 18–22 September
-  We formed our group and I have sent an email  to our TA Yahya according to make the group approved.
+  We formed our group and I have sent an email to our TA Yahya according to make the group approved.
 
 Week 2: 25-29 September
   We met for our first meeting and talked about previous experiences and what each group member would like to do in order to contribute to the project.
 Decided on a second meeting date to write README for out GitHub repo. At the second meeting, we wrote README and brainstromed aboutb the project.
 Decided on our tech stack and to open React and Java Spring projects and push them to GitHub as well as initalizing a database somehow. I created 
-a React+Vite project in JetBrains IDE WebStorm and pushed it to our repo and talked a little with Murat about database formation. Also I have drawn a basic class diagram 
-to have a generic idea about the backend side of our project. In the next week, we plan to test front, back and database connection by testing if a pilot request and respond duo behave as intended. 
+a React+Vite project in JetBrains IDE WebStorm and pushed it to our repo and talked a little with Murat about database formation. Also I have drawn a basic class diagram to have a generic idea about the backend side of our project. In the next week, we plan to test front, back and database connection by testing if a pilot request and respond duo behave as intended. 
+
+Week 3: 2-6 October 
+  We have discussed about the backend structure of our project. Stuff like which class to include, inherit or tables to add to our database are basic topics of our discussions. Decided to use local databases while at the development stage and use AWS cloud at the deploy stage. We also fixed our meeting schedule as 2 certain meeting in a week and if needed plan extra urgent meetings. Finalize the distribution of the tasks. I am going to be in the frontend side of the project mostly. Added Flowbite and TailwindCSS configurations to our React project. Decided to meet again at the start of the week and put together use-case diagram for our project as one from the use-case diagrams that each one of the team member will prepare until the next meeting on monday.
+
+Week 4: 9-13 October
+  Shared the use-case diagram that I have prepared in Visual Paradigm with my team and together we constructed a nearly-complete use-case diagram on monday. Shared duties to complete the undone parts of the use-case diagram and write textual version of our use-case diagram. I took the postItem package to complete and textualize. Untill thursday, I finalized the Post Item package at the use case diagram and with the team we made final discussions and touch ups to the completed use case diagram. After writing the textual description of the Post Item package, I have pushed "Deliverable 1" file to our GitHub repo. I have also started implemeting the frontend in React.js and constructed a suitable navbar for the app. Next week I am planning to continue implementation in React.js and complete most of the implementation procedure for the frontend part of the project.
+
+Week 5: 16-20 October
+  Worked on class diagram and textualising it. Completed most parts of the UI for mockups. Completed D2 and pushed it to GitHub. Next week, planing to finalise UI and start to make connections to backhend (implement the request-respond logic) and make the app's first post to system.
+
+Week 6: 23-27 October
+  Worked on the use-case diagram of the system more according to the feedbacks have given to it by the TA. Continued to the implementation of the frontend. Next week we will be finalising D1-D2, finish editing them and deliver their last versions to the TA. Also planning to continue frontend implementation.
+
+Week 7: 30 October - 3 November
+  Worked on D1-D2. Will be finishing the user interface implementation next week.
+  
