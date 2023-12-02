@@ -4,6 +4,8 @@ import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Repositories.CCuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
@@ -18,6 +20,15 @@ public class UserService {
         this.userRepository = userRepository;
         //this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+    }
+
+    public boolean checkCredentials(String email, String password) {
+        Optional<CCuser> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            return false;
+        }
+        CCuser user = userOpt.get();
+        return user.getPassword().equals(password); // Direct string comparison (unsafe!)
     }
 
     // Register a new user
@@ -48,6 +59,28 @@ public class UserService {
         }
 
         return false;
+    }
+
+    public boolean verifyPassword(String email, String password) {
+        Optional<CCuser> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            return false; // Email not found
+        }
+        CCuser user = userOpt.get();
+        return user.getPassword().equals(password); // Direct string comparison (unsafe!)
+    }
+
+    public boolean emailExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean verifyIsEmailVerified(String email) {
+        Optional<CCuser> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isPresent()) {
+            CCuser user = userOpt.get();
+            return user.isEmailVerified();
+        }
+        return false; // Email not found, consider how you want to handle this case
     }
 
     // Additional methods like loginUser, updateUser, deleteUser can be added here

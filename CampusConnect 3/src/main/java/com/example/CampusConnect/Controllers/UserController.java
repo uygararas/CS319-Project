@@ -34,4 +34,20 @@ public class UserController {
         }
     }
 
+/*
+    //Endpoint for authenticating a user while logging in
+    //@GetMapping("/user/authenticate")
+    @PostMapping("/user/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+        boolean isValidUser = userService.checkCredentials(email, password);
+
+        if (isValidUser) {
+            // Create a simple success response. Normally, you would create a JWT or similar token here.
+            return ResponseEntity.ok(Map.of("success", true));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Invalid credentials"));
+        }
+    }*/
 }

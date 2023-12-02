@@ -30,6 +30,10 @@ public class CCuser {
     // New field to store verification token
     private String verificationToken;
 
+    public boolean getIsEmailVerified() {
+        return isEmailVerified;
+    }
+
     // New field to store email verification status
     private boolean isEmailVerified;
 
@@ -55,6 +59,11 @@ public class CCuser {
     public void verifyEmail() {
         this.isEmailVerified = true;
     }
+
+    public boolean isEmailVerified() {
+        return isEmailVerified;
+    }
+
 
     // Getters and setters will be handled by Lombok
 }
