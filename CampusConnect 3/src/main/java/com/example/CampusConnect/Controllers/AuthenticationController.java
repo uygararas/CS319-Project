@@ -1,5 +1,6 @@
 package com.example.CampusConnect.Controllers;
 
+import com.example.CampusConnect.Services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,11 @@ import org.springframework.http.MediaType;
 
 @CrossOrigin(origins = "http://localhost:5173")
 public class AuthenticationController {
+    private final UserService userService;
     @Autowired
-    private UserService userService;
+    public AuthenticationController(UserService userService) {
+        this.userService = userService;
+    }
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @PostMapping("/user/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {

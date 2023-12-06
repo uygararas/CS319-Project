@@ -2,6 +2,26 @@
 function ProductCard ({ product }) {
     // eslint-disable-next-line react/prop-types
     const { imageUrl, title, description, type, itemId } = product;
+    function formatItemType(type) {
+        switch (type) {
+            case 'secondHandItem':
+                return 'Second Hand Item';
+            case 'donatedItem':
+                return 'Donated Item';
+            case 'lostItem':
+                return 'Lost Item';
+            case 'foundItem':
+                return 'Found Item';
+            case 'lendItem':
+                return 'Lend Item';
+            case 'rentedItem':
+                return 'Rented Item';
+            default:
+                return 'Unknown Type';
+        }
+    }
+
+    const itemTypeFormatted = formatItemType(type);
 
     return(
         <div className="border border-gray-300 hover:border-blue-hover-text hover:text-blue-hover-text rounded dark:bg-gray-900 dark:border-gray-700 bg-white">
@@ -11,7 +31,7 @@ function ProductCard ({ product }) {
                 <h6 className="productCardExplanation">{description}</h6>
             </div>
             <div className="p-[16px] text-center">
-                <h6 className="productCardCategory mb-[16px] pb-[16px] border-b border-gray-300">{type}</h6>
+                <h6 className="productCardCategory mb-[16px] pb-[16px] border-b border-gray-300">{itemTypeFormatted}</h6>
                 <a href={`/view-details/${itemId}`} className="hover:underline productCardTitle hover:text-blue-text">
                     <div className="flex items-center text-sm justify-center">
                         View Details

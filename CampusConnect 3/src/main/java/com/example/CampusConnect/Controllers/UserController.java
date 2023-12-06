@@ -1,5 +1,6 @@
 package com.example.CampusConnect.Controllers;
 
+import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Services.UserService;
 import com.example.CampusConnect.Entities.CCuser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:5173")
 
 public class UserController {
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     // Existing endpoint for user registration
     @PostMapping("/user/register")

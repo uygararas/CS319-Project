@@ -2,10 +2,13 @@ package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Entities.Item;
+import com.example.CampusConnect.Services.StorageService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,7 +20,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @Autowired
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemService itemService, StorageService storageService) {
         this.itemService = itemService;
     }
 
@@ -27,10 +30,28 @@ public class ItemController {
         return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
     }*/
 
-    @PostMapping("/items")
+    /*@PostMapping("/items")
     public ResponseEntity<Item> createItem(@RequestBody Item Item) {
         Item createdItem = itemService.createAndSaveItem(Item);
         return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
+    }*/
+
+    @PostMapping(value = "/items", consumes = {"multipart/form-data"})
+    public ResponseEntity<Item> createItem(@RequestParam("item") String itemJson,
+                                           @RequestParam("image") MultipartFile image) {
+        try {
+            // Convert JSON string to Item object
+            ObjectMapper objectMapper = new ObjectMapper();
+            Item item = objectMapper.readValue(itemJson, Item.class);
+
+            // Create and save the item with the image
+            Item createdItem = itemService.createAndSaveItem(item, image);
+
+            return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // Handle exceptions
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/items/{id}")
@@ -60,6 +81,7 @@ public class ItemController {
         return ResponseEntity.ok(items);
     }
 
+    /*
     @PutMapping("/items/{id}")
     public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
         Item existingItem = itemService.findById(id)
@@ -73,6 +95,6 @@ public class ItemController {
         Item updatedItem = itemService.createAndSaveItem(existingItem);
         return new ResponseEntity<>(updatedItem, HttpStatus.OK);
     }
-
+*/
     // Other endpoints...
 }

@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Config;
+/*package com.example.CampusConnect.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -22,4 +22,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/chat");
         registry.addEndpoint("/chat").withSockJS();
     }
-}
+}*/

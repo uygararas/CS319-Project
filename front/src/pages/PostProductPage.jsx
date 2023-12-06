@@ -18,6 +18,8 @@ function PostProductPage() {
             hour12: true
         });
         if (isFormValid()) {
+            const formData = new FormData();
+            formData.append('image', imageFile); // Append the image file
             // Prepare the data to be sent
             const postData = {
                 type: type,
@@ -50,16 +52,12 @@ function PostProductPage() {
                     condition: condition,
                 }),
             };
-
+            formData.append('item', JSON.stringify(postData));
             try {
                 // Send the POST request to the backend server
                 const response = await fetch('http://localhost:8080/items', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // Include any additional headers like authentication tokens if needed
-                    },
-                    body: JSON.stringify(postData),
+                    body: formData, // Send formData instead of JSON
                 });
 
                 if (!response.ok) {
@@ -82,6 +80,7 @@ function PostProductPage() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl]=useState("");
+    const [imageFile, setImageFile] = useState(null);
 
     const [condition, setCondition] = useState("");
     const [price, setPrice] = useState(0);
@@ -162,15 +161,15 @@ function PostProductPage() {
             alert('Invalid file type');
             return;
         }
-
-        const url = URL.createObjectURL(file);
-        setImageUrl(url);
-
         // File size validation (e.g., 5MB limit)
         const maxSize = 5 * 1024 * 1024; // 5MB in bytes
         if (file.size > maxSize) {
             alert('File size exceeds limit');
         }
+
+        const url = URL.createObjectURL(file);
+        setImageUrl(url); // For image preview
+        setImageFile(file); // Store the file object for form submission
     };
 
     const durationToDays = (number, type) => {
@@ -324,8 +323,8 @@ function PostProductPage() {
                             <label htmlFor="condition" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Condition</label>
                             <select id="condition" onChange={handleConditionChange} value={condition} className="disabled:opacity-25 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" disabled={type === 'lostItem' || type === 'foundItem'}>
                                 <option value="">Select condition</option>
-                                <option value="Like new">Like new</option>
-                                <option value="Very good">Very good</option>
+                                <option value="Like New">Like New</option>
+                                <option value="Very Good">Very Good</option>
                                 <option value="Good">Good</option>
                                 <option value="Fair">Fair</option>
                                 <option value="Poor">Poor</option>
