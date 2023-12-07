@@ -54,7 +54,7 @@ public class AuthenticationController {
 
             logger.info("Authentication successful for email: " + email);
             // Inside the login method after successful authentication
-            String token = jwtUtil.generateToken(email,email,userId); // Assuming jwtUtil is a JWT utility class
+            String token = jwtUtil.generateToken(userId); // Assuming jwtUtil is a JWT utility class
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.APPLICATION_JSON)

@@ -13,12 +13,13 @@ apiService.interceptors.request.use(config => {
     return config;
 });
 
-apiService.getEmail = async () => {
+// Add a new method to fetch email by userId
+apiService.getEmailByUserId = async (userId) => {
     try {
-        const response = await apiService.get('/get-email');
+        const response = await apiService.get(`/getEmailByUserId?userId=${userId}`);
         return response.data; // The email
     } catch (error) {
-        console.error('Error fetching email:', error);
+        console.error('Error fetching email by userId:', error);
         return null;
     }
 };

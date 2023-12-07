@@ -13,15 +13,15 @@ public class JwtUtil {
     private final String secretKey = "yasemin";
 
     // Method to generate a token
-    public String generateToken(String username, String email, Long userId) {
+    // JwtUtil.java
+    public String generateToken(Long userId) {
         return JWT.create()
-                .withSubject(username)
-                .withClaim("email", email)
-                .withClaim("userId", userId) // Adding the user ID
+                .withClaim("userId", userId)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 100)) // 100 hour validity
                 .sign(Algorithm.HMAC256(secretKey));
     }
+
 
     // Method to validate a token
     public Boolean validateToken(String token, String username) {

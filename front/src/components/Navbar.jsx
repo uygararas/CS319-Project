@@ -15,10 +15,20 @@ function Navbar () {
 
 
     useEffect(() => {
+        const fetchEmail = async () => {
+            const token = sessionStorage.getItem('jwtToken');
+            const payload = decodeJWT(token);
+            const userId = payload.userId;
 
-        const token = sessionStorage.getItem('jwtToken');
-        const payload = decodeJWT(token);
-        setUserEmail(payload.email);
+            try {
+                const email = await apiService.getEmailByUserId(userId);
+                setUserEmail(email);
+            } catch (error) {
+                console.error('Error fetching email:', error);
+            }
+        };
+
+        fetchEmail();
     }, []);
     return (
         <nav className="flex items-center body bg-white sticky top-0 z-50 shadow-inner shadow-gray-400 w-full h-[80px]">
