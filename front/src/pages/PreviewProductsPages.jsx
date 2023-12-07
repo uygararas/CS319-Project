@@ -14,6 +14,7 @@ function PreviewProductsPages({ categoryName }) {
         try {
             const response = await apiService.get(`/items?category=${categoryName}`);
             setProducts(response.data);
+            console.log(response.data);
         } catch (error) {
             console.error('Error fetching products:', error);
         }
@@ -22,7 +23,7 @@ function PreviewProductsPages({ categoryName }) {
     return (
         <div>
             <Navbar />
-            <div className="px-20 py-10 bg-gradient-to-b from-white to-gray-300">
+            <div className="px-20 py-10 bg-gradient-to-b from-white to-gray-300 h-screen">
                 <div className="grid grid-cols-4 gap-20 ">
                     {products.map(product => (
                         <ProductCard key={product.itemId} product={product} />

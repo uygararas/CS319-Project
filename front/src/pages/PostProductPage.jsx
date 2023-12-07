@@ -8,8 +8,12 @@ import apiService from '../services/apiService';
 function PostProductPage() {
 
     const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
         const formattedDate = date.toLocaleString('en-GB', {
             day: '2-digit',
             month: '2-digit',
@@ -70,6 +74,7 @@ function PostProductPage() {
             } catch (error) {
                 console.error('Error submitting form:', error);
                 alert("Error in submitting form");
+                setIsSubmitting(false);
             }
         } else {
             alert('Please fill in all required fields with appropriate values.');
@@ -361,8 +366,8 @@ function PostProductPage() {
                             <textarea id="description" maxLength={160} rows="8" onChange={handleDescriptionChange} value={description} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type your description here"></textarea>
                         </div>
                     </div>
-                    <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                        Add product
+                    <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800" disabled={isSubmitting}>
+                        {isSubmitting ? "Submitting..." : "Add Product"}
                     </button>
                 </form>
             </div>
