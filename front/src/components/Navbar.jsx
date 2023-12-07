@@ -1,4 +1,25 @@
+import React, { useState, useEffect } from 'react';
+import apiService from '../services/apiService';
 function Navbar () {
+    const [userEmail, setUserEmail] = useState('');
+
+    const decodeJWT = (token) => {
+        const base64Url = token.split('.')[1]; // Get the payload part
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+
+        return JSON.parse(jsonPayload);
+    };
+
+
+
+    useEffect(() => {
+
+        const token = sessionStorage.getItem('jwtToken');
+        const payload = decodeJWT(token);
+        setUserEmail(payload.email);
+    }, []);
     return (
         <nav className="flex items-center body bg-white sticky top-0 z-50 shadow-inner shadow-gray-400 w-full h-[80px]">
             <div className="flex items-center justify-between pl-4 pr-4 pb-1 pt-1 w-full">
@@ -48,7 +69,7 @@ function Navbar () {
                         </button>
                         <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                             <div className="px-4 py-3">
-                                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name.surname@role.bilkent.edu.tr</span>
+                                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">{userEmail}</span>
                             </div>
                             <ul className="py-2" aria-labelledby="user-menu-button">
                                 <li>

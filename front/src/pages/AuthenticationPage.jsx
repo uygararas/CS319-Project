@@ -1,5 +1,6 @@
+// AuthenticationPage.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import apiService from '../services/apiService';
 
 function AuthenticationPage() {
     const [email, setEmail] = useState('');
@@ -10,23 +11,17 @@ function AuthenticationPage() {
 
         try {
             console.log('Starting login process...');
-            const response = await axios.post('http://localhost:8080/user/login', { email, password });
+            const response = await apiService.post('/user/login', { email, password });
             console.log('Response from backend:', response);
 
             if (response.data.success) {
-                // Redirect to the home page on successful login
+                sessionStorage.setItem('jwtToken', response.data.token);
                 window.location.href = '/home';
-            } else {
-                if (response.data.body === 'Email not verified') {
-                    alert('Email Not Verified');
-                } else {
-                    // Handle other invalid credentials cases
-                    alert('Invalid email or password');
-                }
             }
-        }catch (error) {
+        } catch (error) {
             console.error('Login error:', error);
-            alert('Login error');
+            alert(error.response.data);
+
         }
     };
 

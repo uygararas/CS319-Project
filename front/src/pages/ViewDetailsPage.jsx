@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar.jsx";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import apiService from '../services/apiService';
 function ViewDetailsPage() {
     const initialProduct = ({
                                 type,
@@ -41,19 +42,15 @@ function ViewDetailsPage() {
     const [product, setProduct] = useState({});
 
     const getProduct = async () => {
-        const res = await fetch(
-            `http://localhost:8080/items/${itemId}`, {
-                method: 'GET',
-            }
-        );
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+        try {
+            const response = await apiService.get(`/items/${itemId}`);
+            setProduct(response.data); // response.data is already a JavaScript object
+        } catch (error) {
+            console.error('Error fetching product details:', error);
+            // Handle the error appropriately
         }
-        const json = await res.json();
-        console.log(json);
+    };
 
-        setProduct(json);
-    }
 
     useEffect(() => {
         console.log(itemId);

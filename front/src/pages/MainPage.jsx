@@ -1,9 +1,11 @@
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import {useEffect, useRef, useState} from "react";
-function MainPage() {
+import apiService from '../services/apiService';
 
-    const [products, setProducts] = useState([])
+
+function MainPage() {
+    const [products, setProducts] = useState([]);
     /*const initialProduct = ({
                                type,
                                title,
@@ -41,19 +43,15 @@ function MainPage() {
     useEffect(() => {
         getProducts();
     }, []);
-
     const getProducts = async () => {
-        const res = await fetch(
-            'http://localhost:8080/items', {
-                method: 'GET',
-            }
-        );
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+        try {
+            const response = await apiService.get('/items');
+            setProducts(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            // Handle the error appropriately
         }
-        const json = await res.json();
-        setProducts(json);
-    }
+    };
 
     const targetRef = useRef(null);
 

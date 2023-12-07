@@ -1,4 +1,38 @@
-function passwordChangePage() {
+import React, { useState } from 'react';
+import apiService from '../services/apiService';
+
+
+function PasswordChangePage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        try {
+            const response = await apiService.post('/change-password', {
+                email,
+                newPassword: password
+            });
+            if (response.data.success) {
+                // Password change successful
+                alert('Password changed successfully');
+                // Redirect or other actions
+            } else {
+                // Handle error
+                alert('Password change failed');
+            }
+        } catch (error) {
+            console.error('Password change error:', error);
+            alert('Error changing password');
+        }
+    };
     return(
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -30,4 +64,4 @@ function passwordChangePage() {
         </section>
     );
 }
-export default passwordChangePage;
+export default PasswordChangePage;

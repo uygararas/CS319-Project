@@ -10,19 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.view.RedirectView;
 import com.example.CampusConnect.Services.UserService;
+import com.example.CampusConnect.Util.*;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 @Controller
 
 @CrossOrigin(origins = "http://localhost:5173")
 public class AuthenticationController {
     private final UserService userService;
+    private final JwtUtil jwtUtil;
     @Autowired
-    public AuthenticationController(UserService userService) {
+    public AuthenticationController(UserService userService,  JwtUtil jwtUtil) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @PostMapping("/user/login")
@@ -48,10 +53,13 @@ public class AuthenticationController {
             }
 
             logger.info("Authentication successful for email: " + email);
+            // Inside the login method after successful authentication
+            String token = jwtUtil.generateToken(email,email); // Assuming jwtUtil is a JWT utility class
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(Map.of("success", true));
+                    .body(Map.of("token", token, "success", true));
+
         } catch (Exception e) {
             logger.error("Login error: " + e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Login error");

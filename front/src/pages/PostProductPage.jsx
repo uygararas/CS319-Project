@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Navbar from "../components/Navbar.jsx";
 import {useNavigate} from "react-router-dom";
+import apiService from '../services/apiService';
 
 function PostProductPage() {
 
@@ -54,21 +55,21 @@ function PostProductPage() {
             };
             formData.append('item', JSON.stringify(postData));
             try {
-                // Send the POST request to the backend server
-                const response = await fetch('http://localhost:8080/items', {
-                    method: 'POST',
-                    body: formData, // Send formData instead of JSON
+                const response = await apiService.post('/items', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data' // Specify the content type for formData
+                    }
                 });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                if (response.status === 200 || response.status === 201) {
+                    console.log('Form submitted successfully:', response.data);
+                    alert("Form submitted successfully");
+                    navigate('/home'); // Redirect or other actions after successful submission
+                    return;
                 }
-
-                const responseData = await response.json();
-                console.log('Form submitted successfully:', responseData);
-                // Handle the response data as needed, maybe reset the form or redirect the user
             } catch (error) {
                 console.error('Error submitting form:', error);
+                alert("Error in submitting form");
             }
         } else {
             alert('Please fill in all required fields with appropriate values.');

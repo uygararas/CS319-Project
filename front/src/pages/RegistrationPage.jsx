@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import apiService from '../services/apiService';
 
 function RegistrationPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
+    const isValidBilkentEmail = (email) => {
+        return email.endsWith('bilkent.edu.tr') || email.endsWith('ug.bilkent.edu.tr');
+    };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -14,28 +19,26 @@ function RegistrationPage() {
             alert("Passwords don't match");
             return;
         }
-        navigate('/'); // Navigate to the login page
+        if (!isValidBilkentEmail(email)) {
+            alert("Please use a valid Bilkent email address.");
+            return;
+        }
         try {
-            // Your existing POST request logic
-            const response = await fetch('http://localhost:8080/user/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
+            const response = await apiService.post('/user/register', {
+                email, password
             });
-
-            if (!response.ok) {
+            console.log("hi");
+            if (response.status === 200) {
+                alert("Registration successful. Please check your email to verify your account.");
+                navigate('/'); // Navigate to the login page or another appropriate page
+            } else {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
-            // Assuming successful registration
-            alert("Registration successful. Please check your email to verify your account.");
-
         } catch (error) {
             console.error('Error during registration:', error);
         }
     };
+
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">

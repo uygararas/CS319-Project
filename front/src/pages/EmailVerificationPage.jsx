@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import apiService from '../services/apiService';
+
 
 function EmailVerificationPage() {
     const [verificationStatus, setVerificationStatus] = useState('Verifying...');
@@ -19,11 +20,9 @@ function EmailVerificationPage() {
 
     const verifyEmail = async (token) => {
         try {
-            const response = await axios.get(`http://localhost:8080/user/verify?token=${token}`);
-            // Handle the positive response here
+            const response = await apiService.get(`/user/verify?token=${token}`);
             setVerificationStatus('Your email has been successfully verified!');
         } catch (error) {
-            // Handle the negative response here
             setVerificationStatus('Failed to verify email. Please try again or contact support.');
         }
     };
