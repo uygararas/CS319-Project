@@ -16,6 +16,6 @@ public class FoundItem extends Item{
 
     public FoundItem() {
         super();
-        setCategory("foundItems");
+        setCategory("foundItem");
     }
 }
