@@ -14,6 +14,7 @@ import java.util.UUID; // Import for generating unique verification token
 @Table(name = "CCusers")
 public class CCuser {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
