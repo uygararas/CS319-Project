@@ -3,9 +3,11 @@ package com.example.CampusConnect.Controllers;
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Services.UserService;
 import com.example.CampusConnect.Entities.CCuser;
+import com.example.CampusConnect.Util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 @RestController
 //@RequestMapping("/user")
@@ -25,6 +27,7 @@ public class UserController {
         userService.registerUser(user);
         return ResponseEntity.ok("Registration successful, please check your email to verify your account.");
     }
+
 
     // Endpoint for verifying user email
     @GetMapping("/user/verify")
