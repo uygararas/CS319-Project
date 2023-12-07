@@ -6,23 +6,20 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import java.util.Date;
-import java.security.SecureRandom;
-import java.util.Base64;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
-
-
-    private String secretKey = "yasemin";
+    private final String secretKey = "yasemin";
 
     // Method to generate a token
-    public String generateToken(String username,String email) {
+    public String generateToken(String username, String email, Long userId) {
         return JWT.create()
                 .withSubject(username)
                 .withClaim("email", email)
+                .withClaim("userId", userId) // Adding the user ID
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 100)) // 100 hour validity
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 100)) // 100 hour validity
                 .sign(Algorithm.HMAC256(secretKey));
     }
 
@@ -34,7 +31,7 @@ public class JwtUtil {
                     .build();
             verifier.verify(token);
             return true;
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             // Token invalid
             return false;
         }
@@ -46,5 +43,9 @@ public class JwtUtil {
         return jwt.getSubject();
     }
 
-
+    // Method to extract user ID from token
+    public Long extractUserId(String token) {
+        DecodedJWT jwt = JWT.decode(token);
+        return jwt.getClaim("userId").asLong();
+    }
 }
