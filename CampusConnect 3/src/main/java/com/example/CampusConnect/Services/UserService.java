@@ -83,5 +83,19 @@ public class UserService {
         return false; // Email not found, consider how you want to handle this case
     }
 
+    public Long getUserIdByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(CCuser::getUserId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+
+    public String getEmailByUserId(Long userId) {
+        return userRepository.findById(userId)
+                .map(CCuser::getEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+
     // Additional methods like loginUser, updateUser, deleteUser can be added here
 }

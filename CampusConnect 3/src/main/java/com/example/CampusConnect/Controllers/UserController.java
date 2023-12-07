@@ -41,6 +41,18 @@ public class UserController {
         }
     }
 
+    // UserController.java
+    @GetMapping("/getEmailByUserId")
+    public ResponseEntity<String> getEmailByUserId(@RequestParam Long userId) {
+        try {
+            String email = userService.getEmailByUserId(userId);
+            return ResponseEntity.ok(email);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+
 /*
     //Endpoint for authenticating a user while logging in
     //@GetMapping("/user/authenticate")

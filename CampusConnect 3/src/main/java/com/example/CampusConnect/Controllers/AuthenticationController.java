@@ -34,7 +34,7 @@ public class AuthenticationController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
-
+        Long userId = userService.getUserIdByEmail(email);
         try {
             logger.info("Login attempt for email: " + email);
             if (!userService.emailExists(email)) {
@@ -54,7 +54,7 @@ public class AuthenticationController {
 
             logger.info("Authentication successful for email: " + email);
             // Inside the login method after successful authentication
-            String token = jwtUtil.generateToken(email,email); // Assuming jwtUtil is a JWT utility class
+            String token = jwtUtil.generateToken(email,email,userId); // Assuming jwtUtil is a JWT utility class
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.APPLICATION_JSON)
