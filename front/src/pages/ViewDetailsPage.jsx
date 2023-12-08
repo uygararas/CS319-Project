@@ -2,12 +2,44 @@ import Navbar from "../components/Navbar.jsx";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiService from '../services/apiService';
-import SessionService from "../services/sessionService.js";
 function ViewDetailsPage() {
+    const initialProduct = ({
+                                type,
+                                title,
+                                description,
+                                imageUrl,
+                                condition,
+                                location,
+                                dateLost,
+                                duration,
+                                price
+                            }) => {
+        const baseProduct = {
+            type,
+            title,
+            description,
+            imageUrl
+        };
+        switch (type) {
+            case 'donatedItem':
+                return { ...baseProduct, condition };
+            case 'lostItem':
+                return { ...baseProduct, location, dateLost };
+            case 'foundItem':
+                return { ...baseProduct, location, dateLost };
+            case 'lendItem':
+                return { ...baseProduct, duration, condition };
+            case 'rentedItem':
+                return { ...baseProduct, condition, duration, price };
+            case 'secondHandItem':
+                return { ...baseProduct, condition, price };
+            default:
+                return baseProduct;
+        }
+    };
 
     const { itemId } = useParams();
     const [product, setProduct] = useState({});
-    const userId = SessionService.getUserId();
 
     const getProduct = async () => {
         try {
@@ -15,19 +47,10 @@ function ViewDetailsPage() {
             setProduct(response.data); // response.data is already a JavaScript object
         } catch (error) {
             console.error('Error fetching product details:', error);
+            // Handle the error appropriately
         }
     };
-    const changeIsGiven = async () => {
-        try {
-            const response = await apiService.put(`/${itemId}/toggle-given`);
-            if (response.status === 200 || response.status === 201) {
-                console.log('Product status is changed succesfully!:', response.data);
-                alert("Product status is changed succesfully!");
-            }
-        } catch (error) {
-            console.error('Error fetching product details:', error);
-        }
-    }
+
 
     useEffect(() => {
         console.log(itemId);
@@ -35,32 +58,32 @@ function ViewDetailsPage() {
     }, []);
 
     const renderPrice = () => {
-        if (product.category === 'secondHandItem' || product.category === 'rentedItem') {
+        if (product.type === 'secondHandItem' || product.type === 'rentedItem') {
             return <h3 className="text-4xl my-4">Price: {product.price}</h3>;
         }
         return null;
     };
     const renderDuration = () => {
-        if (product.category === 'lendItem' || product.category === 'rentedItem') {
+        if (product.type === 'lendItem' || product.type === 'rentedItem') {
             return <h3 className="text-4xl my-4">Item is planned to be given away for at most: {product.duration}</h3>;
         }
         return null;
     };
 
     const renderCondition = () => {
-        if (product.category === 'lendItem' || product.category === 'rentedItem' || product.category === 'secondHandItem' || product.category === 'donatedItem') {
+        if (product.type === 'lendItem' || product.type === 'rentedItem' || product.type === 'secondHandItem' || product.type === 'donatedItem') {
             return <h3 className="text-4xl my-4">Condition of the Item: {product.condition}</h3>;
         }
         return null;
     };
 
     const renderLocation = () => {
-        if (product.category === 'foundItem' || product.category === 'lostItem') {
+        if (product.type === 'foundItem' || product.type === 'lostItem') {
             let ForL = '';
 
-            if (product.category === 'foundItem') {
+            if (product.type === 'foundItem') {
                 ForL = 'Found';
-            } else if (product.category === 'lostItem') {
+            } else if (product.type === 'lostItem') {
                 ForL = 'Lost';
             }
             return <h3 className="text-4xl my-4">Location {ForL}: {product.location}</h3>;
@@ -69,12 +92,12 @@ function ViewDetailsPage() {
     };
 
     const renderDateLost = () => {
-        if (product.category === 'foundItem' || product.category === 'lostItem') {
+        if (product.type === 'foundItem' || product.type === 'lostItem') {
             let ForL = '';
 
-            if (product.category === 'foundItem') {
+            if (product.type === 'foundItem') {
                 ForL = 'Found';
-            } else if (product.category === 'lostItem') {
+            } else if (product.type === 'lostItem') {
                 ForL = 'Lost';
             }
             return <h3 className="text-4xl my-4">Date and Time {ForL}: {product.dateLost}</h3>;
@@ -101,7 +124,7 @@ function ViewDetailsPage() {
         }
     }
 
-    const itemTypeFormatted = formatItemType(product.category);
+    const itemTypeFormatted = formatItemType(product.type);
 
     return (
         <div>
@@ -122,11 +145,6 @@ function ViewDetailsPage() {
                         {renderDuration()}
                         {renderLocation()}
                         {renderDateLost()}
-                        {product.userId === userId && (
-                            <button onClick={changeIsGiven}>
-                                Change Activeness
-                            </button>
-                        )}
                     </div>
                 </div>
             </div>
