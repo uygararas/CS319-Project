@@ -1,35 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import apiService from '../services/apiService';
+import { useState, useEffect } from 'react';
+import SessionService from "../services/sessionService.js";
+import {useNavigate} from "react-router-dom";
+
 function Navbar () {
     const [userEmail, setUserEmail] = useState('');
 
-    const decodeJWT = (token) => {
-        const base64Url = token.split('.')[1]; // Get the payload part
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
-            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-
-        return JSON.parse(jsonPayload);
-    };
-
-
-
     useEffect(() => {
         const fetchEmail = async () => {
-            const token = sessionStorage.getItem('jwtToken');
-            const payload = decodeJWT(token);
-            const userId = payload.userId;
-
-            try {
-                const email = await apiService.getEmailByUserId(userId);
+            const email = await SessionService.getUserEmail();
+            if (email) {
                 setUserEmail(email);
-            } catch (error) {
-                console.error('Error fetching email:', error);
             }
         };
 
         fetchEmail();
     }, []);
+
+    function handleSignOut() {
+        const navigate = useNavigate();
+        // Clear session storage, local storage, or cookies
+        sessionStorage.clear();
+        localStorage.clear();
+        // Redirect to login page or home page
+        navigate('/');
+    }
+
     return (
         <nav className="flex items-center body bg-white sticky top-0 z-50 shadow-inner shadow-gray-400 w-full h-[80px]">
             <div className="flex items-center justify-between pl-4 pr-4 pb-1 pt-1 w-full">
@@ -83,16 +78,16 @@ function Navbar () {
                             </div>
                             <ul className="py-2" aria-labelledby="user-menu-button">
                                 <li>
-                                    <a href={`/category/${encodeURIComponent('Active Posts')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Active Posts</a>
+                                    <a href="/active-posts" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Active Posts</a>
                                 </li>
                                 <li>
-                                    <a href={`/category/${encodeURIComponent('Old Posts')}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Old Posts</a>
+                                    <a href="/old-posts" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Old Posts</a>
                                 </li>
                                 <li>
                                     <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</a>
                                 </li>
                                 <li>
-                                    <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign Out</a>
+                                    <button onClick={handleSignOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign Out</button>
                                 </li>
                             </ul>
                         </div>

@@ -9,4 +9,6 @@ import java.util.List;
 public interface ItemRepository  extends JpaRepository<Item,Long> {
     List<Item> findAllByOrderByCreatedAtDesc();
     List<Item> findByCategory(String category);
+    List<Item> findByUserUserIdAndIsGivenFalse(Long userId);
+    List<Item> findByUserUserIdAndIsGivenTrue(Long userId);
 }

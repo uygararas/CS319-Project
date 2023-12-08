@@ -55,4 +55,8 @@ public abstract class Item {
     public Item() {
 
     }
+
+    public void setIsGiven(boolean b) {
+        this.isGiven = b;
+    }
 }

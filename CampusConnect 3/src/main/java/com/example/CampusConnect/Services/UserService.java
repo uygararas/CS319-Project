@@ -1,7 +1,10 @@
 package com.example.CampusConnect.Services;
 
 import com.example.CampusConnect.Entities.CCuser;
+import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Repositories.CCuserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,6 +99,15 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public CCuser findById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+    }
 
-    // Additional methods like loginUser, updateUser, deleteUser can be added here
+    @Transactional
+    public void addItemToUser(Item item, Long userId) {
+        CCuser user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.addItem(item);
+    }
 }

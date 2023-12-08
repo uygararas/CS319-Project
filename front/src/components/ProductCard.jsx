@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
 function ProductCard ({ product }) {
     // eslint-disable-next-line react/prop-types
-    const { imageUrl, title, description, type, itemId } = product;
+    const { imageUrl, title, description, category, itemId } = product;
     function formatItemType(type) {
         switch (type) {
             case 'secondHandItem':
@@ -21,7 +21,7 @@ function ProductCard ({ product }) {
         }
     }
 
-    const itemTypeFormatted = formatItemType(type);
+    const itemTypeFormatted = formatItemType(category);
 
     return(
         <div className="border border-gray-300 hover:border-blue-hover-text hover:text-blue-hover-text rounded dark:bg-gray-900 dark:border-gray-700 bg-white">

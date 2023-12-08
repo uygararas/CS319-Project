@@ -1,5 +1,6 @@
 package com.example.CampusConnect.Services;
 
+import com.example.CampusConnect.DTO.ItemDTO;
 import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Repositories.CCuserRepository;
 import com.example.CampusConnect.Repositories.ItemRepository;
@@ -12,6 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemService {
@@ -49,9 +51,30 @@ public class ItemService {
             throw new RuntimeException("Error while saving item", e);
         }
     }
+    public List<ItemDTO> findItemsByUserAndIsGivenFalse(Long userId) {
+        List<Item> items = itemRepository.findByUserUserIdAndIsGivenFalse(userId);;
+        return items.stream()
+                .map(ItemDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    public List<ItemDTO> findItemsByUserAndIsGivenTrue(Long userId) {
+        List<Item> items = itemRepository.findByUserUserIdAndIsGivenTrue(userId);;
+        return items.stream()
+                .map(ItemDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
 
     public Optional<Item> findById(Long id) {
         return itemRepository.findById(id);
+    }
+
+    public Item toggleIsGiven(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found with id: " + itemId));
+
+        item.setIsGiven(!item.isGiven()); // Toggle the isGiven attribute
+        return itemRepository.save(item); // Save the updated item
     }
 
     public void delete(Item item) {
@@ -72,14 +95,18 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public List<Item> findAllItemsSorted() {
-        return itemRepository.findAllByOrderByCreatedAtDesc();
+    public List<ItemDTO> findAllItemsSorted() {
+        List<Item> items = itemRepository.findAllByOrderByCreatedAtDesc();
+        return items.stream()
+                .map(ItemDTO::fromEntity)
+                .collect(Collectors.toList());
     }
-
-    public List<Item> findByType(String category) {
-        return itemRepository.findByCategory(category);
+    public List<ItemDTO> findByType(String category) {
+        List<Item> items = itemRepository.findByCategory(category);
+        return items.stream()
+                .map(ItemDTO::fromEntity)
+                .collect(Collectors.toList());
     }
-
     private String extractFileKeyFromUrl(String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
             try {

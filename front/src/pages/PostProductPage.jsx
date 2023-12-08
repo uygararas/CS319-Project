@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Navbar from "../components/Navbar.jsx";
 import {useNavigate} from "react-router-dom";
 import apiService from '../services/apiService';
+import SessionService from "../services/sessionService.js";
 
 function PostProductPage() {
 
@@ -25,6 +26,8 @@ function PostProductPage() {
         if (isFormValid()) {
             const formData = new FormData();
             formData.append('image', imageFile); // Append the image file
+            const userId = SessionService.getUserId();
+            formData.append('userId', userId);
             // Prepare the data to be sent
             const postData = {
                 type: type,

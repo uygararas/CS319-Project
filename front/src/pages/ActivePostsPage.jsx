@@ -2,23 +2,26 @@ import { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import apiService from '../services/apiService';
+import SessionService from "../services/sessionService.js";
 
-// eslint-disable-next-line react/prop-types
-function PreviewProductsPages({ categoryName }) {
+function ActivePostsPage() {
+
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
         getProducts();
-    }, []); // Add categoryName to dependency array to refetch when it changes
+    }, []);
 
     const getProducts = async () => {
         try {
-            const response = await apiService.get(`/items?category=${categoryName}`);
+            const userId = SessionService.getUserId()
+            const response = await apiService.get(`/items/active-posts/${userId}`);
             setProducts(response.data);
             console.log(response.data);
         } catch (error) {
             console.error('Error fetching products:', error);
         }
+
     };
 
     return (
@@ -35,4 +38,4 @@ function PreviewProductsPages({ categoryName }) {
     );
 }
 
-export default PreviewProductsPages;
+export default ActivePostsPage;

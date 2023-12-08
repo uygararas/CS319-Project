@@ -10,7 +10,10 @@ Content-Type: application/json
 GET http://localhost:8080/items?category=lostItem
 
 ###
-GET http://localhost:8080/items/3
+GET http://localhost:8080/items/10
+
+###
+GET http://localhost:8080/items/user?userId=1
 
 ###
 POST http://localhost:8080/items

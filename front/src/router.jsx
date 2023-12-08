@@ -7,7 +7,9 @@ import MainPage from "./pages/MainPage.jsx";
 import PostProductPage from "./pages/PostProductPage.jsx";
 import PreviewProductsPages from "./pages/PreviewProductsPages.jsx";
 import ViewDetailsPage from "./pages/ViewDetailsPage.jsx";
-import EmailVerificationPage from "./pages/EmailVerificationPage.jsx"; // Import the new component
+import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
+import ActivePostsPage from "./pages/ActivePostsPage.jsx";
+import OldPostsPage from "./pages/OldPostsPage.jsx"; // Import the new component
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -46,7 +48,15 @@ function Router() {
         },
         {
             path: '/verify-email',
-            element: <EmailVerificationPage /> // Add the new route here
+            element: <EmailVerificationPage />
+        },
+        {
+            path: '/active-posts',
+            element: <ActivePostsPage />
+        },
+        {
+            path: '/old-posts',
+            element: <OldPostsPage />
         }
     ]);
 

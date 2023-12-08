@@ -1,8 +1,11 @@
 package com.example.CampusConnect.Controllers;
 
+import com.example.CampusConnect.DTO.ItemDTO;
+import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Services.StorageService;
+import com.example.CampusConnect.Services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +21,12 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+    private final UserService userService;
 
     @Autowired
-    public ItemController(ItemService itemService, StorageService storageService) {
+    public ItemController(ItemService itemService, UserService userService) {
         this.itemService = itemService;
+        this.userService = userService;
     }
 
     /*@PostMapping("/create")
@@ -38,11 +43,15 @@ public class ItemController {
 
     @PostMapping(value = "/items", consumes = {"multipart/form-data"})
     public ResponseEntity<Item> createItem(@RequestParam("item") String itemJson,
-                                           @RequestParam("image") MultipartFile image) {
+                                           @RequestParam("image") MultipartFile image,
+                                           @RequestParam("userId") Long userId) {
         try {
             // Convert JSON string to Item object
             ObjectMapper objectMapper = new ObjectMapper();
             Item item = objectMapper.readValue(itemJson, Item.class);
+
+            // Find the user by userId
+            userService.addItemToUser(item, userId);
 
             // Create and save the item with the image
             Item createdItem = itemService.createAndSaveItem(item, image);
@@ -63,22 +72,43 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/items/active-posts/{userId}")
+    public ResponseEntity<List<ItemDTO>> getItemsByUserAndIsGivenFalse(@PathVariable Long userId) {
+        List<ItemDTO> itemDTOs = itemService.findItemsByUserAndIsGivenFalse(userId);
+        return ResponseEntity.ok(itemDTOs);
+    }
+    @GetMapping("/items/old-posts/{userId}")
+    public ResponseEntity<List<ItemDTO>> getItemsByUserAndIsGivenTrue(@PathVariable Long userId) {
+        List<ItemDTO> itemDTOs = itemService.findItemsByUserAndIsGivenTrue(userId);
+        return ResponseEntity.ok(itemDTOs);
+    }
+
+    @PutMapping("/{itemId}/toggle-given")
+    public ResponseEntity<ItemDTO> toggleItemIsGiven(@PathVariable Long itemId) {
+        Item updatedItem = itemService.toggleIsGiven(itemId);
+        ItemDTO itemDTO = ItemDTO.fromEntity(updatedItem);
+        return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+    }
+
     @GetMapping("/items/{id}")
-    public ResponseEntity<Item> getItemById(@PathVariable Long id) {
+    public ResponseEntity<ItemDTO> getItemById(@PathVariable Long id) {
         Item item = itemService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item not found with id: " + id));
 
-        return new ResponseEntity<>(item, HttpStatus.OK);
+        ItemDTO itemDTO = ItemDTO.fromEntity(item);
+
+        return new ResponseEntity<>(itemDTO, HttpStatus.OK);
     }
+
     @GetMapping("/items")
-    public ResponseEntity<List<Item>> getItemsByCategory(@RequestParam(required = false) String category) {
-        List<Item> items;
+    public ResponseEntity<List<ItemDTO>> getItemsByCategory(@RequestParam(required = false) String category) {
+        List<ItemDTO> itemDTOs;
         if (category != null && !category.isEmpty()) {
-            items = itemService.findByType(category);
+            itemDTOs = itemService.findByType(category); // Make sure this method also returns List<ItemDTO>
         } else {
-            items = itemService.findAllItemsSorted(); // Assuming this method returns all items
+            itemDTOs = itemService.findAllItemsSorted();
         }
-        return ResponseEntity.ok(items);
+        return ResponseEntity.ok(itemDTOs);
     }
 
     /*
