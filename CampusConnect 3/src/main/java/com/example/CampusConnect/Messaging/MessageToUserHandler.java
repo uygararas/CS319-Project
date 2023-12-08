@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Messaging;
+/*package com.example.CampusConnect.Messaging;
 
 import com.sun.security.auth.UserPrincipal;
 import org.slf4j.Logger;
@@ -23,4 +23,4 @@ public class MessageToUserHandler extends DefaultHandshakeHandler {
         return new UserPrincipal(randomId);
 
     }
-}
+}*/

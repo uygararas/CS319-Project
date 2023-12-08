@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Messaging;
+/*package com.example.CampusConnect.Messaging;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,4 +10,4 @@ public class Message {
 
 
     private String messageContents;
-}
+}*/

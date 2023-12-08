@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Services;
+/*package com.example.CampusConnect.Services;
 
 import com.example.CampusConnect.Messaging.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +20,4 @@ public class WebSocketService {
 
         messagingTemplate.convertAndSend("/topic/messages",response);
     }
-}
+}*/

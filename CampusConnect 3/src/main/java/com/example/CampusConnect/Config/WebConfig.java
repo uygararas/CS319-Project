@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Config;
+/*package com.example.CampusConnect.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,4 +16,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
-}
+}*/
