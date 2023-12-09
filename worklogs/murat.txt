@@ -3,9 +3,10 @@
 
 
 ### 25 Sep - 1 Oct
-Dockers and data grip has been configured to set stage for the database. 
+Dockers and data grip have been configured to set the stage for the database with the help of Yasemin. 
 
 ### 2 Oct - 8 Oct
+I have opened an account in AWS to use a cloud database. However, the team decided to go local, and the DB instance has been shut down.
 
 ### 9 Oct - 15 Oct
 
