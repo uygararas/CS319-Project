@@ -21,6 +21,7 @@ I have improved my parts for D1-D2 according to feedback from our TAs.
 ### 6 Nov - 12 Nov
 
 ### 13 Nov - 19 Nov
+I have helped Uygar with the D4. 
 
 ### 20 Nov - 26 Nov
 
@@ -32,16 +33,4 @@ I have improved my parts for D1-D2 according to feedback from our TAs.
 
 ### 18 Dec - 24 Dec
 
-
-
-
-
-Week of October 30
-This week I have worked on improving the D1 and D2 reports according to the feedback we have got as a group from the first two reports I have mainly worked on the parts that I have done previously also I helped my teammates when I was done with the homework. Also because there was the early prototype for the next week I have worked on improving the front edn part of the application with helping Yasemin.
-Week of November 6 
-This week we were delivering the early prototype so we have worked throughly on the applications development part mainly helping my teammate Yasemin with the development part of the application also started working on deliverable 4 this week mostly done the diagrams.
-Week of November 13
-Continued my work on improving D4 this week with the help of Murat and started initializing the database part of the application for connecting the backend and frontend part of the application and also finalizing the D4 report ready for submission completed push for the report and start working more on the development side of our project.
-Week of November 20
-This week we as a group started doing coding sessions together for faster development and solving the problems as a team. Towards the end of this week we are planning to have another coding session for further development of our application.
 
