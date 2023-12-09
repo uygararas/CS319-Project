@@ -6,10 +6,10 @@
 Dockers and data grip have been configured to set the stage for the database with the help of Yasemin. 
 
 ### 2 Oct - 8 Oct
-I have opened an account in AWS to use a cloud database. However, the team decided to go local, and the DB instance has been shut down. There have been general discussions on how to manage the project ib Mozart Cafe. I have been assigned to the back end.
+I have opened an account in AWS to use a cloud database. However, the team decided to go local, and the DB instance has been shut down. There have been general discussions on how to manage the project in Mozart Cafe. I have been assigned to the back end.
 
 ### 9 Oct - 15 Oct
-I have completed the profile page use case diagram for D1-D2. Also contributed to the general use case diagram with improvement ideas. Yasemin and Uygar decided to go on the front side.
+I have completed the profile page use case diagram for D1-D2. Also contributed to the general use case diagram with improvement ideas. Uygar and Yasemin decided to go to the front-end.
 
 ### 16 Oct - 22 Oct
 
