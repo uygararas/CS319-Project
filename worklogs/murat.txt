@@ -1,5 +1,5 @@
-1.Report on progress and issues What you did, what worked, what you learned, where you had trouble, and where you are stuck. What did you do last week? (By individual team members) Any blockers? 
-2. Outline your plans and goals for the following week What is your plan for next week? (By individual team members) 
+1. Report on progress and issues. What you did, what worked, what you learned, where you had trouble, and where you are stuck. What did you do last week? (By individual team members) Any blockers? 
+2. Outline your plans and goals for the following week. What is your plan for next week? (By individual team members) 
 
 
 ### 25 Sep - 1 Oct
@@ -17,8 +17,16 @@ Dockers and data grip has been configured to set stage for the database.
 
 ### 6 Nov - 12 Nov
 
-### 25 Nov - 1 Nov
+### 13 Nov - 19 Nov
 
-### 25 Nov - 1 Nov
+### 20 Nov - 26 Nov
 
-### 25 Nov - 1 Nov
+### 27 Nov - 3 Dec
+
+### 4 Dec - 10 Dec
+
+### 11 Dec - 17 Dec
+
+### 18 Dec - 24 Dec
+
+
