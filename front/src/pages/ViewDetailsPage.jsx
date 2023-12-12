@@ -1,19 +1,68 @@
 import Navbar from "../components/Navbar.jsx";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
 
 function ViewDetailsPage() {
-
     const { itemId } = useParams();
     const [product, setProduct] = useState({});
+    const [privateMessage, setPrivateMessage] = useState('');
     const userId = SessionService.getUserId();
+    const [messages, setMessages] = useState([]);
+    const [messageText, setMessageText] = useState('');
+
+    // Replace 'ws://localhost:5173' with your actual WebSocket server URL.
+    const webSocketUrl = 'ws://localhost:5173';
+    const webSocket = useRef(new WebSocket(webSocketUrl));
+
+    useEffect(() => {
+        // Listen for messages
+        webSocket.current.addEventListener('message', (event) => {
+            // Handle incoming messages
+            const message = JSON.parse(event.data);
+            console.log('Received message:', message);
+            // Update messages state
+            setMessages((prevMessages) => [...prevMessages, message]);
+        });
+
+        // Clean up WebSocket on component unmount
+        return () => {
+            webSocket.current.close();
+        };
+    }, []);
+
+    useEffect(() => {
+        // Open WebSocket connection after component mounts
+        webSocket.current.addEventListener('open', () => {
+            console.log('WebSocket connection opened');
+        });
+    }, []);  // Empty dependency array to ensure it runs only once after initial render
+
+    // Function to send a private message
+    const sendPrivateMessage = () => {
+        const privateMessage = {
+            type: 'private-message',
+            content: messageText,
+            // Add any other necessary data
+        };
+
+        // Check if the WebSocket is open before sending a message
+        if (webSocket.current.readyState === WebSocket.OPEN) {
+            // Send the private message
+            webSocket.current.send(JSON.stringify(privateMessage));
+
+            // Clear the input field
+            setMessageText('');
+        } else {
+            console.error('WebSocket not open. Unable to send message.');
+        }
+    };
 
     const getProduct = async () => {
         try {
             const response = await apiService.get(`/items/${itemId}`);
-            setProduct(response.data); // response.data is already a JavaScript object
+            setProduct(response.data);
         } catch (error) {
             console.error('Error fetching product details:', error);
         }
@@ -23,18 +72,21 @@ function ViewDetailsPage() {
         try {
             const response = await apiService.put(`/${itemId}/toggle-given`);
             if (response.status === 200 || response.status === 201) {
-                console.log('Product status is changed succesfully!:', response.data);
-                alert("Product status is changed succesfully!");
+                console.log('Product status is changed successfully!', response.data);
+                alert("Product status is changed successfully!");
             }
         } catch (error) {
-            console.error('Error fetching product details:', error);
+            console.error('Error changing product status:', error);
         }
-    }
+    };
+
+    const handlePrivateMessageChange = (event) => {
+        setPrivateMessage(event.target.value);
+    };
 
     useEffect(() => {
-        console.log(itemId);
         getProduct();
-    }, []);
+    }, [itemId]);
 
     const renderPrice = () => {
         if (product.category === 'lendItem' || product.category === 'rentedItem') {
@@ -42,6 +94,7 @@ function ViewDetailsPage() {
         }
         return null;
     };
+
     const renderDuration = () => {
         if (product.category === 'lendItem' || product.category === 'rentedItem') {
             return <h3 className="text-4xl my-4">Item is planned to be given away for at most: {product.duration}</h3>;
@@ -50,7 +103,8 @@ function ViewDetailsPage() {
     };
 
     const renderCondition = () => {
-        if (product.category === 'lendItem' || product.category === 'rentedItem' || product.category === 'secondHandItem' || product.category === 'donatedItem') {            return <h3 className="text-4xl my-4">Condition of the Item: {product.condition}</h3>;
+        if (product.category === 'lendItem' || product.category === 'rentedItem' || product.category === 'secondHandItem' || product.category === 'donatedItem') {
+            return <h3 className="text-4xl my-4">Condition of the Item: {product.condition}</h3>;
         }
         return null;
     };
@@ -106,7 +160,7 @@ function ViewDetailsPage() {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <div className="container mx-auto my-5 py-2">
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/2 text-center p-3">
@@ -117,6 +171,23 @@ function ViewDetailsPage() {
                         <h1 className="text-5xl">{product.title}</h1>
 
                         <p className="text-lg">{product.description}</p>
+                        <div className="form-group">
+                            <label htmlFor="private-message">Private Message</label>
+                            <input
+                                type="text"
+                                id="private-message"
+                                className="form-control"
+                                placeholder="Hello, I am interested!"
+                                value={privateMessage}
+                                onChange={handlePrivateMessageChange}
+                            />
+                        </div>
+                        <div>
+                            <button className="btn btn-default" type="button" onClick={sendPrivateMessage}>
+                                Send Private Message
+                            </button>
+                        </div>
+
                         <button className="btn btn-outline-dark addToCart">Communicate with seller?</button>
                         {renderPrice()}
                         {renderCondition()}

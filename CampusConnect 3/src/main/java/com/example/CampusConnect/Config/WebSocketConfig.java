@@ -1,6 +1,6 @@
 package com.example.CampusConnect.Config;
 
-/*import com.example.CampusConnect.Messaging.MessageToUserHandler;
+import com.example.CampusConnect.Messaging.MessageToUserHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -23,4 +23,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/chat");
         registry.addEndpoint("/chat").setHandshakeHandler(new MessageToUserHandler()).withSockJS();
     }
-}*/
+}

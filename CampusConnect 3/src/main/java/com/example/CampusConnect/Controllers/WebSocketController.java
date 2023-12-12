@@ -1,4 +1,4 @@
-/*package com.example.CampusConnect.Controllers;
+package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.Services.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +19,4 @@ public class WebSocketController {
     }
 
 
-}*/
+}
