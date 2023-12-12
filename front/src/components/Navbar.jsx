@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 function Navbar () {
     const [userEmail, setUserEmail] = useState('');
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchEmail = async () => {
             const email = await SessionService.getUserEmail();
@@ -17,12 +17,11 @@ function Navbar () {
     }, []);
 
     function handleSignOut() {
-        const navigate = useNavigate();
         // Clear session storage, local storage, or cookies
         sessionStorage.clear();
         localStorage.clear();
         // Redirect to login page or home page
-        navigate('/');
+        navigate('/', { replace: true });
     }
 
     return (
