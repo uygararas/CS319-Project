@@ -6,6 +6,10 @@ function Navbar () {
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
     useEffect(() => {
+        const token = sessionStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/');
+        }
         const fetchEmail = async () => {
             const email = await SessionService.getUserEmail();
             if (email) {
