@@ -9,6 +9,10 @@ function ActivePostsPage() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
+        const token = sessionStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/');
+        }
         getProducts();
     }, []);
 

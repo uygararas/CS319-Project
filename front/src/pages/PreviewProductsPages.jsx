@@ -2,12 +2,17 @@ import { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import apiService from '../services/apiService';
+import {useNavigate} from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function PreviewProductsPages({ categoryName }) {
     const [products, setProducts] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
+        const token = sessionStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/');
+        }
         getProducts();
     }, []); // Add categoryName to dependency array to refetch when it changes
 

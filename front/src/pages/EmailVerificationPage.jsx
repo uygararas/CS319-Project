@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import apiService from '../services/apiService';
 
-
 function EmailVerificationPage() {
     const [verificationStatus, setVerificationStatus] = useState('Verifying...');
     const location = useLocation();
@@ -22,6 +21,11 @@ function EmailVerificationPage() {
         try {
             const response = await apiService.get(`/user/verify?token=${token}`);
             setVerificationStatus('Your email has been successfully verified!');
+
+            // Close the window after a delay
+            setTimeout(() => {
+                window.close();
+            }, 3000); // 3 seconds delay
         } catch (error) {
             setVerificationStatus('Failed to verify email. Please try again or contact support.');
         }

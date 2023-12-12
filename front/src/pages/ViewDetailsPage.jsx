@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar.jsx";
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
 
@@ -15,8 +15,12 @@ function ViewDetailsPage() {
     // Replace 'ws://localhost:5173' with your actual WebSocket server URL.
     const webSocketUrl = 'ws://localhost:5173';
     const webSocket = useRef(new WebSocket(webSocketUrl));
-
+    const navigate = useNavigate();
     useEffect(() => {
+        const token = sessionStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/');
+        }
         // Listen for messages
         webSocket.current.addEventListener('message', (event) => {
             // Handle incoming messages

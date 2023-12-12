@@ -3,12 +3,18 @@ import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
+import {useNavigate} from "react-router-dom";
 
 function ActivePostsPage() {
 
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const token = sessionStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/');
+        }
         getProducts();
     }, []);
 
