@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import withBackButtonListener from "../components/withBackButtonListener.jsx";
+import Navbar from "../components/Navbar.jsx";
 
 class InAppChatsPage extends Component {
     state = {
@@ -22,6 +23,7 @@ class InAppChatsPage extends Component {
     render() {
         return (
             <div className="in-app-chats">
+                <Navbar /> {/* Navbar added here */}
                 <h1>Chats</h1>
                 <ul className="chat-list">
                     {this.renderChatList()}
