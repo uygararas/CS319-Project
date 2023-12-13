@@ -92,16 +92,12 @@ function Navbar () {
                                     <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</a>
                                 </li>
                                 <li>
-<<<<<<< HEAD
                                     <li>
                                         <button onClick={handleChangePassword} className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change Password</button>
                                     </li>
                                 </li>
                                 <li>
-                                    <button onClick={handleSignOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign Out</button>
-=======
                                     <button onClick={handleSignOut} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign Out</button>
->>>>>>> 8ab84ec (some fixes on ui)
                                 </li>
                             </ul>
                         </div>
