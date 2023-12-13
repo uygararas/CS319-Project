@@ -20,6 +20,9 @@ function Navbar () {
         fetchEmail();
     }, []);
 
+    const handleChangePassword = () => {
+        navigate('/change-password'); // Replace '/change-password' with the actual route
+    };
     function handleSignOut() {
         // Clear session storage, local storage, or cookies
         sessionStorage.clear();
@@ -88,6 +91,11 @@ function Navbar () {
                                 </li>
                                 <li>
                                     <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</a>
+                                </li>
+                                <li>
+                                    <li>
+                                        <button onClick={handleChangePassword} className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change Password</button>
+                                    </li>
                                 </li>
                                 <li>
                                     <button onClick={handleSignOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign Out</button>
