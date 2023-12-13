@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import apiService from '../services/apiService';
 import {useNavigate} from "react-router-dom";
-
+import withBackButtonListener from "../components/withBackButtonListener.jsx";
 
 function PasswordChangePage() {
     const [email, setEmail] = useState('');
@@ -65,4 +65,4 @@ function PasswordChangePage() {
         </section>
     );
 }
-export default PasswordChangePage;
+export default withBackButtonListener(PasswordChangePage);
