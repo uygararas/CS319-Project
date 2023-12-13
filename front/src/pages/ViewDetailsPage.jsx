@@ -16,6 +16,9 @@ function ViewDetailsPage() {
     const webSocketUrl = 'ws://localhost:5173';
     const webSocket = useRef(new WebSocket(webSocketUrl));
     const navigate = useNavigate();
+    
+
+    
     useEffect(() => {
         const token = sessionStorage.getItem('jwtToken');
         if (!token) {

@@ -10,6 +10,8 @@ import ViewDetailsPage from "./pages/ViewDetailsPage.jsx";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
 import ActivePostsPage from "./pages/ActivePostsPage.jsx";
 import OldPostsPage from "./pages/OldPostsPage.jsx"; // Import the new component
+import MessagingPage from "./pages/MessagingPage.jsx";
+
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -57,6 +59,10 @@ function Router() {
         {
             path: '/old-posts',
             element: <OldPostsPage />
+        },
+        {
+            path: '/messages',
+            element: <MessagingPage />
         }
     ]);
 

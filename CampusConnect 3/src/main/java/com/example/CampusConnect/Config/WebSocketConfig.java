@@ -13,14 +13,15 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config){
-        config.enableSimpleBroker("/topic");
-        config.setApplicationDestinationPrefixes("/ws");
+    public void configureMessageBroker(final MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/ws");
     }
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry){
-        registry.addEndpoint("/chat");
-        registry.addEndpoint("/chat").setHandshakeHandler(new MessageToUserHandler()).withSockJS();
+    public void registerStompEndpoints(final StompEndpointRegistry registry) {
+        registry.addEndpoint("/our-websocket")
+                .setHandshakeHandler(new MessageToUserHandler())
+                .withSockJS();
     }
 }
