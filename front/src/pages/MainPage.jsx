@@ -76,7 +76,7 @@ function MainPage() {
                         </div>
                     </div>
                 </section>
-                <div ref={targetRef} className="px-20 py-10 bg-gradient-to-b from-[#18181b] to-blue-300">
+                <div ref={targetRef} className="px-20 py-10 bg-gray-100">
                     <div className="grid grid-cols-4 gap-20">
                         {products.map(product => (
                             <ProductCard key={product.itemId} product={product} />

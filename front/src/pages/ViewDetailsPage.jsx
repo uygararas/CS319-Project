@@ -97,49 +97,37 @@ function ViewDetailsPage() {
 
     const renderPrice = () => {
         if (product.category === 'lendItem' || product.category === 'rentedItem') {
-            return <h3 className="text-4xl my-4">Price: {product.price}</h3>;
+            return <h3 className="text-xl md:text-2xl font-semibold my-2">Price: <span className="font-normal">{product.price}</span></h3>;
         }
         return null;
     };
 
     const renderDuration = () => {
         if (product.category === 'lendItem' || product.category === 'rentedItem') {
-            return <h3 className="text-4xl my-4">Item is planned to be given away for at most: {product.duration}</h3>;
+            return <h3 className="text-xl md:text-2xl font-semibold my-2">Duration: <span className="font-normal">{product.duration}</span></h3>;
         }
         return null;
     };
 
     const renderCondition = () => {
         if (product.category === 'lendItem' || product.category === 'rentedItem' || product.category === 'secondHandItem' || product.category === 'donatedItem') {
-            return <h3 className="text-4xl my-4">Condition of the Item: {product.condition}</h3>;
+            return <h3 className="text-xl md:text-2xl font-semibold my-2">Condition: <span className="font-normal">{product.condition}</span></h3>;
         }
         return null;
     };
 
     const renderLocation = () => {
         if (product.category === 'foundItem' || product.category === 'lostItem') {
-            let ForL = '';
-
-            if (product.category === 'foundItem') {
-                ForL = 'Found';
-            } else if (product.category === 'lostItem') {
-                ForL = 'Lost';
-            }
-            return <h3 className="text-4xl my-4">Location {ForL}: {product.location}</h3>;
+            const ForL = product.category === 'foundItem' ? 'Found' : 'Lost';
+            return <h3 className="text-xl md:text-2xl font-semibold my-2">Location {ForL}: <span className="font-normal">{product.location}</span></h3>;
         }
         return null;
     };
 
     const renderDateLost = () => {
         if (product.category === 'foundItem' || product.category === 'lostItem') {
-            let ForL = '';
-
-            if (product.category === 'foundItem') {
-                ForL = 'Found';
-            } else if (product.category === 'lostItem') {
-                ForL = 'Lost';
-            }
-            return <h3 className="text-4xl my-4">Date and Time {ForL}: {product.dateLost}</h3>;
+            const ForL = product.category === 'foundItem' ? 'Found' : 'Lost';
+            return <h3 className="text-xl md:text-2xl font-semibold my-2">Date and Time {ForL}: <span className="font-normal">{product.dateLost}</span></h3>;
         }
         return null;
     };
@@ -170,15 +158,41 @@ function ViewDetailsPage() {
             <Navbar />
             <div className="container mx-auto my-5 py-2">
                 <div className="flex flex-wrap">
-                    <div className="w-full md:w-1/2 text-center p-3">
-                        <img className="mx-auto" src={product.imageUrl} alt="" style={{ width: '300px', height: '300px' }} />
+                    <div className="w-full md:w-1/2 p-3 flex justify-center">
+                        <img
+                            className="max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px] object-contain"
+                            src={product.imageUrl}
+                            alt={product.name}
+                        />
                     </div>
                     <div className="w-full md:w-1/2 p-5">
-                        <h4 className="text-uppercase text-gray-600">{itemTypeFormatted}</h4>
-                        <h1 className="text-5xl">{product.title}</h1>
+                        <h4 className="text-lg uppercase text-gray-600 mb-2">{itemTypeFormatted}</h4>
+                        <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
+                        <p className="text-base break-words mb-4">
+                            {product.description}
+                        </p>
+                        {renderPrice()}
+                        {renderCondition()}
+                        {renderDuration()}
+                        {renderLocation()}
+                        {renderDateLost()}
+                        {product.userId === userId && (
+                            <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                Change Activeness
+                            </button>
+                        )}
+                        {product.userId !== userId && (
+                            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
 
-                        <p className="text-lg">{product.description}</p>
-                        <div className="form-group">
+export default ViewDetailsPage;
+{/*<div className="form-group">
                             <label htmlFor="private-message">Private Message</label>
                             <input
                                 type="text"
@@ -193,24 +207,4 @@ function ViewDetailsPage() {
                             <button className="btn btn-default" type="button" onClick={sendPrivateMessage}>
                                 Send Private Message
                             </button>
-                        </div>
-
-                        <button className="btn btn-outline-dark addToCart">Communicate with seller?</button>
-                        {renderPrice()}
-                        {renderCondition()}
-                        {renderDuration()}
-                        {renderLocation()}
-                        {renderDateLost()}
-                        {product.userId === userId && (
-                            <button onClick={changeIsGiven}>
-                                Change Activeness
-                            </button>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-export default ViewDetailsPage;
+                        </div>*/}
