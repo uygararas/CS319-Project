@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import {useEffect, useRef, useState} from "react";
 import apiService from '../services/apiService';
+import withBackButtonListener from "../components/withBackButtonListener.jsx";
 
 
 function MainPage() {
@@ -88,4 +89,4 @@ function MainPage() {
     );
 }
 
-export default MainPage;
+export default withBackButtonListener(MainPage);

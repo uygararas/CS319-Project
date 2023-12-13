@@ -39,7 +39,7 @@ function Navbar () {
         <nav className="flex items-center body bg-white sticky top-0 z-50 shadow-inner shadow-gray-400 w-full h-[80px]">
             <div className="flex items-center justify-between pl-4 pr-4 pb-1 pt-1 w-full">
                 <div className="flex items-center space-x-9">
-                    <a href="/home">
+                    <a href='/home'>
                         <img src="/Logo-3.pdf" className="h-14" alt="Logo" />
                     </a>
                     <a href="/post-item" className="text-blue-hover-text hover:text-blue-text">
