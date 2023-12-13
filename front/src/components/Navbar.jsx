@@ -31,6 +31,10 @@ function Navbar () {
         navigate('/', { replace: true });
     }
 
+    const handleChats = () => {
+        navigate('/in-app-chats');
+    };
+
     return (
         <nav className="flex items-center body bg-white sticky top-0 z-50 shadow-inner shadow-gray-400 w-full h-[80px]">
             <div className="flex items-center justify-between pl-4 pr-4 pb-1 pt-1 w-full">
@@ -90,7 +94,7 @@ function Navbar () {
                                     <a href="/old-posts" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Old Posts</a>
                                 </li>
                                 <li>
-                                    <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</a>
+                                    <button onClick={handleChats} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</button>
                                 </li>
                                 <li>
                                     <li>

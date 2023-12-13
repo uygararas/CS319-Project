@@ -11,6 +11,7 @@ import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
 import ActivePostsPage from "./pages/ActivePostsPage.jsx";
 import OldPostsPage from "./pages/OldPostsPage.jsx"; // Import the new component
 //import MessagingPage from "./pages/MessagingPage.jsx";
+import InAppChatsPage from "./pages/InAppChatsPage.jsx"
 
 
 function CategoryWrapper() {
@@ -63,7 +64,11 @@ function Router() {
         {/*
             path: '/messages',
             element: <MessagingPage />
-        */}
+        */},
+        {
+            path: '/in-app-chats',
+            element: <InAppChatsPage />
+        }
     ]);
 
     return (
