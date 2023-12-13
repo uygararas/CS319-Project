@@ -7,7 +7,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -92,7 +91,18 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public boolean changePassword(String email, String newPassword) {
+        Optional<CCuser> user = userRepository.findByEmail(email); 
 
+        // Check if user exists
+        if (user.isEmpty()) {
+            // User not found, return false or handle accordingly
+            return false;
+        }
+        CCuser current = user.get();
+        current.changePassword(newPassword);
+        return true;
+    }
     public String getEmailByUserId(Long userId) {
         return userRepository.findById(userId)
                 .map(CCuser::getEmail)

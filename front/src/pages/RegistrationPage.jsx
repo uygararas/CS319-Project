@@ -35,9 +35,11 @@ function RegistrationPage() {
             } else {
                 alert("Registration is failed try different email address or check your internet connection");
                 throw new Error(`Registration is failed try different email address or check your internet connection`);
+                setIsSubmitting(false);
             }
         } catch (error) {
             alert("Registration is failed try different email address or check your internet connection");
+            setIsSubmitting(false);
             console.error('Registration is failed try different email address or check your internet connection');
         }
         setIsSubmitting(false);

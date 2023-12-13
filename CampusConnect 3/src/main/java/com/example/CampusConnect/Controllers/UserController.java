@@ -1,5 +1,6 @@
 package com.example.CampusConnect.Controllers;
 
+import com.example.CampusConnect.DTO.PasswordChangeRequest;
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Services.UserService;
 import com.example.CampusConnect.Entities.CCuser;
@@ -38,6 +39,20 @@ public class UserController {
             return ResponseEntity.ok("Email successfully verified.");
         } else {
             return ResponseEntity.badRequest().body("Invalid or expired verification token.");
+        }
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequest request) {
+        try {
+            boolean success = userService.changePassword(request.getEmail(), request.getNewPassword());
+            if (success) {
+                return ResponseEntity.ok().body("Password changed successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password change failed");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
         }
     }
 

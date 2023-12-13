@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import apiService from '../services/apiService';
+import {useNavigate} from "react-router-dom";
 
 
 function PasswordChangePage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -16,16 +18,14 @@ function PasswordChangePage() {
         }
 
         try {
-            const response = await apiService.post('/change-password', {
+            const response = await apiService.post('/user/change-password', {
                 email,
                 newPassword: password
             });
-            if (response.data.success) {
-                // Password change successful
+            if (response.status === 200) {
                 alert('Password changed successfully');
-                // Redirect or other actions
+                navigate('/');
             } else {
-                // Handle error
                 alert('Password change failed');
             }
         } catch (error) {
@@ -33,11 +33,12 @@ function PasswordChangePage() {
             alert('Error changing password');
         }
     };
+
     return(
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img className="w-8 h-8 mr-2 rounded-full" src="../../public/logo.png" alt="logo"></img>
+                    <img className="w-10 h-10 mr-2 rounded-full" src="dist/Logo_Campus_Connect_Circular-removebg-preview.png" alt="logo"></img>
                         Campus Connect
                 </a>
                 <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
