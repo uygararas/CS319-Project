@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import SessionService from "../services/sessionService.js";
 import {useNavigate} from "react-router-dom";
+import withBackButtonListener from "./withBackButtonListener.jsx";
 
 function Navbar () {
     const [userEmail, setUserEmail] = useState('');
@@ -114,4 +115,4 @@ function Navbar () {
     );
 }
 
-export default Navbar;
+export default withBackButtonListener(Navbar);
