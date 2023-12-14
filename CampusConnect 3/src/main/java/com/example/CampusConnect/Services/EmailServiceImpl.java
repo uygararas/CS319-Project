@@ -19,4 +19,13 @@ public class EmailServiceImpl implements EmailService {
         message.setText("Please verify your email using the following link: " + verificationLink);
         mailSender.send(message);
     }
+
+    @Override
+    public void sendPasswordResetEmail(String email, String resetUrl) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Password Reset Request");
+        message.setText("You have requested to reset your password. Please click on the following link to set a new password: " + resetUrl + "\n\nIf you did not request this, please ignore this email.");
+        mailSender.send(message);
+    }
 }

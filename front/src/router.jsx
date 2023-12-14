@@ -13,6 +13,8 @@ import OldPostsPage from "./pages/OldPostsPage.jsx"; // Import the new component
 //import MessagingPage from "./pages/MessagingPage.jsx";
 import InAppChatsPage from "./pages/InAppChatsPage.jsx"
 import ChatPage from "./pages/ChatPage.jsx";
+import PasswordForgotPage from "./pages/PasswordForgotPage.jsx";
+import PasswordResetVerificationPage from "./pages/PasswordResetVerificationPage.jsx";
 
 
 function CategoryWrapper() {
@@ -69,6 +71,14 @@ function Router() {
         {
             path: '/in-app-chats',
             element: <InAppChatsPage />
+        },
+        {
+            path: '/password-forgot-page',
+            element: <PasswordForgotPage />
+        },
+        {
+            path: '/password-reset-verification',
+            element: <PasswordResetVerificationPage />
         }
     ]);
 

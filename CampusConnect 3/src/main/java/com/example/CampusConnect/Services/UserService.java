@@ -50,6 +50,38 @@ public class UserService {
 
     }
 
+    // In UserService.java
+    public boolean verifyEmailForPasswordReset(String token) {
+        CCuser user = userRepository.findByVerificationToken(token);
+
+        if (user != null && !user.isEmailVerifiedForPasswordChange()) {
+            user.setEmailVerifiedForPasswordChange(true);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+
+    public boolean sendPasswordResetEmail(String email) {
+        Optional<CCuser> userOptional = userRepository.findByEmail(email);
+
+        if (userOptional.isPresent()) {
+            CCuser user = userOptional.get();
+            user.generateNewPasswordResetToken();
+            userRepository.save(user);
+
+            // Update the resetUrl to point to the new verification page
+            String resetUrl = "http://localhost:5173/password-reset-verification?token=" + user.getPasswordResetToken();
+            emailService.sendPasswordResetEmail(email, resetUrl);
+            return true;
+        }
+
+        return false;
+    }
+
+
+
     // Verify the user
     public boolean verifyUser(String token) {
         CCuser user = userRepository.findByVerificationToken(token);
@@ -92,16 +124,14 @@ public class UserService {
     }
 
     public boolean changePassword(String email, String newPassword) {
-        Optional<CCuser> user = userRepository.findByEmail(email); 
-
-        // Check if user exists
-        if (user.isEmpty()) {
-            // User not found, return false or handle accordingly
-            return false;
+        Optional<CCuser> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isPresent()) {
+            CCuser user = userOpt.get();
+            user.setPassword(newPassword); // Directly set the new password
+            userRepository.save(user); // Save the user with the new password
+            return true;
         }
-        CCuser current = user.get();
-        current.changePassword(newPassword);
-        return true;
+        return false;
     }
     public String getEmailByUserId(Long userId) {
         return userRepository.findById(userId)

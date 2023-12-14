@@ -30,6 +30,9 @@ public class CCuser {
 
     // New field to store verification token
     private String verificationToken;
+    @Getter
+    private String passwordResetToken;
+    private boolean isEmailVerifiedForPasswordChange;
 
     public boolean getIsEmailVerified() {
         return isEmailVerified;
@@ -70,6 +73,12 @@ public class CCuser {
 
     public boolean isEmailVerified() {
         return isEmailVerified;
+    }
+
+    public void generateNewPasswordResetToken() {
+        // Generate token logic here
+        this.passwordResetToken = UUID.randomUUID().toString();
+        this.isEmailVerifiedForPasswordChange = false;
     }
 
 
