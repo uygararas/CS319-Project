@@ -94,11 +94,11 @@ function Navbar () {
                                     <a href="/old-posts" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Old Posts</a>
                                 </li>
                                 <li>
-                                    <button onClick={handleChats} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</button>
+                                    <a href="/in-app-chats" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">In-App Chats</a>
                                 </li>
                                 <li>
                                     <li>
-                                        <button onClick={handleChangePassword} className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change Password</button>
+                                        <a href="/change-password" className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change Password</a>
                                     </li>
                                 </li>
                                 <li>

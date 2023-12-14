@@ -25,7 +25,7 @@ function EmailVerificationPage() {
             // Close the window after a delay
             setTimeout(() => {
                 window.close();
-            }, 800); // 3 seconds delay
+            }, 800); // 0.8 seconds delay
         } catch (error) {
             setVerificationStatus('Failed to verify email. Please try again or contact support.');
         }
