@@ -41,6 +41,8 @@ public abstract class Item {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private CCuser user;
+    @Transient
+    private Long user_id; // Temporary field to hold the user ID
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -58,5 +60,9 @@ public abstract class Item {
 
     public void setIsGiven(boolean b) {
         this.isGiven = b;
+    }
+
+    public Long getUserId() {
+        return user_id;
     }
 }

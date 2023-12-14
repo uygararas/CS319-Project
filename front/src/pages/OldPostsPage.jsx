@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard.jsx";
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
 import {useNavigate} from "react-router-dom";
+import Footer from "../components/Footer.jsx";
 
 function ActivePostsPage() {
 
@@ -33,13 +34,18 @@ function ActivePostsPage() {
     return (
         <div>
             <Navbar />
-            <div className="px-20 py-10 bg-gradient-to-b from-white to-gray-300 h-screen">
+            <div className="px-20 py-10 bg-repeat h-screen" style={{
+                backgroundImage: "url('/bg.jpg')",
+                backgroundRepeat: 'repeat',
+                backgroundAttachment: 'fixed'
+            }}>
                 <div className="grid grid-cols-4 gap-20 ">
                     {products.map(product => (
                         <ProductCard key={product.itemId} product={product} />
                     ))}
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

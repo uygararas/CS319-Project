@@ -85,6 +85,11 @@ function ViewDetailsPage() {
         } catch (error) {
             console.error('Error changing product status:', error);
         }
+        // Update the product state
+        setProduct(prevState => ({
+            ...prevState,
+            given: !prevState.given
+        }));
     };
 
     const handlePrivateMessageChange = (event) => {
@@ -96,8 +101,8 @@ function ViewDetailsPage() {
     }, [itemId]);
 
     const renderPrice = () => {
-        if (product.category === 'lendItem' || product.category === 'rentedItem') {
-            return <h3 className="text-xl md:text-2xl font-semibold my-2">Price: <span className="font-normal">{product.price}</span></h3>;
+        if (product.category === 'secondHandItem' || product.category === 'rentedItem') {
+            return <h3 className="text-xl md:text-2xl font-semibold my-2">Price: <span className="font-normal">{product.price} TRY</span></h3>;
         }
         return null;
     };
@@ -156,11 +161,11 @@ function ViewDetailsPage() {
     return (
         <div>
             <Navbar />
-            <div className="container mx-auto my-5 py-2">
+            <div className="container mx-auto my-5 py-2 body">
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/2 p-3 flex justify-center">
                         <img
-                            className="max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px] object-contain"
+                            className="max-w-[600px] max-h-[600px] min-w-[400px] min-h-[400px] object-contain"
                             src={product.imageUrl}
                             alt={product.name}
                         />
@@ -168,7 +173,7 @@ function ViewDetailsPage() {
                     <div className="w-full md:w-1/2 p-5">
                         <h4 className="text-lg uppercase text-gray-600 mb-2">{itemTypeFormatted}</h4>
                         <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
-                        <p className="text-base break-words mb-4">
+                        <p className="text-lg break-words mb-4">
                             {product.description}
                         </p>
                         {renderPrice()}
@@ -178,7 +183,7 @@ function ViewDetailsPage() {
                         {renderDateLost()}
                         {product.userId === userId && (
                             <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
-                                Change Activeness
+                                {product.given ? 'Mark as Active' : 'Mark as Old'}
                             </button>
                         )}
                         {product.userId !== userId && (

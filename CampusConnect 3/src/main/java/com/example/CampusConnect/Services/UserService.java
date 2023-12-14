@@ -119,5 +119,6 @@ public class UserService {
         CCuser user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.addItem(item);
+        item.setUser(user);
     }
 }
