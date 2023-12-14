@@ -12,6 +12,7 @@ import ActivePostsPage from "./pages/ActivePostsPage.jsx";
 import OldPostsPage from "./pages/OldPostsPage.jsx"; // Import the new component
 //import MessagingPage from "./pages/MessagingPage.jsx";
 import InAppChatsPage from "./pages/InAppChatsPage.jsx"
+import ChatPage from "./pages/ChatPage.jsx";
 
 
 function CategoryWrapper() {
@@ -61,10 +62,10 @@ function Router() {
             path: '/old-posts',
             element: <OldPostsPage />
         },
-        {/*
-            path: '/messages',
-            element: <MessagingPage />
-        */},
+        {
+            path: '/chat',
+            element: <ChatPage />
+        },
         {
             path: '/in-app-chats',
             element: <InAppChatsPage />
