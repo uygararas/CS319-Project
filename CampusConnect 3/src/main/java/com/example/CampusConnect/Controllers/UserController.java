@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 //@RequestMapping("/user")
@@ -42,17 +44,17 @@ public class UserController {
         }
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/user/change-password")
     public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequest request) {
         try {
             boolean success = userService.changePassword(request.getEmail(), request.getNewPassword());
             if (success) {
-                return ResponseEntity.ok().body("Password changed successfully");
+                return ResponseEntity.ok("Password changed successfully");
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password change failed");
+                return ResponseEntity.badRequest().body("Password change failed: User not found");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
     }
 

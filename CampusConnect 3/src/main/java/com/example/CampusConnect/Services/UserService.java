@@ -92,16 +92,14 @@ public class UserService {
     }
 
     public boolean changePassword(String email, String newPassword) {
-        Optional<CCuser> user = userRepository.findByEmail(email); 
-
-        // Check if user exists
-        if (user.isEmpty()) {
-            // User not found, return false or handle accordingly
-            return false;
+        Optional<CCuser> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isPresent()) {
+            CCuser user = userOpt.get();
+            user.setPassword(newPassword); // Directly set the new password
+            userRepository.save(user); // Save the user with the new password
+            return true;
         }
-        CCuser current = user.get();
-        current.changePassword(newPassword);
-        return true;
+        return false;
     }
     public String getEmailByUserId(Long userId) {
         return userRepository.findById(userId)
