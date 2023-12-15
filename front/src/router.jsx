@@ -9,17 +9,20 @@ import PreviewProductsPages from "./pages/PreviewProductsPages.jsx";
 import ViewDetailsPage from "./pages/ViewDetailsPage.jsx";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
 import ActivePostsPage from "./pages/ActivePostsPage.jsx";
-import OldPostsPage from "./pages/OldPostsPage.jsx"; // Import the new component
-//import MessagingPage from "./pages/MessagingPage.jsx";
-import InAppChatsPage from "./pages/InAppChatsPage.jsx"
+import OldPostsPage from "./pages/OldPostsPage.jsx";
+import InAppChatsPage from "./pages/InAppChatsPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import PasswordForgotPage from "./pages/PasswordForgotPage.jsx";
 import PasswordResetVerificationPage from "./pages/PasswordResetVerificationPage.jsx";
 
-
 function CategoryWrapper() {
     const { categoryName } = useParams();
     return <PreviewProductsPages categoryName={decodeURIComponent(categoryName)} />;
+}
+
+function ChatPageWrapper() {
+    const params = useParams();
+    return <ChatPage {...params} />;
 }
 
 function Router() {
@@ -65,8 +68,8 @@ function Router() {
             element: <OldPostsPage />
         },
         {
-            path: '/chat',
-            element: <ChatPage />
+            path: '/chat/:sellerId',
+            element: <ChatPageWrapper /> // Wrapped ChatPage to handle dynamic route parameter
         },
         {
             path: '/in-app-chats',
@@ -80,6 +83,7 @@ function Router() {
             path: '/password-reset-verification',
             element: <PasswordResetVerificationPage />
         }
+        // Add additional routes as needed
     ]);
 
     return (

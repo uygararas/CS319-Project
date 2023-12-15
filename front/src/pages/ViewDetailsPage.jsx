@@ -16,6 +16,11 @@ function ViewDetailsPage() {
     const webSocketUrl = 'ws://localhost:5173';
     const webSocket = useRef(new WebSocket(webSocketUrl));
     const navigate = useNavigate();
+
+    const navigateToChat = () => {
+        const sellerId = product.userId; // Assuming this is the seller's userId
+        navigate(`/chat/${sellerId}`);
+    };
     
 
     
@@ -187,7 +192,9 @@ function ViewDetailsPage() {
                             </button>
                         )}
                         {product.userId !== userId && (
-                            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
+                            <button onClick={navigateToChat} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">
+                                Communicate with seller?
+                            </button>
                         )}
                     </div>
                 </div>
