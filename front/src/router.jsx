@@ -14,6 +14,7 @@ import InAppChatsPage from "./pages/InAppChatsPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import PasswordForgotPage from "./pages/PasswordForgotPage.jsx";
 import PasswordResetVerificationPage from "./pages/PasswordResetVerificationPage.jsx";
+import UpdateProductPage from "./pages/UpdateProductPage.jsx";
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -82,6 +83,10 @@ function Router() {
         {
             path: '/password-reset-verification',
             element: <PasswordResetVerificationPage />
+        },
+        {
+            path: 'update-product',
+            element: <UpdateProductPage/>
         }
         // Add additional routes as needed
     ]);

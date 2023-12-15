@@ -38,12 +38,29 @@ function UpdateProductPage() {
                 setType(productData.category);
                 setTitle(productData.title);
                 setDescription(productData.description);
-                setDuration(productData.duration);
                 setImageUrl(productData.imageUrl);
-                setCondition(productData.condition);
-                setPrice(productData.price);
-                setLocation(productData.location);
-                setDate(productData.date);
+
+                if(type === "lendItem") {
+                    setDuration(productData.duration);
+                    setCondition(productData.condition);
+                }
+                else if (type === "secondHandItem") {
+                    setPrice(productData.price);
+                    setCondition(productData.condition);
+                }
+                else if (type === "rentedItem") {
+                    setPrice(productData.price);
+                    setCondition(productData.condition);
+                    setDuration(productData.duration);
+                }
+                else if(type === "lostItem" || type === "foundItem") {
+                    setLocation(productData.location);
+                    setDate(productData.date);
+                }
+                else if (type === "donatedItem") {
+                    setCondition(productData.condition);
+
+                }
             } catch (error) {
                 console.error('Error fetching product details:', error);
             }
@@ -212,12 +229,15 @@ function UpdateProductPage() {
             );
         }
     };
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (isSubmitting) return;
 
-        setIsSubmitting(true);
-        const formattedDate = date.toLocaleString('en-GB', {
+    function formatToLocaleString(date) {
+        if (!date) return null;
+
+        // Ensure the input is a Date object
+        const dateObj = (date instanceof Date) ? date : new Date(date);
+
+        // Format the date
+        return dateObj.toLocaleString('en-GB', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
@@ -225,12 +245,20 @@ function UpdateProductPage() {
             minute: '2-digit',
             hour12: true
         });
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+
         if (isFormValid()) {
             const formData = new FormData();
-            formData.append('image', imageFile); // Append the image file
+
             // Prepare the data to be sent
             const postData = {
-                type: type,
+                category: type,
                 title: title,
                 description: description,
                 imageUrl: imageUrl,
@@ -240,11 +268,11 @@ function UpdateProductPage() {
                 }),
                 ...(type === 'lostItem' && {
                     location: location,
-                    dateLost: formattedDate,
+                    dateLost: formatToLocaleString(date),
                 }),
                 ...(type === 'foundItem' && {
                     location: location,
-                    dateLost: formattedDate,
+                    dateLost: formatToLocaleString(date),
                 }),
                 ...(type === 'lendItem' && {
                     duration: combinedDuration,
@@ -260,24 +288,30 @@ function UpdateProductPage() {
                     condition: condition,
                 }),
             };
+            // Append item data as JSON string
             formData.append('item', JSON.stringify(postData));
+
+            // Append image file if available
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
             try {
                 const response = await apiService.put(`/items/${itemId}`, formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data' // Specify the content type for formData
+                        'Content-Type': 'multipart/form-data'
                     }
                 });
 
                 if (response.status === 200 || response.status === 201) {
                     console.log('Form submitted successfully:', response.data);
                     alert("Form submitted successfully");
-                    navigate('/home'); // Redirect or other actions after successful submission
-                    return;
+                    navigate('/home'); // Redirect after successful submission
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
-                setIsSubmitting(false);
                 alert("Error in submitting form");
+            } finally {
+                setIsSubmitting(false);
             }
         } else {
             setIsSubmitting(false);
