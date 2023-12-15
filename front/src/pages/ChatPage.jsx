@@ -1,60 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar.jsx";
-import { useParams } from 'react-router-dom';
-//import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
 import Footer from "../components/Footer.jsx";
 
 function ChatPage() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const { chatId } = useParams(); // Get chatId from route parameter
-    let stompClient = null;
+    let webSocket = null;
 
     useEffect(() => {
-        // Establish WebSocket connection
-        const socket = new SockJS('http://localhost:8080/our-websocket'); // Your server URL
-        stompClient = Stomp.over(socket);
+        // Replace with your actual WebSocket URL
+        webSocket = new WebSocket('ws://localhost:8080/our-websocket');
 
-        stompClient.connect({}, frame => {
-            console.log('Connected: ' + frame);
+        webSocket.onmessage = function(event) {
+            // Assuming the server sends a stringified JSON object
+            const data = JSON.parse(event.data);
+            setMessages(prevMessages => [...prevMessages, data.messageContents]);
+        };
 
-            stompClient.subscribe('/topic/messages', message => {
-                // Handle received messages
-                const receivedMessage = JSON.parse(message.body).contents;
-                setMessages(prevMessages => [...prevMessages, receivedMessage]);
-            });
-        });
+        webSocket.onerror = function(error) {
+            console.error('WebSocket Error: ', error);
+        };
+
+        webSocket.onclose = function() {
+            console.log('WebSocket connection closed');
+        };
 
         return () => {
-            // Disconnect on cleanup
-            if (stompClient !== null) {
-                stompClient.disconnect();
+            if (webSocket) {
+                webSocket.close();
             }
-            console.log("Disconnected");
         };
-    }, [chatId]);
+    }, []);
 
     const sendMessage = () => {
-        if (stompClient) {
-            const messageToSend = JSON.stringify({messageContents: newMessage});
-            stompClient.send("/ws/message", {}, messageToSend);
+        if (webSocket && webSocket.readyState === WebSocket.OPEN && newMessage) {
+            const messageToSend = JSON.stringify({ messageContents: newMessage });
+            webSocket.send(messageToSend);
             setNewMessage("");
         }
     };
 
     return (
-        <div className="chat-page">
+        <div>
             <Navbar />
-            <div className="chat-container">
-                <div className="chat-header">Chat</div>
-                <div className="chat-messages">
+            <div>
+                <div>Chat</div>
+                <div>
                     {messages.map((msg, index) => (
                         <div key={index}>{msg}</div>
                     ))}
                 </div>
-                <div className="chat-input">
-                    <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+                <div>
+                    <input
+                        type="text"
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                    />
                     <button onClick={sendMessage}>Send</button>
                 </div>
             </div>

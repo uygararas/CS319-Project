@@ -24,6 +24,8 @@ public class MessageController {
     @Autowired
     private NotificationService notificationService;
 
+
+
     @MessageMapping("/message")
     @SendTo("/topic/messages")
     public ResponseMessage getMessage(final Message message) throws InterruptedException {
