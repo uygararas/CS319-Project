@@ -1,7 +1,7 @@
 package com.example.CampusConnect.Services;
 
 import com.example.CampusConnect.DTO.ItemDTO;
-import com.example.CampusConnect.Entities.Item;
+import com.example.CampusConnect.Entities.*;
 import com.example.CampusConnect.Repositories.CCuserRepository;
 import com.example.CampusConnect.Repositories.ItemRepository;
 import jakarta.transaction.Transactional;
@@ -57,6 +57,23 @@ public class ItemService {
                 .map(ItemDTO::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public Item updateAndSaveItem(Long itemId, ItemDTO updatedItemDTO, MultipartFile image) throws Exception {
+        Item existingItem = itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found with id: " + itemId));
+
+        // Update the existing item with values from the DTO
+        updatedItemDTO.updateEntity(existingItem);
+        // Process and set the image if provided
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = storageService.uploadFile(image);
+            existingItem.setImageUrl(imageUrl);
+        }
+
+        return itemRepository.save(existingItem);
+    }
+
 
     public List<ItemDTO> findItemsByUserAndIsGivenTrue(Long userId) {
         List<Item> items = itemRepository.findByUserUserIdAndIsGivenTrue(userId);;

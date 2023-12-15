@@ -72,6 +72,23 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping(value = "/items/{itemId}", consumes = {"multipart/form-data"})
+    public ResponseEntity<Item> updateItem(@PathVariable Long itemId,
+                                           @RequestParam("item") String itemJson,
+                                           @RequestParam(value = "image", required = false) MultipartFile image) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            ItemDTO updatedItemDTO = objectMapper.readValue(itemJson, ItemDTO.class);
+
+            Item savedItem = itemService.updateAndSaveItem(itemId, updatedItemDTO, image);
+
+            return new ResponseEntity<>(savedItem, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @GetMapping("/items/active-posts/{userId}")
     public ResponseEntity<List<ItemDTO>> getItemsByUserAndIsGivenFalse(@PathVariable Long userId) {
         List<ItemDTO> itemDTOs = itemService.findItemsByUserAndIsGivenFalse(userId);

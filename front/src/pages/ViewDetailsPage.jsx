@@ -1,29 +1,30 @@
-import React, {useState, useEffect, useRef} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
+import { useState, useEffect, useRef } from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
+import Footer from "../components/Footer.jsx";
 
 function ViewDetailsPage() {
     const { itemId } = useParams();
     const [product, setProduct] = useState({});
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
-    const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState("");
+    const [privateMessage, setPrivateMessage] = useState('');
     const userId = SessionService.getUserId();
-    const navigate = useNavigate();
-    const webSocketUrl = 'ws://localhost:8080/our-websocket';
+    const [messages, setMessages] = useState([]);
+    const [messageText, setMessageText] = useState('');
+
+    // Replace 'ws://localhost:5173' with your actual WebSocket server URL.
+    const webSocketUrl = 'ws://localhost:5173';
     const webSocket = useRef(new WebSocket(webSocketUrl));
+    const navigate = useNavigate();
+    
 
+    
     useEffect(() => {
-        getProduct();
-        fetchComments();
-        webSocket.current.addEventListener('open', () => {
-            console.log('WebSocket connection opened');
-        });
-
+        const token = sessionStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/');
+        }
         // Listen for messages
         webSocket.current.addEventListener('message', (event) => {
             // Handle incoming messages
@@ -37,17 +38,16 @@ function ViewDetailsPage() {
         return () => {
             webSocket.current.close();
         };
-    }, [itemId]);
+    }, []);
 
-    const getProduct = async () => {
-        try {
-            const response = await apiService.get(`/items/${itemId}`);
-            setProduct(response.data);
-        } catch (error) {
-            console.error('Error fetching product details:', error);
-        }
-    };
+    useEffect(() => {
+        // Open WebSocket connection after component mounts
+        webSocket.current.addEventListener('open', () => {
+            console.log('WebSocket connection opened');
+        });
+    }, []);  // Empty dependency array to ensure it runs only once after initial render
 
+    // Function to send a private message
     const sendPrivateMessage = () => {
         const privateMessage = {
             type: 'private-message',
@@ -67,34 +67,13 @@ function ViewDetailsPage() {
         }
     };
 
-
-    const fetchComments = async () => {
+    const getProduct = async () => {
         try {
-            const response = await apiService.get(`/api/comments/${itemId}`);
-            setComments(response.data);
+            const response = await apiService.get(`/items/${itemId}`);
+            setProduct(response.data);
         } catch (error) {
-            console.error('Error fetching comments:', error);
+            console.error('Error fetching product details:', error);
         }
-    };
-
-    const postComment = async () => {
-        const commentData = { text: newComment, productId: itemId };
-        try {
-            await apiService.post('/api/comments', commentData);
-            setNewComment('');
-            fetchComments();
-        } catch (error) {
-            console.error('Error posting comment:', error);
-        }
-    };
-
-    const handleCommentChange = (event) => {
-        setNewComment(event.target.value);
-    };
-
-    const navigateToChat = () => {
-        const sellerId = product.itemID;
-        navigate(`/chat/${sellerId}`);
     };
 
     const changeIsGiven = async () => {
@@ -118,6 +97,9 @@ function ViewDetailsPage() {
         setPrivateMessage(event.target.value);
     };
 
+    useEffect(() => {
+        getProduct();
+    }, [itemId]);
 
     const renderPrice = () => {
         if (product.category === 'secondHandItem' || product.category === 'rentedItem') {
@@ -155,6 +137,7 @@ function ViewDetailsPage() {
         }
         return null;
     };
+
     function formatItemType(type) {
         switch (type) {
             case 'secondHandItem':
@@ -173,7 +156,9 @@ function ViewDetailsPage() {
                 return 'Unknown Type';
         }
     }
+
     const itemTypeFormatted = formatItemType(product.category);
+
     return (
         <div>
             <Navbar />
@@ -197,42 +182,47 @@ function ViewDetailsPage() {
                         {renderDuration()}
                         {renderLocation()}
                         {renderDateLost()}
-                        {product.userId === userId && (
-                            <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
-                                {product.given ? 'Mark as Active' : 'Mark as Old'}
-                            </button>
-                        )}
-                        {product.userId !== userId && (
-                            <button onClick={navigateToChat} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">
-                                Communicate with seller?
-                            </button>
-                        )}
-                        <div className="comments-section fixed bottom-0 right-0 mr-4 mb-20 bg-white shadow-lg rounded-lg p-4 max-w-sm">
-                            <h2 className="chat-title">Comments</h2>
-                            <div className="comments-list overflow-y-auto max-h-96">
-                                {comments.map((comment, index) => (
-                                    <div key={index} className="comment mb-2 last:mb-0 p-2 bg-gray-100 rounded">
-                                        <p>{comment.text}</p>
-                                    </div>
-                                ))}
+                        <div className="grid grid-rows-2">
+                            <div className="flex row-1">
+                                {product.userId === userId && (
+                                    <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                        {product.given ? 'Mark as Active' : 'Mark as Old'}
+                                    </button>
+                                )}
                             </div>
-                            <div className="add-comment mt-4">
-                                        <textarea
-                                            className="w-full p-2 mb-2 border border-gray-300 rounded"
-                                            value={newComment}
-                                            onChange={handleCommentChange}
-                                            placeholder="Add a comment..."
-                                        />
-                                <button className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                        onClick={postComment}>Post Comment</button>
+                            <div className="flex row-2">
+                                {product.userId === userId && (
+                                    <a href={`/update-product/${itemId}`} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                        Update Product
+                                    </a>
+                                )}
                             </div>
                         </div>
+                        {product.userId !== userId && (
+                            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
+                        )}
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </div>
     );
 }
 
 export default ViewDetailsPage;
+{/*<div className="form-group">
+                            <label htmlFor="private-message">Private Message</label>
+                            <input
+                                type="text"
+                                id="private-message"
+                                className="form-control"
+                                placeholder="Hello, I am interested!"
+                                value={privateMessage}
+                                onChange={handlePrivateMessageChange}
+                            />
+                        </div>
+                        <div>
+                            <button className="btn btn-default" type="button" onClick={sendPrivateMessage}>
+                                Send Private Message
+                            </button>
+                        </div>*/}
