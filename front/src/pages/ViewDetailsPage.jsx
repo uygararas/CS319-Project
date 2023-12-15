@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
+import Footer from "../components/Footer.jsx";
 
 function ViewDetailsPage() {
     const { itemId } = useParams();
@@ -181,17 +182,29 @@ function ViewDetailsPage() {
                         {renderDuration()}
                         {renderLocation()}
                         {renderDateLost()}
-                        {product.userId === userId && (
-                            <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
-                                {product.given ? 'Mark as Active' : 'Mark as Old'}
-                            </button>
-                        )}
+                        <div className="grid grid-rows-2">
+                            <div className="flex row-1">
+                                {product.userId === userId && (
+                                    <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                        {product.given ? 'Mark as Active' : 'Mark as Old'}
+                                    </button>
+                                )}
+                            </div>
+                            <div className="flex row-2">
+                                {product.userId === userId && (
+                                    <a href={`/update-product/${itemId}`} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                        Update Product
+                                    </a>
+                                )}
+                            </div>
+                        </div>
                         {product.userId !== userId && (
                             <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
                         )}
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

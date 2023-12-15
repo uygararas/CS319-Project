@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar.jsx";
 import {useNavigate} from "react-router-dom";
 import apiService from '../services/apiService';
 import SessionService from "../services/sessionService.js";
+import Footer from "../components/Footer.jsx";
 
 function PostProductPage() {
 
@@ -76,13 +77,13 @@ function PostProductPage() {
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
-                alert("Error in submitting form");
                 setIsSubmitting(false);
+                alert("Error in submitting form");
             }
         } else {
+            setIsSubmitting(false);
             alert('Please fill in all required fields with appropriate values.');
         }
-        navigate('')
     };
 
     const [type, setType] = useState("");
@@ -306,7 +307,7 @@ function PostProductPage() {
                                 <option value="month">Month</option>
                             </select>
 
-                            <label htmlFor="durationNumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">How many {durationType}s?</label>
+                            <label htmlFor="durationNumber" className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white ${durationType ? 'opacity-full' : 'opacity-25'}`}>How many {durationType}s?</label>
                             <input
                                 type="number"
                                 name="durationNumber"
@@ -401,6 +402,7 @@ function PostProductPage() {
                 </form>
             </div>
         </section>
+            <Footer/>
         </div>
     );
 }

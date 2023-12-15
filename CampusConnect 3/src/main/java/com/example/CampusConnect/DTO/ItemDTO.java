@@ -74,4 +74,43 @@ public class ItemDTO {
 
         return dto;
     }
+
+    public void updateEntity(Item item) {
+        if (item == null) {
+            throw new IllegalArgumentException("The provided item cannot be null");
+        }
+        // Update common fields
+        item.setTitle(this.getTitle());
+        item.setDescription(this.getDescription());
+        item.setImageUrl(this.getImageUrl());
+        item.setIsGiven(this.isGiven());
+        // ... other common fields ...
+
+        // Update specific fields based on item type
+        if ("donatedItem".equals(this.getCategory()) && item instanceof DonatedItem) {
+            DonatedItem donatedItem = (DonatedItem) item;
+            donatedItem.setCondition(this.getCondition());
+        } else if ("secondHandItem".equals(this.getCategory()) && item instanceof SecondHandItem) {
+            SecondHandItem secondHandItem = (SecondHandItem) item;
+            secondHandItem.setPrice(this.getPrice());
+            secondHandItem.setCondition(this.getCondition());
+        } else if ("lendItem".equals(this.getCategory()) && item instanceof LendItem) {
+            LendItem lendItem = (LendItem) item;
+            lendItem.setDuration(this.getDuration());
+            lendItem.setCondition(this.getCondition());
+        } else if ("foundItem".equals(this.getCategory()) && item instanceof FoundItem) {
+            FoundItem foundItem = (FoundItem) item;
+            foundItem.setLocation(this.getLocation());
+            foundItem.setDateLost(this.getDateLost());
+        } else if ("lostItem".equals(this.getCategory()) && item instanceof LostItem) {
+            LostItem lostItem = (LostItem) item;
+            lostItem.setLocation(this.getLocation());
+            lostItem.setDateLost(this.getDateLost());
+        } else if ("rentedItem".equals(this.getCategory()) && item instanceof RentedItem) {
+            RentedItem rentedItem = (RentedItem) item;
+            rentedItem.setCondition(this.getCondition());
+            rentedItem.setPrice(this.getPrice());
+            rentedItem.setDuration(this.getDuration());
+        }
+    }
 }
