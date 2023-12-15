@@ -8,4 +8,5 @@ import lombok.Setter;
 @Setter
 public class Message {
     private String messageContents;
+    private String recipientId;
 }

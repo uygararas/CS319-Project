@@ -18,7 +18,7 @@ class ChatPage extends React.Component {
     componentDidMount() {
         const { sellerId } = this.props.params; // Accessing sellerId from params
         // Replace with your WebSocket server URL and include sellerId if needed
-        this.webSocket = new WebSocket('ws://localhost:8080/chat/' + sellerId);
+        this.webSocket = new WebSocket('ws://localhost:8080/our-websocket');
 
         this.webSocket.onmessage = (event) => {
             const message = JSON.parse(event.data);
@@ -44,16 +44,21 @@ class ChatPage extends React.Component {
     }
 
     sendMessage = () => {
-        const { newMessage } = this.state;
-        if (this.webSocket.readyState === WebSocket.OPEN && newMessage) {
-            this.webSocket.send(JSON.stringify({ message: newMessage }));
+        if (this.webSocket.readyState === WebSocket.OPEN && this.state.newMessage) {
+            const messagePayload = {
+                content: this.state.newMessage,
+                sellerId: this.props.params.sellerId  // Include sellerId in the message
+            };
+            this.webSocket.send(JSON.stringify(messagePayload));
             this.setState({ newMessage: '' });
         }
     };
 
+
     handleNewMessageChange = (event) => {
         this.setState({ newMessage: event.target.value });
     };
+
 
     render() {
         const { messages, newMessage } = this.state;
