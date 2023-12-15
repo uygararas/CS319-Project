@@ -9,8 +9,7 @@ function ChatPage() {
 
     useEffect(() => {
         // Replace with your actual WebSocket URL
-        webSocket = new WebSocket('ws://localhost:8080/our-websocket');
-
+        const webSocket = new WebSocket('ws://localhost:8080/our-websocket');
         webSocket.onmessage = function(event) {
             // Assuming the server sends a stringified JSON object
             const data = JSON.parse(event.data);
