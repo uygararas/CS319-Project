@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import withBackButtonListener from "../components/withBackButtonListener.jsx";
-// Include other necessary imports
 
 class ChatPage extends React.Component {
     constructor(props) {
@@ -12,53 +11,47 @@ class ChatPage extends React.Component {
             messages: [],
             newMessage: ''
         };
-        this.webSocket = null;
     }
 
     componentDidMount() {
-        const { sellerId } = this.props.params; // Accessing sellerId from params
-        // Replace with your WebSocket server URL and include sellerId if needed
-        this.webSocket = new WebSocket('ws://localhost:8080/our-websocket');
-
-        this.webSocket.onmessage = (event) => {
-            const message = JSON.parse(event.data);
-            this.setState(prevState => ({
-                messages: [...prevState.messages, message]
-            }));
-        };
-
-        this.webSocket.onopen = () => {
-            console.log('WebSocket connection opened');
-            // You can send an initial message or perform any setup here
-        };
-
-        this.webSocket.onerror = (error) => {
-            console.error('WebSocket Error:', error);
-        };
+        this.fetchMessages();
     }
 
-    componentWillUnmount() {
-        if (this.webSocket) {
-            this.webSocket.close();
-        }
-    }
-
-    sendMessage = () => {
-        if (this.webSocket.readyState === WebSocket.OPEN && this.state.newMessage) {
-            const messagePayload = {
-                content: this.state.newMessage,
-                sellerId: this.props.params.sellerId  // Include sellerId in the message
-            };
-            this.webSocket.send(JSON.stringify(messagePayload));
-            this.setState({ newMessage: '' });
-        }
+    fetchMessages = () => {
+        fetch('/api/messages')
+            .then(response => response.json())
+            .then(data => this.setState({ messages: data }))
+            .catch(error => console.error('Error fetching messages:', error));
     };
 
+    sendMessage = () => {
+        const { newMessage } = this.state;
+        const { sellerId } = this.props.params;  // Or your logic to determine recipient
+        const message = {
+            content: newMessage,
+            recipientId: sellerId,  // Assuming you have recipient's ID
+            senderId: 'currentUserId' // Replace with actual sender's ID
+        };
+
+        fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(message)
+        })
+            .then(response => {
+                if (response.ok) {
+                    this.setState({ newMessage: '' });
+                    this.fetchMessages(); // Fetch messages again to update the list
+                } else {
+                    console.error('Error sending message:', response);
+                }
+            })
+            .catch(error => console.error('Error sending message:', error));
+    };
 
     handleNewMessageChange = (event) => {
         this.setState({ newMessage: event.target.value });
     };
-
 
     render() {
         const { messages, newMessage } = this.state;
@@ -89,8 +82,7 @@ class ChatPage extends React.Component {
     }
 }
 
-// withRouter is not required in React Router v6
-// Use a wrapper component or function to pass useParams to a class component
+// Wrapper to use useParams in a class component
 function ChatPageWithParams(props) {
     const params = useParams();
     return <ChatPage {...props} params={params} />;

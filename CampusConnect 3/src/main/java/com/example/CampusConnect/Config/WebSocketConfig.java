@@ -1,3 +1,4 @@
+/*
 package com.example.CampusConnect.Config;
 
 import com.example.CampusConnect.Messaging.MessageToUserHandler;
@@ -25,3 +26,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .withSockJS();
     }
 }
+*/

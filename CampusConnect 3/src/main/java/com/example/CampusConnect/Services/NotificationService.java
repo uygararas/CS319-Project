@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Services;
+/*package com.example.CampusConnect.Services;
 
 
 import com.example.CampusConnect.Messaging.ResponseMessage;
@@ -27,3 +27,4 @@ public class NotificationService {
         messagingTemplate.convertAndSendToUser(userId,"/topic/private-notifications", message);
     }
 }
+*/

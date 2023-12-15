@@ -1,3 +1,4 @@
+/*
 package com.example.CampusConnect.Services;
 
 import com.example.CampusConnect.Messaging.ResponseMessage;
@@ -31,3 +32,4 @@ public class WebSocketService {
         messagingTemplate.convertAndSendToUser(id, "/topic/private-messages", response);
     }
 }
+*/
