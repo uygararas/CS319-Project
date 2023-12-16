@@ -14,6 +14,7 @@ function ViewDetailsPage() {
     const [messageText, setMessageText] = useState('');
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [userEmails, setUserEmails] = useState('');
 
 
     // Replace 'ws://localhost:5173' with your actual WebSocket server URL.
@@ -28,19 +29,7 @@ function ViewDetailsPage() {
         if (!token) {
             navigate('/');
         }
-        // Listen for messages
-        webSocket.current.addEventListener('message', (event) => {
-            // Handle incoming messages
-            const message = JSON.parse(event.data);
-            console.log('Received message:', message);
-            // Update messages state
-            setMessages((prevMessages) => [...prevMessages, message]);
-        });
 
-        // Clean up WebSocket on component unmount
-        return () => {
-            webSocket.current.close();
-        };
     }, []);
 
     // Function to send a private message
@@ -168,14 +157,29 @@ function ViewDetailsPage() {
         return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     }
 
+
     const fetchComments = async () => {
         try {
             const response = await apiService.get(`/comments/${itemId}`);
-            setComments(response.data);
+            const fetchedComments = response.data;
+
+            // After fetching comments, fetch emails for each user in the comments
+            let emails = {};
+            for (const comment of fetchedComments) {
+                if (!emails[comment.userId]) {
+                    const emailResponse = await apiService.getEmailByUserId(comment.userId);
+                    // Assuming the API returns the email directly
+                    emails[comment.userId] = emailResponse;
+                }
+            }
+
+            setComments(fetchedComments);
+            setUserEmails(emails); // Update the state with fetched emails
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
     };
+
     const postComment = async () => {
         // Assuming you have functions to get the current user's ID
         const userId = SessionService.getUserId();
@@ -199,6 +203,7 @@ function ViewDetailsPage() {
             console.error('Error posting comment:', error);
         }
     };
+
 
     const itemTypeFormatted = formatItemType(product.category);
     const handleCommentChange = (event) => {
@@ -256,9 +261,9 @@ function ViewDetailsPage() {
                     <h2>Comments</h2>
                     {comments.map((comment, index) => (
                         <div key={index} className="comment">
-                            <p>{comment.userId}</p>
-                            <p>{comment.text}</p>
-                            <p>{formatTimestamp(comment.createdAt)}</p>
+                            <p>Email: {userEmails[comment.userId] || 'Loading email...'}</p>
+                            <p>Comment: {comment.text}</p>
+                            <p>Posted on: {formatTimestamp(comment.createdAt)}</p>
                         </div>
                     ))}
                     <div className="add-comment">
