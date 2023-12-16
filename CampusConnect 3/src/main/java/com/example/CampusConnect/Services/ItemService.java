@@ -38,7 +38,7 @@ public class ItemService {
         return itemRepository.save(item);
     }*/
 
-    @Transactional
+    /*@Transactional
     public Item createAndSaveItem(Item item, MultipartFile image) {
         try {
             if (image != null && !image.isEmpty()) {
@@ -50,7 +50,22 @@ public class ItemService {
         } catch (Exception e) {
             throw new RuntimeException("Error while saving item", e);
         }
+    }*/
+    @Transactional
+    public ItemDTO createAndSaveItem(Item item, MultipartFile image) {
+        try {
+            if (image != null && !image.isEmpty()) {
+                String imageUrl = storageService.uploadFile(image);
+                item.setImageUrl(imageUrl);
+            }
+
+            Item savedItem = itemRepository.save(item);
+            return ItemDTO.fromEntity(savedItem); // Convert saved item to DTO
+        } catch (Exception e) {
+            throw new RuntimeException("Error while saving item", e);
+        }
     }
+
     public List<ItemDTO> findItemsByUserAndIsGivenFalse(Long userId) {
         List<Item> items = itemRepository.findByUserUserIdAndIsGivenFalse(userId);;
         return items.stream()
@@ -72,6 +87,15 @@ public class ItemService {
         }
 
         return itemRepository.save(existingItem);
+    }
+
+    public List<ItemDTO> searchItems(String query) {
+        String standardizedQuery = query.toLowerCase(); // or toUpperCase()
+        List<Item> items = itemRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(standardizedQuery, standardizedQuery);
+
+        return items.stream()
+                .map(ItemDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 
 
