@@ -170,17 +170,30 @@ function ViewDetailsPage() {
             console.error('Error fetching comments:', error);
         }
     };
-
     const postComment = async () => {
-        const commentData = { text: newComment, productId: itemId };
+        // Assuming you have functions to get the current user's ID
+        const userId = SessionService.getUserId();
+
+        const commentData = { text: newComment };
+
         try {
-            await apiService.post('/api/comments', commentData);
-            setNewComment('');
-            fetchComments(); // Refresh comments after posting
+            // Construct the URL with itemId and userId as path parameters
+            const url = `/post/${itemId}/${userId}`;
+
+            const response = await apiService.post(url, commentData);
+
+            if (response.status === 200 || response.status === 201) {
+                setNewComment(''); // Clear the comment box
+                fetchComments(); // Refresh comments after posting
+            } else {
+                console.error('Error posting comment:', response);
+            }
         } catch (error) {
             console.error('Error posting comment:', error);
         }
     };
+
+
 
     const itemTypeFormatted = formatItemType(product.category);
     const handleCommentChange = (event) => {
