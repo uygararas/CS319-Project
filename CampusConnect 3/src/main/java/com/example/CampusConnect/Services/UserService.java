@@ -24,6 +24,24 @@ public class UserService {
         this.emailService = emailService;
     }
 
+
+    public boolean verifyEmailForPasswordReset(String token) {
+        // Find user by password reset token
+        Optional<CCuser> userOpt = userRepository.findByPasswordResetToken(token);
+
+        if (userOpt.isPresent()) {
+            CCuser user = userOpt.get();
+
+            // Check if the email is already verified for password reset
+            if (!user.getIsEmailVerifiedForPasswordChange()) {
+                user.setIsEmailVerifiedForPasswordChange(true);
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean checkCredentials(String email, String password) {
         Optional<CCuser> userOpt = userRepository.findByEmail(email);
         if (userOpt.isEmpty()) {
@@ -49,20 +67,7 @@ public class UserService {
         emailService.sendVerificationEmail(user.getEmail(), verificationUrl);
 
     }
-
-    // In UserService.java
-    public boolean verifyEmailForPasswordReset(String token) {
-        CCuser user = userRepository.findByVerificationToken(token);
-
-        if (user != null && !user.isEmailVerifiedForPasswordChange()) {
-            user.setEmailVerifiedForPasswordChange(true);
-            userRepository.save(user);
-            return true;
-        }
-        return false;
-    }
-
-
+    
     public boolean sendPasswordResetEmail(String email) {
         Optional<CCuser> userOptional = userRepository.findByEmail(email);
 

@@ -1,10 +1,12 @@
 package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.DTO.PasswordChangeRequest;
+import com.example.CampusConnect.Repositories.CCuserRepository;
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Services.UserService;
 import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Util.JwtUtil;
+import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +46,9 @@ public class UserController {
         }
     }
 
+
+
+
     // In UserController.java
     @GetMapping("/user/verify-for-password-reset")
     public ResponseEntity<?> verifyForPasswordReset(@RequestParam String token) {
@@ -51,9 +56,10 @@ public class UserController {
         if (isVerified) {
             return ResponseEntity.ok("Email verified successfully for password reset.");
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email verification failed.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email verification failed or token already used.");
         }
     }
+
 
 
 

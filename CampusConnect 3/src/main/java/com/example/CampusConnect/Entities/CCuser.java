@@ -35,6 +35,16 @@ public class CCuser {
     private String verificationToken;
     @Getter
     private String passwordResetToken;
+
+
+    public boolean getIsEmailVerifiedForPasswordChange() {
+        return isEmailVerifiedForPasswordChange;
+    }
+
+    public void setIsEmailVerifiedForPasswordChange(boolean emailVerifiedForPasswordChange) {
+        isEmailVerifiedForPasswordChange = emailVerifiedForPasswordChange;
+    }
+
     private boolean isEmailVerifiedForPasswordChange;
 
     public boolean getIsEmailVerified() {

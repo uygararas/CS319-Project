@@ -1,11 +1,12 @@
 // PasswordResetVerificationPage.jsx
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import apiService from '../services/apiService';
 
 function PasswordResetVerificationPage() {
     const [verificationStatus, setVerificationStatus] = useState('Verifying...');
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -16,12 +17,15 @@ function PasswordResetVerificationPage() {
         } else {
             setVerificationStatus('Invalid verification link.');
         }
-    }, [location]);
+    }, [location, navigate]);
 
     const verifyEmailForPasswordReset = async (token) => {
         try {
-            const response = await apiService.get(`/user/verify-for-password-reset?token=${token}`);
+            await apiService.get(`/user/verify-for-password-reset?token=${token}`);
             setVerificationStatus('Your email has been successfully verified for password reset!');
+            // Optionally close the window or redirect
+            window.close(); // Close current tab if opened via link
+            navigate('/password-change'); // Redirect to password change page
         } catch (error) {
             setVerificationStatus('Failed to verify email. Please try again or contact support.');
         }

@@ -1,6 +1,7 @@
 package com.example.CampusConnect.Repositories;
 
 import com.example.CampusConnect.Entities.CCuser;
+import org.antlr.v4.runtime.misc.MultiMap;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -12,4 +13,6 @@ public interface CCuserRepository extends JpaRepository<CCuser, Long> {
     Optional<CCuser> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    Optional<CCuser> findByPasswordResetToken(String token);
 }

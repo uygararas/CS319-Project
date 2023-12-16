@@ -184,7 +184,6 @@ function ViewDetailsPage() {
 
             if (response.status === 200 || response.status === 201) {
                 setNewComment(''); // Clear the comment box
-                fetchComments(); // Refresh comments after posting
             } else {
                 console.error('Error posting comment:', response);
             }
