@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import apiService from '../services/apiService';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import withBackButtonListener from '../components/withBackButtonListener.jsx';
 import SessionService from '../services/SessionService'; // Import SessionService
 
@@ -9,6 +9,8 @@ function PasswordChangePage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const emailGot = location.state?.email;
 
     useEffect(() => {
         const fetchEmail = async () => {
@@ -16,10 +18,13 @@ function PasswordChangePage() {
             if (userEmail) {
                 setEmail(userEmail);
             }
+            else if(emailGot){
+                setEmail(emailGot);
+            }
         };
 
         fetchEmail();
-    }, []);
+    }, [emailGot]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -34,6 +39,7 @@ function PasswordChangePage() {
                 email,
                 newPassword: password
             });
+            console.log(response);
             if (response.status === 200) {
                 alert('Password changed successfully');
                 navigate('/');

@@ -1,11 +1,38 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import apiService from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import withBackButtonListener from '../components/withBackButtonListener.jsx';
 
+// eslint-disable-next-line react-refresh/only-export-components
 function PasswordForgotPage() {
     const [email, setEmail] = useState('');
+    const [isEmailVerifiedForPasswordChange, setIsEmailVerifiedForPasswordChange] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+            try {
+                const response = await apiService.checkEmailVerificationStatus(email);
+                if (response.isEmailVerifiedForPasswordChange) {
+                    setIsEmailVerifiedForPasswordChange(true);
+                    clearInterval(intervalId);
+                }
+            } catch (error) {
+                console.error('Error while checking email verification:', error);
+            }
+        }, 5000); // Poll every 5 seconds, adjust as needed
+
+        return () => clearInterval(intervalId); // Clean up interval
+    }, [email, setIsEmailVerifiedForPasswordChange]);
+
+    useEffect(() => {
+        if (isEmailVerifiedForPasswordChange) {
+            // Navigate to the password change screen
+            navigate('/change-password', { state: { email: email } });
+        }
+    }, [email, isEmailVerifiedForPasswordChange, navigate]);
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -14,7 +41,6 @@ function PasswordForgotPage() {
             const response = await apiService.post('/user/request-password-reset', { email });
             if (response.status === 200) {
                 alert('Verification email sent. Please check your email.');
-                // Optionally navigate to a different page if needed
             } else {
                 alert('Failed to send verification email.');
             }

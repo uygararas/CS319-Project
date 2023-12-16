@@ -23,9 +23,7 @@ function PasswordResetVerificationPage() {
         try {
             await apiService.get(`/user/verify-for-password-reset?token=${token}`);
             setVerificationStatus('Your email has been successfully verified for password reset!');
-            // Optionally close the window or redirect
             window.close(); // Close current tab if opened via link
-            navigate('/password-change'); // Redirect to password change page
         } catch (error) {
             setVerificationStatus('Failed to verify email. Please try again or contact support.');
         }

@@ -24,4 +24,15 @@ apiService.getEmailByUserId = async (userId) => {
     }
 };
 
+apiService.checkEmailVerificationStatus = async (email) => {
+    try {
+        // Replace '/check-verification-status' with your actual endpoint
+        const response = await apiService.get(`/check-verification-status?email=${encodeURIComponent(email)}`);
+        return response.data; // Expected to return an object with isEmailVerifiedForPasswordChange flag
+    } catch (error) {
+        console.error('Error checking email verification status:', error);
+        return { isEmailVerifiedForPasswordChange: false };
+    }
+};
+
 export default apiService;
