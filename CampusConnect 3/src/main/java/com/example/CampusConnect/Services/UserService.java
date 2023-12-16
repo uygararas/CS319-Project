@@ -42,6 +42,17 @@ public class UserService {
         return false;
     }
 
+    public boolean checkEmailVerificationStatus(String email) {
+        Optional<CCuser> user = userRepository.findByEmail(email);
+        CCuser cCuser;
+        if(user.isPresent()){
+            cCuser = user.get();
+            return cCuser.getIsEmailVerifiedForPasswordChange();
+        }
+        // Handle the case where the user is not found or another error occurs
+        throw new RuntimeException("User not found");
+    }
+
     public boolean checkCredentials(String email, String password) {
         Optional<CCuser> userOpt = userRepository.findByEmail(email);
         if (userOpt.isEmpty()) {

@@ -114,6 +114,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/check-verification-status")
+    public ResponseEntity<?> checkVerificationStatus(@RequestParam String email) {
+        try {
+            // Method in UserService to check verification status
+            boolean isVerified = userService.checkEmailVerificationStatus(email);
+            return ResponseEntity.ok(Map.of("isEmailVerifiedForPasswordChange", isVerified));
+        } catch (Exception e) {
+            // Handle exceptions accordingly
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error checking verification status: " + e.getMessage());
+        }
+    }
+
 
 /*
     //Endpoint for authenticating a user while logging in
