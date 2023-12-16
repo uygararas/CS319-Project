@@ -133,7 +133,6 @@ public class ItemController {
 
         return new ResponseEntity<>(itemDTO, HttpStatus.OK);
     }
-
     @GetMapping("/items")
     public ResponseEntity<List<ItemDTO>> getItemsByCategory(@RequestParam(required = false) String category) {
         List<ItemDTO> itemDTOs;

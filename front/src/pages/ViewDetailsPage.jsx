@@ -94,6 +94,7 @@ function ViewDetailsPage() {
     };
 
     useEffect(() => {
+        fetchComments();
         getProduct();
     }, [itemId]);
 
@@ -164,7 +165,7 @@ function ViewDetailsPage() {
 
     const fetchComments = async () => {
         try {
-            const response = await apiService.get(`/api/comments/${itemId}`);
+            const response = await apiService.get(`/comments/${itemId}`);
             setComments(response.data);
         } catch (error) {
             console.error('Error fetching comments:', error);
@@ -184,6 +185,8 @@ function ViewDetailsPage() {
 
             if (response.status === 200 || response.status === 201) {
                 setNewComment(''); // Clear the comment box
+                fetchComments(); // Refresh comments after posting
+
             } else {
                 console.error('Error posting comment:', response);
             }

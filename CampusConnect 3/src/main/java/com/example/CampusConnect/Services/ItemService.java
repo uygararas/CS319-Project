@@ -120,13 +120,13 @@ public class ItemService {
 
     public void delete(Item item) {
 
-        String imageUrl = item.getImageUrl();
+        /*String imageUrl = item.getImageUrl();
         String fileKey = extractFileKeyFromUrl(imageUrl);
 
         // Deleting the file from S3 using StorageService
         if (fileKey != null && !fileKey.isEmpty()) {
             storageService.deleteFile(fileKey);
-        }
+        }*/
 
         // Deleting the item from the database
         itemRepository.delete(item);
