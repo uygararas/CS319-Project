@@ -139,40 +139,58 @@
 .message-input button:hover {
     background-color: #45a049;
 }
-.comments-section {
-    width: 350px; /* Adjust width as needed */
-    max-height: 70vh; /* Adjust height as needed */
-    overflow: hidden;
-    background-color: aliceblue;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.container {
+    max-width: 800px; /* Adjust the max width as needed */
+    margin: auto;
+    padding: 20px;
 }
 
-.comments-list {
-    max-height: 50vh;
-    overflow-y: auto;
+.product-and-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-details, .comments-section {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.product-details img {
+    max-width: 100%;
+    height: 300px;
+    border-radius: 4px;
+}
+
+.comments-section {
+    padding: 15px;
 }
 
 .comment {
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
+    background: #e1e1e1;
     padding: 10px;
+    margin-bottom: 10px;
     border-radius: 4px;
+}
+
+.add-comment {
+    margin-top: 20px;
 }
 
 .add-comment textarea {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    border: 1px solid blue;
-    resize: none; /* Disable textarea resize */
+    resize: vertical; /* Allows the textarea to be resized vertically */
 }
 
 .add-comment button {
-    width: 100%;
-    padding: 8px;
-    background-color: white;
-    color: black;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;

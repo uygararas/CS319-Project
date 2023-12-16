@@ -12,6 +12,9 @@ function ViewDetailsPage() {
     const userId = SessionService.getUserId();
     const [messages, setMessages] = useState([]);
     const [messageText, setMessageText] = useState('');
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState('');
+
 
     // Replace 'ws://localhost:5173' with your actual WebSocket server URL.
     const webSocketUrl = 'ws://localhost:5173';
@@ -157,26 +160,46 @@ function ViewDetailsPage() {
         }
     }
 
-    const itemTypeFormatted = formatItemType(product.category);
+    const fetchComments = async () => {
+        try {
+            const response = await apiService.get(`/api/comments/${itemId}`);
+            setComments(response.data);
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    };
 
+    const postComment = async () => {
+        const commentData = { text: newComment, productId: itemId };
+        try {
+            await apiService.post('/api/comments', commentData);
+            setNewComment('');
+            fetchComments(); // Refresh comments after posting
+        } catch (error) {
+            console.error('Error posting comment:', error);
+        }
+    };
+
+    const itemTypeFormatted = formatItemType(product.category);
+    const handleCommentChange = (event) => {
+        setNewComment(event.target.value);
+    };
     return (
         <div>
             <Navbar />
             <div className="container mx-auto my-5 py-2 body">
-                <div className="flex flex-wrap">
-                    <div className="w-full md:w-1/2 p-3 flex justify-center">
+                <div className="product-and-comments">
+
+                    {/* Product Details */}
+                    <div className="product-details">
                         <img
-                            className="max-w-[600px] max-h-[600px] min-w-[400px] min-h-[400px] object-contain"
+                            className="max-w-full h-auto object-contain mb-3"
                             src={product.imageUrl}
                             alt={product.name}
                         />
-                    </div>
-                    <div className="w-full md:w-1/2 p-5">
                         <h4 className="text-lg uppercase text-gray-600 mb-2">{itemTypeFormatted}</h4>
                         <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
-                        <p className="text-lg break-words mb-4">
-                            {product.description}
-                        </p>
+                        <p className="text-lg break-words mb-4">{product.description}</p>
                         {renderPrice()}
                         {renderCondition()}
                         {renderDuration()}
@@ -197,10 +220,27 @@ function ViewDetailsPage() {
                                     </a>
                                 )}
                             </div>
-                        </div>
+
                         {product.userId !== userId && (
                             <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
                         )}
+                    </div>
+                    </div>
+                    <div className="comments-section mt-5">
+                        <h2>Comments</h2>
+                        {comments.map((comment, index) => (
+                            <div key={index} className="comment">
+                                <p>{comment.text}</p>
+                            </div>
+                        ))}
+                        <div className="add-comment">
+                        <textarea
+                            value={newComment}
+                            onChange={handleCommentChange}
+                            placeholder="Add a comment..."
+                        />
+                            <button onClick={postComment}>Post Comment</button>
+                        </div>
                     </div>
                 </div>
             </div>
