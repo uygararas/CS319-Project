@@ -1,14 +1,29 @@
 package com.example.CampusConnect.Entities;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity
+@Table(name = "comments")
 public class Comment {
-    @Id
+
+    @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String text;
-    private Long productId; // Assuming this is the ID of the product
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private CCuser user;
 
-    // Constructors, getters, and setters
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }

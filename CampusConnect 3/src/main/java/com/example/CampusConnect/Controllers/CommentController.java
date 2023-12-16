@@ -1,25 +1,50 @@
 package com.example.CampusConnect.Controllers;
 
+import com.example.CampusConnect.DTO.CommentDTO;
+import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Entities.Comment;
+import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Services.CommentService;
+import com.example.CampusConnect.Services.ItemService;
+import com.example.CampusConnect.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
-
-
-@RequestMapping("/api/comments")
 public class CommentController {
+
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private ItemService itemService;
+    @Autowired
+    private UserService ccuserService;
 
-    @PostMapping
-    public Comment addComment(@RequestBody Comment comment) {
-        return commentService.saveComment(comment);
+    @PostMapping("/post/{itemId}/{userId}")
+    public ResponseEntity<CommentDTO> addComment(@PathVariable Long itemId,
+                                                 @PathVariable Long userId,
+                                                 @RequestBody CommentDTO commentDTO) {
+        // Fetch the item and user based on the provided IDs
+        Item item = itemService.getItemById(itemId);
+        CCuser user = ccuserService.findById(userId);
+
+        // Create and populate a new Comment entity
+        Comment comment = new Comment();
+        comment.setText(commentDTO.getText());
+        comment.setItem(item);
+        comment.setUser(user);
+
+        // Save the comment and convert the saved entity back to DTO
+        CommentDTO savedCommentDTO = CommentDTO.fromEntity(commentService.saveComment(comment));
+
+        return new ResponseEntity<>(savedCommentDTO, HttpStatus.CREATED);
     }
+
 
     @GetMapping("/{productId}")
     public List<Comment> getCommentsByProduct(@PathVariable Long productId) {

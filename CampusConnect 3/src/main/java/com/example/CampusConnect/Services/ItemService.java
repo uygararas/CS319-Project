@@ -160,4 +160,9 @@ public class ItemService {
         }
         return null;
     }
+    public Item getItemById(Long itemId) {
+        return itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found with id: " + itemId));
+    }
+
 }

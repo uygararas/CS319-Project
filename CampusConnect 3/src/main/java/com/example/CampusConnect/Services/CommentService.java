@@ -14,8 +14,7 @@ public class CommentService {
     public Comment saveComment(Comment comment) {
         return commentRepository.save(comment);
     }
-
     public List<Comment> getCommentsByProductId(Long productId) {
-        return commentRepository.findByProductId(productId);
+        return commentRepository.findByItemItemId(productId);
     }
 }

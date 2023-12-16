@@ -5,5 +5,5 @@ import com.example.CampusConnect.Entities.Comment;
 import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findByProductId(Long productId);
+    List<Comment> findByItemItemId(Long productId);
 }
