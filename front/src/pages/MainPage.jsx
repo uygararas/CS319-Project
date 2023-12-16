@@ -4,7 +4,6 @@ import {useEffect, useRef, useState} from "react";
 import apiService from '../services/apiService';
 import withBackButtonListener from "../components/withBackButtonListener.jsx";
 
-
 function MainPage() {
     const [products, setProducts] = useState([]);
     /*const initialProduct = ({
@@ -62,7 +61,7 @@ function MainPage() {
         <div>
             <Navbar />
             <div>
-                <section className="h-screen bg-center bg-no-repeat bg-[url('https://scontent.fesb3-1.fna.fbcdn.net/v/t31.18172-8/21552009_1489979164372853_664001206582317381_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7f8c78&_nc_ohc=BvWX9HNCbB0AX8rZbcq&_nc_ht=scontent.fesb3-1.fna&oh=00_AfCNJSyQLjQUp-vy5P_15esVv079DZNMAz0J7XJPC3AIVA&oe=657C3C63')] bg-gray-700 bg-blend-multiply">
+                <section className="h-screen bg-center bg-no-repeat bg-[url('https://trin.bilkent.edu.tr/wp-content/uploads/2023/03/1.jpg')] bg-gray-700 bg-blend-multiply bg-cover">
                     <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
                         <h1 className="mb-20 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Welcome to CampusConnect: Bilkent University's Social Marketplace</h1>

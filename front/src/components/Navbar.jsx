@@ -2,9 +2,14 @@ import { useState, useEffect } from 'react';
 import SessionService from "../services/sessionService.js";
 import {useNavigate} from "react-router-dom";
 import withBackButtonListener from "./withBackButtonListener.jsx";
+import apiService from "../services/apiService.js";
 
 function Navbar () {
     const [userEmail, setUserEmail] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
+    const [products, setProducts] = useState({});
+
+
     const navigate = useNavigate();
     useEffect(() => {
         const token = sessionStorage.getItem('jwtToken');
@@ -23,6 +28,14 @@ function Navbar () {
     const handleChangePassword = () => {
         navigate('/change-password'); // Replace '/change-password' with the actual route
     };
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
+    };
+
     function handleSignOut() {
         // Clear session storage, local storage, or cookies
         sessionStorage.clear();
@@ -65,7 +78,7 @@ function Navbar () {
                     </a>
                 </div>
                 <div className="flex">
-                    <form className="flex items-center">
+                    <form className="flex items-center" onSubmit={handleSearchSubmit}>
                         <label htmlFor="default-search" className="text-gray-900 sr-only">Search</label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center ml-3 pointer-events-none">
@@ -73,7 +86,15 @@ function Navbar () {
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg>
                             </div>
-                            <input type="search" id="default-search" className="block w-80 p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search with keywords" required></input>
+                            <input
+                                type="search"
+                                id="default-search"
+                                className="block w-80 p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Search with keywords"
+                                required
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                            ></input>
                             <button type="submit" className="absolute text-gray-900 px-2 py-1 right-1.5 bottom-1.5 border border-gray-900 hover:bg-blue-hover-text rounded-lg  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                         </div>
                     </form>

@@ -23,25 +23,19 @@ public class ItemController {
     private final ItemService itemService;
     private final UserService userService;
 
+    @GetMapping("/items/search")
+    public ResponseEntity<List<ItemDTO>> searchItems(@RequestParam String q) {
+        List<ItemDTO> itemDTOs = itemService.searchItems(q);
+        return ResponseEntity.ok(itemDTOs);
+    }
+
     @Autowired
     public ItemController(ItemService itemService, UserService userService) {
         this.itemService = itemService;
         this.userService = userService;
     }
 
-    /*@PostMapping("/create")
-    public ResponseEntity<Item> createItem(@RequestParam Long userId, @RequestBody Item Item) {
-        Item createdItem = itemService.createAndSaveItem(userId, Item);
-        return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
-    }*/
-
-    /*@PostMapping("/items")
-    public ResponseEntity<Item> createItem(@RequestBody Item Item) {
-        Item createdItem = itemService.createAndSaveItem(Item);
-        return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
-    }*/
-
-    @PostMapping(value = "/items", consumes = {"multipart/form-data"})
+    /*@PostMapping(value = "/items", consumes = {"multipart/form-data"})
     public ResponseEntity<Item> createItem(@RequestParam("item") String itemJson,
                                            @RequestParam("image") MultipartFile image,
                                            @RequestParam("userId") Long userId) {
@@ -61,7 +55,28 @@ public class ItemController {
             // Handle exceptions
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }*/
+    @PostMapping(value = "/items", consumes = {"multipart/form-data"})
+    public ResponseEntity<ItemDTO> createItem(@RequestParam("item") String itemJson,
+                                              @RequestParam("image") MultipartFile image,
+                                              @RequestParam("userId") Long userId) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Item item = objectMapper.readValue(itemJson, Item.class);
+
+            // Find the user by userId and add item to user
+            userService.addItemToUser(item, userId);
+
+            // Create and save the item with the image
+            ItemDTO createdItemDTO = itemService.createAndSaveItem(item, image);
+
+            return new ResponseEntity<>(createdItemDTO, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // Handle exceptions
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @DeleteMapping("/items/{id}")
     public ResponseEntity<?> deleteItem(@PathVariable Long id) {
@@ -73,7 +88,7 @@ public class ItemController {
     }
 
     @PutMapping(value = "/items/{itemId}", consumes = {"multipart/form-data"})
-    public ResponseEntity<Item> updateItem(@PathVariable Long itemId,
+    public ResponseEntity<ItemDTO> updateItem(@PathVariable Long itemId,
                                            @RequestParam("item") String itemJson,
                                            @RequestParam(value = "image", required = false) MultipartFile image) {
         try {
@@ -82,7 +97,9 @@ public class ItemController {
 
             Item savedItem = itemService.updateAndSaveItem(itemId, updatedItemDTO, image);
 
-            return new ResponseEntity<>(savedItem, HttpStatus.OK);
+            // Convert the saved Item entity to ItemDTO
+            ItemDTO responseDTO = ItemDTO.fromEntity(savedItem);
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -127,21 +144,4 @@ public class ItemController {
         }
         return ResponseEntity.ok(itemDTOs);
     }
-
-    /*
-    @PutMapping("/items/{id}")
-    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
-        Item existingItem = itemService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Item not found with id: " + id));
-
-        // Update properties of the existing item
-        existingItem.setTitle(itemDetails.getTitle());
-        existingItem.setDescription(itemDetails.getDescription());
-        // ... other properties to update
-
-        Item updatedItem = itemService.createAndSaveItem(existingItem);
-        return new ResponseEntity<>(updatedItem, HttpStatus.OK);
-    }
-*/
-    // Other endpoints...
 }

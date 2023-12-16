@@ -15,6 +15,7 @@ import ChatPage from "./pages/ChatPage.jsx";
 import PasswordForgotPage from "./pages/PasswordForgotPage.jsx";
 import PasswordResetVerificationPage from "./pages/PasswordResetVerificationPage.jsx";
 import UpdateProductPage from "./pages/UpdateProductPage.jsx";
+import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -85,10 +86,13 @@ function Router() {
             element: <PasswordResetVerificationPage />
         },
         {
-            path: 'update-product',
+            path: '/update-product/:itemId',
             element: <UpdateProductPage/>
+        },
+        {
+            path:'/search-results',
+            element: <SearchResultsPage/>
         }
-        // Add additional routes as needed
     ]);
 
     return (
