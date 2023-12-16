@@ -188,15 +188,19 @@ function ViewDetailsPage() {
         <div>
             <Navbar />
             <div className="container mx-auto my-5 py-2 body">
-                <div className="product-and-comments">
+                <div className="flex flex-wrap md:flex-nowrap">
 
-                    {/* Product Details */}
-                    <div className="product-details">
+                    {/* Item Photo */}
+                    <div className="item-photo w-full md:w-1/2 p-3">
                         <img
-                            className="max-w-full h-auto object-contain mb-3"
+                            className="max-w-full h-auto object-contain"
                             src={product.imageUrl}
                             alt={product.name}
                         />
+                    </div>
+
+                    {/* Item Properties */}
+                    <div className="item-properties w-full md:w-1/2 p-5">
                         <h4 className="text-lg uppercase text-gray-600 mb-2">{itemTypeFormatted}</h4>
                         <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
                         <p className="text-lg break-words mb-4">{product.description}</p>
@@ -234,11 +238,11 @@ function ViewDetailsPage() {
                             </div>
                         ))}
                         <div className="add-comment">
-                        <textarea
-                            value={newComment}
-                            onChange={handleCommentChange}
-                            placeholder="Add a comment..."
-                        />
+                    <textarea
+                        value={newComment}
+                        onChange={handleCommentChange}
+                        placeholder="Add a comment..."
+                    />
                             <button onClick={postComment}>Post Comment</button>
                         </div>
                     </div>

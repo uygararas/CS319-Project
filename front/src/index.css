@@ -139,15 +139,17 @@
 .message-input button:hover {
     background-color: #45a049;
 }
+/* Adjustments to the existing CSS for the product details layout */
+
 .container {
-    max-width: 800px; /* Adjust the max width as needed */
+    max-width: 1200px; /* Adjust the max width as needed */
     margin: auto;
     padding: 20px;
 }
 
 .product-and-comments {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
 }
 
@@ -157,15 +159,25 @@
     border-radius: 5px;
 }
 
+.product-details {
+    flex: 1; /* Take up the remaining space */
+    margin-right: 20px; /* Add some space between the product details and comments */
+}
+
 .product-details img {
     max-width: 100%;
-    height: 300px;
+    height: auto;
+    object-fit: contain; /* Ensures the image fits within the dimensions without stretching */
     border-radius: 4px;
 }
 
 .comments-section {
+    flex-basis: 100%;
     padding: 15px;
 }
+
+/* Rest of your existing CSS */
+
 
 .comment {
     background: #e1e1e1;
