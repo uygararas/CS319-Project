@@ -45,7 +45,6 @@ public class CommentController {
 
         return new ResponseEntity<>(savedCommentDTO, HttpStatus.CREATED);
     }
-
     @GetMapping("/comments/{productId}")
     public List<CommentDTO> getCommentsByProduct(@PathVariable Long productId) {
         // Fetch comments by productId

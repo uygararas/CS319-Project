@@ -163,6 +163,11 @@ function ViewDetailsPage() {
         }
     }
 
+    function formatTimestamp(timestamp) {
+        const date = new Date(timestamp);
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    }
+
     const fetchComments = async () => {
         try {
             const response = await apiService.get(`/comments/${itemId}`);
@@ -194,8 +199,6 @@ function ViewDetailsPage() {
             console.error('Error posting comment:', error);
         }
     };
-
-
 
     const itemTypeFormatted = formatItemType(product.category);
     const handleCommentChange = (event) => {
@@ -253,7 +256,9 @@ function ViewDetailsPage() {
                     <h2>Comments</h2>
                     {comments.map((comment, index) => (
                         <div key={index} className="comment">
+                            <p>{comment.userId}</p>
                             <p>{comment.text}</p>
+                            <p>{formatTimestamp(comment.createdAt)}</p>
                         </div>
                     ))}
                     <div className="add-comment">

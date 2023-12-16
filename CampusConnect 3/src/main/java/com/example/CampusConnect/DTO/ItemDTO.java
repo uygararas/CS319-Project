@@ -74,7 +74,6 @@ public class ItemDTO {
 
         return dto;
     }
-
     public void updateEntity(Item item) {
         if (item == null) {
             throw new IllegalArgumentException("The provided item cannot be null");
