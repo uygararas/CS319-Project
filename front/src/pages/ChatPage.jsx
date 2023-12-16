@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import withBackButtonListener from "../components/withBackButtonListener.jsx";
+import SessionService from "../services/sessionService.js";
 
 class ChatPage extends React.Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class ChatPage extends React.Component {
     }
 
     fetchMessages = () => {
-        fetch('/api/messages')
+        const chatSessionId = this.props.params.chatSessionId; // Update as per your route param
+        fetch(`/api/messages/${chatSessionId}`)
             .then(response => response.json())
             .then(data => this.setState({ messages: data }))
             .catch(error => console.error('Error fetching messages:', error));
@@ -26,11 +28,12 @@ class ChatPage extends React.Component {
 
     sendMessage = () => {
         const { newMessage } = this.state;
-        const { sellerId } = this.props.params;  // Or your logic to determine recipient
+        const chatSessionId = this.props.params.chatSessionId;
+
         const message = {
             content: newMessage,
-            recipientId: sellerId,  // Assuming you have recipient's ID
-            senderId: 'currentUserId' // Replace with actual sender's ID
+            chatSessionId: chatSessionId, // Assuming this is how the backend identifies chat session
+            senderId: SessionService.getUserId() // Fetch the current user's ID
         };
 
         fetch('/api/messages', {
@@ -48,6 +51,7 @@ class ChatPage extends React.Component {
             })
             .catch(error => console.error('Error sending message:', error));
     };
+
 
     handleNewMessageChange = (event) => {
         this.setState({ newMessage: event.target.value });
@@ -80,6 +84,7 @@ class ChatPage extends React.Component {
             </div>
         );
     }
+
 }
 
 // Wrapper to use useParams in a class component

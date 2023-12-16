@@ -43,13 +43,6 @@ function ViewDetailsPage() {
         };
     }, []);
 
-    useEffect(() => {
-        // Open WebSocket connection after component mounts
-        webSocket.current.addEventListener('open', () => {
-            console.log('WebSocket connection opened');
-        });
-    }, []);  // Empty dependency array to ensure it runs only once after initial render
-
     // Function to send a private message
     const sendPrivateMessage = () => {
         const privateMessage = {
@@ -103,6 +96,15 @@ function ViewDetailsPage() {
     useEffect(() => {
         getProduct();
     }, [itemId]);
+
+    const navigateToChat = () => {
+        const sellerId = product.userId; // Get the seller's userId from the product
+        if (sellerId) {
+            navigate(`/chat/${sellerId}`);
+        } else {
+            console.error('Seller ID not found');
+        }
+    };
 
     const renderPrice = () => {
         if (product.category === 'secondHandItem' || product.category === 'rentedItem') {
@@ -226,7 +228,7 @@ function ViewDetailsPage() {
                             </div>
 
                         {product.userId !== userId && (
-                            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
+                            <button onClick={navigateToChat} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
                         )}
                     </div>
                     </div>

@@ -6,23 +6,34 @@ import {Link} from "react-router-dom";
 
 class InAppChatsPage extends Component {
     state = {
-        chats: [
-            { id: 1, user: 'User1', message: 'Hello, how are you?' },
-            { id: 2, user: 'User2', message: 'Did you see my last message?' },
-            { id: 3, user: 'User3', message: 'Let’s meet tomorrow!' }
-        ]
+        chats: [] // Initialize as an empty array
+    };
+
+    componentDidMount() {
+        this.fetchChatSessions();
+    }
+
+    fetchChatSessions = () => {
+        // Fetch chat sessions from the backend
+        fetch('/api/chats')
+            .then(response => response.json())
+            .then(data => this.setState({ chats: data }))
+            .catch(error => console.error('Error fetching chat sessions:', error));
     };
 
     renderChatList() {
-        return this.state.chats.map(chat => (
-            <li key={chat.id} className="chat-item">
-                <a href={`/chat/${chat.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div className="chat-user">{chat.user}</div>
-                    <div className="chat-message">{chat.message}</div>
-                </a>
+        return this.state.chats.map(chatSession => (
+            <li key={chatSession.id} className="chat-item">
+                <Link to={`/chat/${chatSession.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <div className="chat-user">{/* Display chat participant(s) info */}</div>
+                    <div className="chat-message">{/* Last message preview or similar */}</div>
+                </Link>
             </li>
         ));
     }
+
+
+
 
     render() {
         return (
