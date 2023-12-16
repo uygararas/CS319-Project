@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -45,9 +46,11 @@ public class CommentController {
         return new ResponseEntity<>(savedCommentDTO, HttpStatus.CREATED);
     }
 
+    @GetMapping("/comments/{productId}")
+    public List<CommentDTO> getCommentsByProduct(@PathVariable Long productId) {
+        // Fetch comments by productId
+        List<CommentDTO> commentDTOs = commentService.getCommentsByProductId(productId);
 
-    @GetMapping("/{productId}")
-    public List<Comment> getCommentsByProduct(@PathVariable Long productId) {
-        return commentService.getCommentsByProductId(productId);
+        return ResponseEntity.ok(commentDTOs).getBody();
     }
 }

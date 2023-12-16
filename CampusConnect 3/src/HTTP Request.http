@@ -68,3 +68,7 @@ Content-Type: application/json
 {
   "text": "This is a test comment"
 }
+
+###
+GET http://localhost:8080/comments/3
+
