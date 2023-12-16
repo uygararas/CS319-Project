@@ -214,39 +214,40 @@ function ViewDetailsPage() {
                         <div className="grid grid-rows-2">
                             <div className="flex row-1">
                                 {product.userId === userId && (
-                                    <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                    <button onClick={changeIsGiven} className="mt-4 px-4 py-2 bg-[#4CAF50] text-white rounded hover:bg-green-600 transition-colors">
                                         {product.given ? 'Mark as Active' : 'Mark as Old'}
                                     </button>
                                 )}
                             </div>
                             <div className="flex row-2">
                                 {product.userId === userId && (
-                                    <a href={`/update-product/${itemId}`} className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                                    <a href={`/update-product/${itemId}`} className="mt-4 px-4 py-2 bg-[#4CAF50] text-white rounded hover:bg-green-600 transition-colors">
                                         Update Product
                                     </a>
                                 )}
                             </div>
-
-                        {product.userId !== userId && (
-                            <button onClick={navigateToChat} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 transition-colors">Communicate with seller?</button>
-                        )}
-                    </div>
-                    </div>
-                    <div className="comments-section mt-5">
-                        <h2>Comments</h2>
-                        {comments.map((comment, index) => (
-                            <div key={index} className="comment">
-                                <p>{comment.text}</p>
+                            <div>
+                                {product.userId !== userId && (
+                                    <button onClick={navigateToChat} className="px-4 py-2 bg-[#4CAF50] text-white rounded hover:bg-green-600 transition-colors">Communicate with seller</button>
+                                )}
                             </div>
-                        ))}
-                        <div className="add-comment">
-                    <textarea
-                        value={newComment}
-                        onChange={handleCommentChange}
-                        placeholder="Add a comment..."
-                    />
-                            <button onClick={postComment}>Post Comment</button>
                         </div>
+                    </div>
+                </div>
+                <div className="comments-section mt-5">
+                    <h2>Comments</h2>
+                    {comments.map((comment, index) => (
+                        <div key={index} className="comment">
+                            <p>{comment.text}</p>
+                        </div>
+                    ))}
+                    <div className="add-comment">
+                        <textarea
+                            value={newComment}
+                            onChange={handleCommentChange}
+                            placeholder="Add a comment..."
+                        />
+                        <button onClick={postComment}>Post Comment</button>
                     </div>
                 </div>
             </div>
