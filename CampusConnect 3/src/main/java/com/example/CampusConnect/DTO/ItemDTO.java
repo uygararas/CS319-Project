@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import com.example.CampusConnect.Entities.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -85,27 +84,21 @@ public class ItemDTO {
         item.setIsGiven(this.isGiven());
 
         // Update specific fields based on item type
-        if ("donatedItem".equals(this.getCategory()) && item instanceof DonatedItem) {
-            DonatedItem donatedItem = (DonatedItem) item;
+        if ("donatedItem".equals(this.getCategory()) && item instanceof DonatedItem donatedItem) {
             donatedItem.setCondition(this.getCondition());
-        } else if ("secondHandItem".equals(this.getCategory()) && item instanceof SecondHandItem) {
-            SecondHandItem secondHandItem = (SecondHandItem) item;
+        } else if ("secondHandItem".equals(this.getCategory()) && item instanceof SecondHandItem secondHandItem) {
             secondHandItem.setPrice(this.getPrice());
             secondHandItem.setCondition(this.getCondition());
-        } else if ("lendItem".equals(this.getCategory()) && item instanceof LendItem) {
-            LendItem lendItem = (LendItem) item;
+        } else if ("lendItem".equals(this.getCategory()) && item instanceof LendItem lendItem) {
             lendItem.setDuration(this.getDuration());
             lendItem.setCondition(this.getCondition());
-        } else if ("foundItem".equals(this.getCategory()) && item instanceof FoundItem) {
-            FoundItem foundItem = (FoundItem) item;
+        } else if ("foundItem".equals(this.getCategory()) && item instanceof FoundItem foundItem) {
             foundItem.setLocation(this.getLocation());
             foundItem.setDateLost(this.getDateLost());
-        } else if ("lostItem".equals(this.getCategory()) && item instanceof LostItem) {
-            LostItem lostItem = (LostItem) item;
+        } else if ("lostItem".equals(this.getCategory()) && item instanceof LostItem lostItem) {
             lostItem.setLocation(this.getLocation());
             lostItem.setDateLost(this.getDateLost());
-        } else if ("rentedItem".equals(this.getCategory()) && item instanceof RentedItem) {
-            RentedItem rentedItem = (RentedItem) item;
+        } else if ("rentedItem".equals(this.getCategory()) && item instanceof RentedItem rentedItem) {
             rentedItem.setCondition(this.getCondition());
             rentedItem.setPrice(this.getPrice());
             rentedItem.setDuration(this.getDuration());

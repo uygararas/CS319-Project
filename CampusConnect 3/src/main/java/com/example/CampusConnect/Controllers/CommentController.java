@@ -7,24 +7,24 @@ import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Services.CommentService;
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 public class CommentController {
 
-    @Autowired
-    private CommentService commentService;
-    @Autowired
-    private ItemService itemService;
-    @Autowired
-    private UserService ccuserService;
+    private final CommentService commentService;
+    private final ItemService itemService;
+    private final UserService ccuserService;
+
+    public CommentController(CommentService commentService,ItemService itemService, UserService ccuserService) {
+        this.commentService = commentService;
+        this.itemService = itemService;
+        this.ccuserService = ccuserService;
+    }
 
     @PostMapping("/post/{itemId}/{userId}")
     public ResponseEntity<CommentDTO> addComment(@PathVariable Long itemId,

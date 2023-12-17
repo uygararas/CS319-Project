@@ -6,7 +6,6 @@ import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.math.BigDecimal;
-
 @Getter
 @Setter
 @Entity

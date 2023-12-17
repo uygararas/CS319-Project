@@ -4,10 +4,13 @@ import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Entities.Comment;
 import com.example.CampusConnect.Entities.Item;
 import com.example.CampusConnect.Services.ItemService;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class CommentDTO {
+    // Getters and Setters
     private Long id;
     private String text;
     private Long userId;
@@ -65,34 +68,23 @@ public class CommentDTO {
         // Note: createdAt is set automatically in the entity
         return comment;
     }
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+
     public void setId(Long id) {
         this.id = id;
     }
-    public String getText() {
-        return text;
-    }
+
     public void setText(String text) {
         this.text = text;
     }
-    public Long getUserId() {
-        return userId;
-    }
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getItemId() {
-        return itemId;
-    }
+
     public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }

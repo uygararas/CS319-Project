@@ -1,14 +1,13 @@
 package com.example.CampusConnect.Filters;
 
 import com.example.CampusConnect.Util.JwtUtil;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class TokenRequestFilter implements Filter, jakarta.servlet.Filter {
 
-    private JwtUtil jwtUtil = new JwtUtil();
+    private final JwtUtil jwtUtil = new JwtUtil();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -30,7 +29,6 @@ public class TokenRequestFilter implements Filter, jakarta.servlet.Filter {
         }
 
         if (username != null && jwtUtil.validateToken(jwt, username)) {
-            // Optionally, add code to set user details in the context
         }
 
         chain.doFilter(request, response);
@@ -45,6 +43,4 @@ public class TokenRequestFilter implements Filter, jakarta.servlet.Filter {
     public void destroy() {
 
     }
-
-    // Implement other required methods like init() and destroy()
 }

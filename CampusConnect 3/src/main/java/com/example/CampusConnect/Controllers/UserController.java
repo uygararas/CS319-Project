@@ -1,12 +1,8 @@
 package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.DTO.PasswordChangeRequest;
-import com.example.CampusConnect.Repositories.CCuserRepository;
-import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Services.UserService;
 import com.example.CampusConnect.Entities.CCuser;
-import com.example.CampusConnect.Util.JwtUtil;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-//@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:5173")
 
 public class UserController {
@@ -28,7 +23,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Existing endpoint for user registration
     @PostMapping("/user/register")
     public ResponseEntity<?> registerUser(@RequestBody CCuser user) {
         userService.registerUser(user);
@@ -46,10 +40,6 @@ public class UserController {
         }
     }
 
-
-
-
-    // In UserController.java
     @GetMapping("/user/verify-for-password-reset")
     public ResponseEntity<?> verifyForPasswordReset(@RequestParam String token) {
         boolean isVerified = userService.verifyEmailForPasswordReset(token);
@@ -60,10 +50,6 @@ public class UserController {
         }
     }
 
-
-
-
-    // Endpoint for verifying user email
     @GetMapping("/user/verify")
     public ResponseEntity<?> verifyUser(@RequestParam String token) {
         boolean isVerified = userService.verifyUser(token);
@@ -103,7 +89,6 @@ public class UserController {
         }
     }
 
-    // UserController.java
     @GetMapping("/getEmailByUserId")
     public ResponseEntity<String> getEmailByUserId(@RequestParam Long userId) {
         try {
@@ -126,6 +111,4 @@ public class UserController {
                     .body("Error checking verification status: " + e.getMessage());
         }
     }
-
-
 }

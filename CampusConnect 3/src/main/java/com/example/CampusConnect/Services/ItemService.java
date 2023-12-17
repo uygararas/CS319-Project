@@ -20,7 +20,6 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
     private final CCuserRepository userRepository;
-
     private final StorageService storageService;
 
     @Autowired
@@ -30,27 +29,6 @@ public class ItemService {
         this.storageService = storageService;
     }
 
-    /*@Transactional
-    public Item createAndSaveItem(Long userId, Item item) {
-        CCuser user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        item.setUser(user);
-
-        return itemRepository.save(item);
-    }*/
-
-    /*@Transactional
-    public Item createAndSaveItem(Item item, MultipartFile image) {
-        try {
-            if (image != null && !image.isEmpty()) {
-                String imageUrl = storageService.uploadFile(image);
-                item.setImageUrl(imageUrl);
-            }
-
-            return itemRepository.save(item);
-        } catch (Exception e) {
-            throw new RuntimeException("Error while saving item", e);
-        }
-    }*/
     @Transactional
     public ItemDTO createAndSaveItem(Item item, MultipartFile image) {
         try {
@@ -99,8 +77,6 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-
-
     public List<ItemDTO> findItemsByUserAndIsGivenTrue(Long userId) {
         List<Item> items = itemRepository.findByUserUserIdAndIsGivenTrue(userId);;
         return items.stream()
@@ -123,10 +99,6 @@ public class ItemService {
     public void delete(Item item) {
         // Deleting the item from the database
         itemRepository.delete(item);
-    }
-
-    public List<Item> findAll() {
-        return itemRepository.findAll();
     }
 
     public List<ItemDTO> findAllItemsSorted(Long userId) {
@@ -161,5 +133,4 @@ public class ItemService {
         return itemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item not found with id: " + itemId));
     }
-
 }

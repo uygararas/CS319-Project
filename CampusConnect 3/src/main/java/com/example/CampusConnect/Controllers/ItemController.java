@@ -1,10 +1,8 @@
 package com.example.CampusConnect.Controllers;
 
 import com.example.CampusConnect.DTO.ItemDTO;
-import com.example.CampusConnect.Entities.CCuser;
 import com.example.CampusConnect.Services.ItemService;
 import com.example.CampusConnect.Entities.Item;
-import com.example.CampusConnect.Services.StorageService;
 import com.example.CampusConnect.Services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/items")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ItemController {
 
@@ -38,27 +35,6 @@ public class ItemController {
         this.userService = userService;
     }
 
-    /*@PostMapping(value = "/items", consumes = {"multipart/form-data"})
-    public ResponseEntity<Item> createItem(@RequestParam("item") String itemJson,
-                                           @RequestParam("image") MultipartFile image,
-                                           @RequestParam("userId") Long userId) {
-        try {
-            // Convert JSON string to Item object
-            ObjectMapper objectMapper = new ObjectMapper();
-            Item item = objectMapper.readValue(itemJson, Item.class);
-
-            // Find the user by userId
-            userService.addItemToUser(item, userId);
-
-            // Create and save the item with the image
-            Item createdItem = itemService.createAndSaveItem(item, image);
-
-            return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
-        } catch (Exception e) {
-            // Handle exceptions
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
     @PostMapping(value = "/items", consumes = {"multipart/form-data"})
     public ResponseEntity<ItemDTO> createItem(@RequestParam("item") String itemJson,
                                               @RequestParam("image") MultipartFile image,

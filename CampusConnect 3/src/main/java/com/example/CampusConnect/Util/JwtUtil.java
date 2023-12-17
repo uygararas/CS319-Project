@@ -13,7 +13,6 @@ public class JwtUtil {
     private final String secretKey = "yasemin";
 
     // Method to generate a token
-    // JwtUtil.java
     public String generateToken(Long userId) {
         return JWT.create()
                 .withClaim("userId", userId)

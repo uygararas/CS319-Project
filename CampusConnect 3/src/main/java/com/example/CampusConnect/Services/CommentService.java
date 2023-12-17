@@ -1,7 +1,6 @@
 package com.example.CampusConnect.Services;
 
 import com.example.CampusConnect.DTO.CommentDTO;
-import com.example.CampusConnect.DTO.ItemDTO;
 import com.example.CampusConnect.Entities.Comment;
 import com.example.CampusConnect.Repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
-    @Autowired
-    private CommentRepository commentRepository;
+
+    private final CommentRepository commentRepository;
+
+    CommentService(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
     public Comment saveComment(Comment comment) {
         return commentRepository.save(comment);
@@ -35,7 +38,6 @@ public class CommentService {
                 throw new RuntimeException("Comment not found with id: " + commentId);
             }
         } catch (Exception e) {
-            // Optional: handle any specific exceptions you expect
             throw new RuntimeException("Error deleting comment: " + e.getMessage());
         }
     }

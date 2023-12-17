@@ -8,13 +8,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserService {
 
     private final CCuserRepository userRepository;
-    private final EmailService emailService; // This should be your email service class that actually sends the emails
+    private final EmailService emailService;
 
     @Autowired
     public UserService(CCuserRepository userRepository/*, PasswordEncoder passwordEncoder*/, EmailService emailService) {
@@ -93,8 +92,6 @@ public class UserService {
 
         return false;
     }
-
-
 
     // Verify the user
     public boolean verifyUser(String token) {
