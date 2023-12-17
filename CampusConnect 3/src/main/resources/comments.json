@@ -1,0 +1,62 @@
+[
+  {
+    "text": "Amazing product, just what I needed!",
+    "userId": 1,
+    "itemId": 1
+  },
+  {
+    "text": "The quality is top-notch.",
+    "userId": 2,
+    "itemId": 3
+  },
+  {
+    "text": "Received the item quickly and in perfect condition.",
+    "userId": 3,
+    "itemId": 5
+  },
+  {
+    "text": "Couldn't be happier with my purchase!",
+    "userId": 4,
+    "itemId": 2
+  },
+  {
+    "text": "Excellent service, highly recommended.",
+    "userId": 5,
+    "itemId": 4
+  },
+  {
+    "text": "Love this item, exactly as described!",
+    "userId": 1,
+    "itemId": 6
+  },
+  {
+    "text": "Very reliable seller.",
+    "userId": 2,
+    "itemId": 8
+  },
+  {
+    "text": "Awesome product, will definitely buy again!",
+    "userId": 3,
+    "itemId": 10
+  },
+  {
+    "text": "Great experience, the item is perfect.",
+    "userId": 4,
+    "itemId": 7
+  },
+  {
+    "text": "Superb quality, exceeded my expectations.",
+    "userId": 5,
+    "itemId": 9
+  },
+  {
+    "text": "Item arrived on time and in great condition.",
+    "userId": 1,
+    "itemId": 11
+  },
+  {
+    "text": "Very satisfied with my purchase.",
+    "userId": 2,
+    "itemId": 12
+  }
+]
