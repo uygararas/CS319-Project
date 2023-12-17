@@ -1,3 +1,5 @@
+//this is the page for viewing the details of a product in this page you have many different actions like
+// updating a product if it is your product and if it is not your product you can email with the user
 import Navbar from "../components/Navbar.jsx";
 import { useState, useEffect, useRef } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';

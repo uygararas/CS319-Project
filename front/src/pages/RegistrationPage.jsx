@@ -1,3 +1,4 @@
+//this is the sign up page that is used for creating an account
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';

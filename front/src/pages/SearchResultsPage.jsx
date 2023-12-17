@@ -1,3 +1,4 @@
+//this is for search bar implementation
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import Footer from "../components/Footer.jsx";

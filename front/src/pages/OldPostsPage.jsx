@@ -6,7 +6,7 @@ import SessionService from "../services/sessionService.js";
 import {useNavigate} from "react-router-dom";
 import Footer from "../components/Footer.jsx";
 
-function ActivePostsPage() {
+function OldPostsPage() {
 
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
@@ -50,4 +50,4 @@ function ActivePostsPage() {
     );
 }
 
-export default ActivePostsPage;
+export default OldPostsPage;

@@ -1,3 +1,5 @@
+//this is the active posts page that is used for displaying a users active posts and to identify which
+//items are active so they can be updated or editted
 import { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";

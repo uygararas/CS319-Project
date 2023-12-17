@@ -1,4 +1,5 @@
 // PasswordResetVerificationPage.jsx
+//this is the page that is used for password resets confirmation status show
 import { useEffect, useState } from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import apiService from '../services/apiService';

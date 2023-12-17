@@ -1,3 +1,5 @@
+//this is the email verification page that is just works like a pop-up screen that is
+//for showing that email verification is completed or not after log in is complete
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import apiService from '../services/apiService';

@@ -1,3 +1,5 @@
+//this product card is used in every class that item is used retrieved or changed
+//this is like a wrapper component
 // eslint-disable-next-line react/prop-types
 import apiService from "../services/apiService.js";
 import {useEffect, useState} from "react";

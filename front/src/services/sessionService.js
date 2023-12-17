@@ -1,5 +1,5 @@
 import apiService from "./apiService.js";
-
+//this is the session service class that is used for token decoding getting some user fields from the tokens
 class SessionService {
     // Function to decode JWT token
     static decodeJWT(token) {

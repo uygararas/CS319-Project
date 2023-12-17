@@ -1,4 +1,6 @@
 // apiService.js
+//THIS IS THE MOST IMPORTANT CLASS IN OUR PROJECT IT IS FOR SESSION CONTROL IN THIS CLASS WE MANAGE THE
+// USER TOKENS IN AXIOS COMMANDS BY API SERVICE
 import axios from 'axios';
 
 const apiService = axios.create({

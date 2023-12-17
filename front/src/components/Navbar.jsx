@@ -1,3 +1,5 @@
+//this is the navbar which includes all of our main page buttons and our dropdown menu
+//all pages which is accessible after login has this component in it
 import { useState, useEffect } from 'react';
 import SessionService from "../services/sessionService.js";
 import {useNavigate} from "react-router-dom";

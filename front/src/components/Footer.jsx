@@ -1,3 +1,5 @@
+//the footer component which every class has at the bottom,
+// this includes two buttons about and contact which directs to those pages
 function Footer() {
     return(
         <footer className="bg-white shadow-inner shadow-gray-300 body">

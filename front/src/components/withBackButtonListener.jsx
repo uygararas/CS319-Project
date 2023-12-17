@@ -1,3 +1,4 @@
+//this class is used for back buttons functionality to prevent frozen buttons when the back button is used
 // withBackButtonListener.jsx
 import React, { useEffect } from 'react';
 

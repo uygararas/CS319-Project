@@ -1,3 +1,5 @@
+//this is the home-screen of our application and all of the items that ara currently active is
+// being displayed on this screen
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import {useEffect, useRef, useState} from "react";

@@ -1,3 +1,5 @@
+//password change page is used for basic in-app password changes this is used for
+//changing the password without entering the email
 import { useState, useEffect } from 'react';
 import apiService from '../services/apiService';
 import {useLocation, useNavigate} from 'react-router-dom';

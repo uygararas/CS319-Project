@@ -1,3 +1,5 @@
+//this is the page that is firstly beign used after password has been forgotten only the email is
+//entered than an email is sent to check if the entered email is a users email
 import { useState, useEffect } from 'react';
 import apiService from '../services/apiService';
 import { useNavigate } from 'react-router-dom';

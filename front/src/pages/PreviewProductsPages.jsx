@@ -1,3 +1,4 @@
+// this is the preview products page for just seeing the products a little bit as a card
 import { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar.jsx";
 import ProductCard from "../components/ProductCard.jsx";

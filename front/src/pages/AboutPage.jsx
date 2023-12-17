@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
+//This is the about page that is explaining what we have achieved in our application it is not a big class
 function AboutPage() {
     return (
         <div className="body">

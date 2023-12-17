@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
+//this is the community guidelines page which is just a info page that is being used in the comments component
+//this is like an advice and request page that is created for comment guidelines
 function CommunityGuidelinesPage() {
     return (
         <div className="body">

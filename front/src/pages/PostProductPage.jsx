@@ -1,3 +1,5 @@
+//this is the page for posting product, every detail of a product can be determined in this page
+//and after using this page an alert is shown when a form is submitted successfully
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -71,7 +73,7 @@ function PostProductPage() {
 
                 if (response.status === 200 || response.status === 201) {
                     console.log('Form submitted successfully:', response.data);
-                    alert("Form submitted successfully");
+                    alert("Item posted successfully!");
                     window.location.href = '/home' // Redirect or other actions after successful submission
                     return;
                 }
