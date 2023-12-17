@@ -26,5 +26,12 @@
     "password": "123",
     "verificationToken": "token4",
     "isEmailVerified": true
+  },
+  {
+  "userId": 5,
+  "email": "murat.ertan@ug.bilkent.edu.tr",
+  "password": "123",
+  "verificationToken": "token5",
+  "isEmailVerified": true
   }
 ]
