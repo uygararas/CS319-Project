@@ -1,4 +1,4 @@
-package com.example.CampusConnect.Config;
+/*package com.example.CampusConnect.Config;
 
 import com.example.CampusConnect.DTO.ItemDTO;
 import com.example.CampusConnect.Entities.CCuser;
@@ -54,5 +54,5 @@ public class DatabaseSeeder {
             itemRepository.save(item);
         });
     }
-}
+}*/
 
