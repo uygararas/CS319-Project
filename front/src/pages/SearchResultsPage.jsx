@@ -4,6 +4,7 @@ import Footer from "../components/Footer.jsx";
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import apiService from "../services/apiService.js";
+import SessionService from "../services/sessionService.js";
 
 // eslint-disable-next-line react/prop-types
 function SearchResultsPage () {
@@ -15,7 +16,7 @@ function SearchResultsPage () {
             const query = searchParams.get('q');
             if (query) {
                 try {
-                    const response = await apiService.get(`/items/search?q=${query}`);
+                    const response = await apiService.get(`/items/search/${userId}?q=${query}`);
                     setProducts(response.data);
                 } catch (error) {
                     console.error('Error fetching products:', error);
@@ -24,6 +25,8 @@ function SearchResultsPage () {
         };
         fetchProducts();
     }, [searchParams]);
+    const userId = SessionService.getUserId();
+
     return(
         <div>
             <Navbar />

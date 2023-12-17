@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard.jsx";
 import apiService from '../services/apiService';
 import {useNavigate} from "react-router-dom";
 import Footer from "../components/Footer.jsx";
+import SessionService from "../services/sessionService.js";
 
 // eslint-disable-next-line react/prop-types
 function PreviewProductsPages({ categoryName }) {
@@ -16,10 +17,11 @@ function PreviewProductsPages({ categoryName }) {
         }
         getProducts();
     }, []); // Add categoryName to dependency array to refetch when it changes
+    const userId = SessionService.getUserId();
 
     const getProducts = async () => {
         try {
-            const response = await apiService.get(`/items?category=${categoryName}`);
+            const response = await apiService.get(`/items/get/${userId}?category=${categoryName}`);
             setProducts(response.data);
             console.log(response.data);
         } catch (error) {
