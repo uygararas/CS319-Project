@@ -24,4 +24,19 @@ public class CommentService {
                 .map(CommentDTO::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    public void deleteCommentById(Long commentId) {
+        try {
+            // Check if the comment exists
+            if (commentRepository.existsById(commentId)) {
+                // Delete the comment by ID
+                commentRepository.deleteById(commentId);
+            } else {
+                throw new RuntimeException("Comment not found with id: " + commentId);
+            }
+        } catch (Exception e) {
+            // Optional: handle any specific exceptions you expect
+            throw new RuntimeException("Error deleting comment: " + e.getMessage());
+        }
+    }
 }

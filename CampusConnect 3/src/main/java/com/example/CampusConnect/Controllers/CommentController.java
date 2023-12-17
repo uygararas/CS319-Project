@@ -52,4 +52,17 @@ public class CommentController {
 
         return ResponseEntity.ok(commentDTOs).getBody();
     }
+
+    @DeleteMapping("/comments/delete/{commentId}")
+    public ResponseEntity<?> deleteComment(@PathVariable Long commentId) {
+        try {
+            // Call the service to delete the comment
+            commentService.deleteCommentById(commentId);
+            // Return a success response
+            return ResponseEntity.ok().body("Comment deleted successfully");
+        } catch (Exception e) {
+            // If something goes wrong, return an error response
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting comment: " + e.getMessage());
+        }
+    }
 }

@@ -12,6 +12,7 @@ function UpdateProductPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [isDataLoaded, setIsDataLoaded] = useState(false); // New state to track if data is loaded
+    const [isFormReady, setIsFormReady] = useState(false);
 
     const [type, setType] = useState("");
     const [title, setTitle] = useState("");
@@ -31,6 +32,9 @@ function UpdateProductPage() {
     const [date, setDate] = useState("");
 
     useEffect(() => {
+        const isValid = isFormValid();
+        // Update a new state variable, e.g., `isFormReady`
+        setIsFormReady(isValid);
         const getProduct = async () => {
             try {
                 const response = await apiService.get(`/items/${itemId}`);

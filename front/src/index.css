@@ -10,6 +10,14 @@
     font-weight: 300;
 }
 
+.body-mini {
+    font-family: 'Plus Jakarta Display', sans-serif;
+    letter-spacing: 0.02em;
+    font-size: 12px;
+    line-height: 1.75em;
+    font-weight: 300;
+}
+
 .categoryHeader {
     font-family: 'Plus Jakarta Display', sans-serif;
     letter-spacing: 0.02em;

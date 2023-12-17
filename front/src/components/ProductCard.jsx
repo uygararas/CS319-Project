@@ -1,7 +1,10 @@
 // eslint-disable-next-line react/prop-types
+import apiService from "../services/apiService.js";
+import {useEffect, useState} from "react";
+
 function ProductCard ({ product }) {
     // eslint-disable-next-line react/prop-types
-    const { imageUrl, title, description, category, itemId } = product;
+    const { imageUrl, title, description, category, itemId, createdAt, userId } = product;
     function formatItemType(type) {
         switch (type) {
             case 'secondHandItem':
@@ -18,6 +21,20 @@ function ProductCard ({ product }) {
                 return 'Rented Item';
             default:
                 return 'Unknown Type';
+        }
+    }
+
+    useEffect(() => {
+        fetchUserEmail();
+    }, []);
+
+    const fetchUserEmail = async () => {
+        try {
+            const response = await apiService.getEmailByUserId(userId);
+            const username = response.split('@')[0]; // Splits the email and takes the first part
+            setEmail(username);
+        } catch (error) {
+            console.error('Error fetching comments:', error);
         }
     }
 
@@ -60,7 +77,22 @@ function ProductCard ({ product }) {
     }
 
     const itemTypeFormatted = formatItemType(category);
+    const [email, setEmail] = useState("");
+    function formatTimestamp(timestamp) {
+        const now = new Date();
+        const postedDate = new Date(timestamp);
+        const diffInMs = now - postedDate;
+        const diffInHours = diffInMs / (1000 * 60 * 60);
 
+        if (diffInHours < 1) {
+            return `Posted just now`;
+        } else if (diffInHours < 24) {
+            return `Posted ${Math.round(diffInHours)} hours ago`;
+        } else {
+            const diffInDays = diffInHours / 24;
+            return `Posted ${Math.round(diffInDays)} days ago`;
+        }
+    }
     return(
         <div className={`border border-3 ${getTextColorClass(category)} rounded bg-white ${getBorderColorClass(category)}`}>
             <img className="p-[16px]" src={imageUrl} alt="item-photo" />
@@ -74,11 +106,12 @@ function ProductCard ({ product }) {
                     <div className="flex items-center text-sm justify-center">
                         View Details
                         <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
                     </div>
                 </a>
             </div>
+            <p className="body-mini text-center p-2">{formatTimestamp(createdAt)} by {email}</p>
         </div>
     );
 }

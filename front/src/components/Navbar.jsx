@@ -95,7 +95,7 @@ function Navbar () {
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                             ></input>
-                            <button type="submit" className="absolute text-gray-900 px-2 py-1 right-1.5 bottom-1.5 border border-gray-900 bg-green-400 hover:bg-green-600 rounded-lg  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                            <button type="submit" className="absolute text-gray-900 px-2 py-1 right-1.5 bottom-1.5 border border-gray-900 bg-white hover:bg-blue-hover-text rounded-lg  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                         </div>
                     </form>
                     <div className="flex items-center md:order-2 ml-5">

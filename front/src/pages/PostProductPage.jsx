@@ -266,7 +266,7 @@ function PostProductPage() {
     return(
         <div>
         <Navbar/>
-        <section className="dark:bg-gray-900 h-auto bg-gray-100">
+        <section className="dark:bg-gray-900 h-auto bg-gray-100 body">
             <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
                 <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Post a new product</h2>
                 <form onSubmit={handleSubmit}>

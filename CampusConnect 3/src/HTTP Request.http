@@ -51,6 +51,9 @@ Content-Type: application/json
 GET http://localhost:8080/user/get-email
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1eWdhcmFyYXMzQGdtYWlsLmNvbSIsImV4cCI6MTcwMjI5Njk2OCwiaWF0IjoxNzAxOTM2OTY4LCJlbWFpbCI6InV5Z2FyYXJhczNAZ21haWwuY29tIn0.sih4JyBb6rdVS_csMHKSLWYmJ1kCWQvMggK
 
+###
+GET http://localhost:8080/getEmailByUserId?userId=1
+Accept: application/json
 
 ###
 POST http://localhost:8080/api/comments/post
