@@ -9,11 +9,13 @@ Dockers and data grip have been configured to set the stage for the database wit
 I have opened an account in AWS to use a cloud database. However, the team decided to go local, and the DB instance has been shut down. There have been general discussions on how to manage the project in Mozart Cafe. I have been assigned to the back end.
 
 ### 9 Oct - 15 Oct
-I have completed the profile page use case diagram for D1-D2. Also contributed to the general use case diagram with improvement ideas. Uygar and Yasemin decided to go to the front-end.
+I have completed the profile page use case diagram for D1-D2. Also contributed to the general use case diagram with improvement ideas. Uygar and Yasemin decided to go to the front-end. And they left back-end for the rest of us.
 
 ### 16 Oct - 22 Oct
+I have written the class diagrams for the Message Center, User_Center and the profile page. We had a face-to-face discussion session in Cafe Inn. Also, I have finished the draft activity diagram. Yasemin has given feedback on those, and I have improved the draft activity diagrams. 
 
 ### 23 Oct - 29 Oct
+We have received the feedback for D1. I had improved my part, but Yasmin had also done the D1 use case diagrams, and we had done the same work twice. Hopefully, she benefited from my part and finalised D1.
 
 ### 30 Oct - 5 Nov
 I have improved my parts for D1-D2 according to feedback from our TAs. 
@@ -31,7 +33,5 @@ I have helped Uygar with the D4.
 I have been assigned to complete D5 with the given feedback and the added class functions in development according to our group work distribution decision. Also, I have written design trade-offs for D4. Yasemin volunteered for the other part. 
 
 ### 11 Dec - 17 Dec
-
-### 18 Dec - 24 Dec
-
+I have tested CampusConnect application on the Windows environment. I have written the User Manual and the build instructions for the final report. And finally, I finalised my work logs. 
 
