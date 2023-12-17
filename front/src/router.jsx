@@ -18,6 +18,7 @@ import UpdateProductPage from "./pages/UpdateProductPage.jsx";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import CommunityGuidelinesPage from "./pages/CommunityGuidelinesPage.jsx";
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -62,6 +63,10 @@ function Router() {
         {
             path: '/about',
             element: <AboutPage />
+        },
+        {
+            path: '/community-guidelines',
+            element: <CommunityGuidelinesPage />
         },
         {
             path: '/Contact',

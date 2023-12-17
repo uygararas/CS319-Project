@@ -222,3 +222,57 @@
 .add-comment button:hover {
     background-color: #16a34a;
 }
+
+
+.about-page {
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: auto;
+    text-align: left;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.categoryHeader {
+    text-align: center;
+    color: #2a2a2a;
+}
+
+.about-intro {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.about-paragraph {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.about-subheader {
+    margin-top: 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.about-feedback {
+    margin-top: 20px;
+    font-style: italic;
+}
+.guidelines-content {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.guidelines-content ul {
+    padding-left: 20px;
+}

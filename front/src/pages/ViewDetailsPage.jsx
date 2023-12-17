@@ -317,7 +317,8 @@ function ViewDetailsPage() {
                                                 </div>
                                             </div>
                                         </form>
-                                        <p className="ms-auto text-xs text-gray-500 dark:text-gray-400">Remember, comments to this post should follow our <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.</p>
+                                        <p className="ms-auto text-xs text-gray-500 dark:text-gray-400">Remember, comments to this post should follow our <a href="/community-guidelines" className="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>
+                                            .</p>
                                     </div>
                                 </div>
                             </div>
