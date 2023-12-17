@@ -21,4 +21,18 @@ Week 6: 23-27 October
 
 Week 7: 30 October - 3 November
   Worked on D1-D2. Will be finishing the user interface implementation next week.
-  
+
+Week 8: 6 November - 10 November
+
+Week 9: 13 November - 17 November
+
+Week 10: 20 November - 24 November
+
+Week 11: 27 November - 1 December
+
+Week 12: 4 December - 8 December
+
+Week 13: 11 December - 15 December
+
+Last Weeks:
+  Implemented all CRUD operations for items, including all controller, service, repository level implementations, implemented comment functionality with Uygar, implemented search functionality through search bar, implemented the user-interface, made use of and connected aws RDS, S3, IAM systems for cloud database and storage service functionalities. Added database seeding to make testing faster and easier. Implemented DTOs and implemented and tested request-response relationships. For the reports, made the High-Level Architecture Diagram and explained in detail the creational, behavioral, architectural design patterns used in implementation.
