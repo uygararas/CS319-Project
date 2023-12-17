@@ -29,7 +29,7 @@ function AuthenticationPage() {
             }
         } catch (error) {
             console.error('Login error:', error);
-            alert("Make sure you signed up or check your internet connection");
+            alert("Make sure you signed up and did verification or check your internet connection");
             setIsSubmitting(false);
         }
     };
