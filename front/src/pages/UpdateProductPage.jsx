@@ -347,6 +347,7 @@ function UpdateProductPage() {
             <section className="bg-gray-100 body">
                 <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
                     <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update product</h2>
+                    <h2 className="mb-4 text-sm font-bold text-gray-900 dark:text-white">Only change the fields that you want to update!</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                             <div className="sm:col-span-2">
