@@ -94,10 +94,12 @@ function ProductCard ({ product }) {
         }
     }
     return(
-        <div className={`border border-3 ${getTextColorClass(category)} rounded bg-white ${getBorderColorClass(category)}`}>
-            <img className="p-[16px]" src={imageUrl} alt="item-photo" />
-            <div className={`p-[16px] text-center space-y-[8px] border-b ${getBorderColorClass(category)}`}>
-                <a href="" className="productCardTitle">{title}</a>
+        <div className={`border border-3 ${getTextColorClass(category)} rounded bg-white ${getBorderColorClass(category)} flex flex-col`}>
+            <div className="flex justify-center items-center overflow-hidden" style={{ height: '200px' }}> {/* Adjust height as needed */}
+                <img className="max-w-full max-h-full p-2" src={imageUrl} alt="item-photo" style={{ objectFit: 'contain' }} />
+            </div>
+            <div className={`p-[16px] text-center space-y-[8px] border-b ${getBorderColorClass(category)} flex flex-col flex-grow`}>
+                <a href="" className="productCardTitle truncate">{title}</a>
                 <h6 className="productCardExplanation truncate">{description}</h6>
             </div>
             <div className="p-[16px] text-center">

@@ -7,17 +7,17 @@
     "isEmailVerified": true
   },
   {
-    "userId": 3,
-    "email": "ulas.keskin@ug.bilkent.edu.tr",
-    "password": "123",
-    "verificationToken": "token3",
-    "isEmailVerified": true
-  },
-  {
     "userId": 2,
     "email": "uygar.aras@ug.bilkent.edu.tr",
     "password": "123",
     "verificationToken": "token2",
+    "isEmailVerified": true
+  },
+  {
+    "userId": 3,
+    "email": "ulas.keskin@ug.bilkent.edu.tr",
+    "password": "123",
+    "verificationToken": "token3",
     "isEmailVerified": true
   },
   {
