@@ -13,6 +13,8 @@ function UpdateProductPage() {
 
     const [isDataLoaded, setIsDataLoaded] = useState(false); // New state to track if data is loaded
     const [isFormReady, setIsFormReady] = useState(false);
+    const [originalProductData, setOriginalProductData] = useState(null);
+
 
     const [type, setType] = useState("");
     const [title, setTitle] = useState("");
@@ -40,6 +42,7 @@ function UpdateProductPage() {
                 const response = await apiService.get(`/items/${itemId}`);
                 const productData = response.data;
                 console.log(productData);
+                setOriginalProductData(productData);
                 // Set initial values for form fields
                 setType(productData.category);
                 setTitle(productData.title);
@@ -201,42 +204,32 @@ function UpdateProductPage() {
 
     const isFormValid = () => {
         if (!isDataLoaded) return false;
-        // First, check for the comment properties of the all types of items, they should not be empty
-        if(type === "" || title.trim() === "" || description === "" || imageUrl === "") {
-            return false;
-        }
 
-        if (type === "lostItem" || type === "foundItem") {
-            return(
-                location !== "" &&
-                date !== ""
-            );
-        }
-        else if (type === "lendItem") {
-            return(
-                condition !== "" &&
-                isDurationLessThanTwoYears()
-            );
-        }
-        else if (type === "secondHandItem") {
-            return(
-                condition !== "" &&
-                price > 0
-            );
-        }
-        else if (type === "donatedItem") {
-            return(
-                condition !== ""
-            );
-        }
-        else if (type === "rentedItem") {
-            return(
-                condition !== "" &&
-                price > 0 &&
-                isDurationLessThanTwoYears()
-            );
-        }
+        // Comparing each field with its original value
+        let isAnyFieldUpdated;
+        isAnyFieldUpdated = title !== originalProductData.title ||
+            description !== originalProductData.description ||
+            imageUrl !== originalProductData.imageUrl ||
+            type !== originalProductData.category ||
+            condition !== originalProductData.condition ||
+            price !== originalProductData.price ||
+            location !== originalProductData.location ||
+            (date && originalProductData.date && date.toISOString() !== new Date(originalProductData.date).toISOString()) ||
+            (extractNumberFromDuration(durationNumber) !== extractNumberFromDuration(originalProductData.duration)) ||
+            extractTypeFromDuration(durationType) !== extractTypeFromDuration(originalProductData.duration);
+
+        return isAnyFieldUpdated;
     };
+
+// Helper functions to extract number and type from duration string (e.g., '2 days')
+    const extractNumberFromDuration = (durationString) => {
+        return durationString ? parseInt(durationString.split(' ')[0]) : 0;
+    };
+
+    const extractTypeFromDuration = (durationString) => {
+        return durationString ? durationString.split(' ')[1].replace(/s$/, '') : ''; // Removes plural 's'
+    };
+
 
     function formatToLocaleString(date) {
         if (!date) return null;
