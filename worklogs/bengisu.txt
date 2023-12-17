@@ -1,0 +1,38 @@
+18-24 September - Week 1
+We formed our group members and emailed it to our TA.
+
+25-1 October - Week 2
+We have written the Readme file of our project, and discussed the main properties of our application. I have finalised and uploaded the file with the help of my friends.
+
+2-8 October - Week 3
+We have discussed the implementation details and work distribution according to each group members' preference and interests. We decided to divide the workload into two as BackEnd(3 members) and FrontEnd(2 members).
+
+9-15 October - Week 4
+We have uploaded first draft of D1. We divided the workload to 5, I have prepared the Authentication part of Use Case diagram and corresponding Use Case descriptions, and connected all subgroups of the Use Case diagram together.  
+
+16-22 October - Week 5
+We have uploaded first draft of D2. We divided the workload to 5, I have prepared the Class diagram except the item parts. We started implemenation referecing our previous design decisions.
+
+23-29 October - Week 6
+We have worked on finalising D1 and D2 based on the feedback we received. Everyone fixed the corresponding parts where we have completed for the first draft. 
+
+30-5 November - Week 7
+We have uploaded the final versions of D1 and D2. I have fixed the problematic parts on Use Case descriptions according to feedback on parts I have prepared, then studied for the midterm.
+
+6-12 November - Week 8
+We showed our implementation to our TA via Zoom for D3. We have also asked our questions about required user types and messaging implementation. 
+
+13-19 November - Week 9
+We have uploaded first draft of D4. We dividivided the workload to 5 and I have prepared the Client layer of high level architecture diagram. 
+
+20-26 November - Week 10
+We made progress on the implementation overall. I have worked on the Backend with Ulas, we continued implementing Repository, Service, Controller, Entity classes. 
+
+27-3 December - Week 11
+We have uploaded first draft of D5. I have added the corresponding Messaging, Repository and Service classes to the Class diagram, and finalised the report by combining remaining parts of Class diagram that my friends prepared.
+
+4-10 December - Week 12
+We have uploaded final versions of D4 and D5. We made progress in implementation, we met regulary to make coding sessions together. At that point, we did not have strict workload divisons like for reports, we discussed and solved the problems together. I have worked on messaging part mostly.
+
+11-17 December - Week 13
+We have finalised our code and prepared a commercial video to introduce our application. I have prepared the 1 min video and help with implementation when needed.
