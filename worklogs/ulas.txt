@@ -1,0 +1,38 @@
+Week 1 (18-24 September):
+We formed our group and emailed our Teaching Assistant.
+
+Week 2 (25 September - 1 October):
+We composed the Readme file for our project, discussing its key features. We decided on our meeting days.
+
+Week 3 (2-8 October):
+Preferences on implementation and workload distribution occurred based on each member's requests, we decided to divide the workload by allocating three members to back-end and two to the front-end. I offered to participate in the back-end part of the implementation. I also offered to use spring as it is in my area of expertise from my summer internship.
+
+Week 4 (9-15 October):
+We submitted the initial draft of D1, dividing tasks among the team. I focused on the Management section of the Use Case diagram, and corresponding descriptions.
+
+Week 5 (16-22 October):
+The first draft of D2 was shared, with tasks distributed among team members on a face to face meeting. I specifically did the State diagram and initiated back-end implementation based on our meetings and prior design reports. 
+
+Week 6 (23-29 October):
+Our efforts were directed towards finalizing D1 and D2, incorporating feedback received from our TA. Each team member worked on the part they have completed for first draft according to feedback. I have worked on the state diagrams.
+
+Week 7 (30 October - 5 November):
+Final versions of D1 and D2 were uploaded. I addressed issues in the Use Case descriptions on my behalf based on feedback, and subsequently focused on midterm preparation.
+
+Week 8 (6-12 November):
+For D3, we presented our implementation to our TA on Zoom, and we asked for clarification on ading admin to the application, and other structural questions.
+
+Week 9 (13-19 November):
+The initial draft of D4 was submitted, with tasks divided among team members. I specifically worked on the Database layer in the high-level architecture diagram.
+
+Week 10 (20-26 November):
+Overall implementation progress was made. I collaborated on the Backend with Bengisu, focusing on implementing Service, Repository, Entity, and Controller classes.
+
+Week 11 (27 November - 3 December):
+The first draft of D5 was completed. My contribution included adding, Entity, Config, and Controller classes to the Class diagram.
+
+Week 12 (4-10 December):
+Final versions of D4 and D5 were uploaded. Progress in implementation was achieved through regular collaborative coding sessions, with collective discussions. My primary focus during this phase was on implementing the messaging feature.
+
+Week 13 (11-17 December):
+We finalized our code and got ready for a live presentation, and a demo video introducing our application was prepared. I have worked on the details of implementing a forum-like messaging structure.
