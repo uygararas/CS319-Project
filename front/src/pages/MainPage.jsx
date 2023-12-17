@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard.jsx";
 import {useEffect, useRef, useState} from "react";
 import apiService from '../services/apiService';
 import withBackButtonListener from "../components/withBackButtonListener.jsx";
+import Footer from "../components/Footer.jsx";
 
 function MainPage() {
     const [products, setProducts] = useState([]);
@@ -84,6 +85,7 @@ function MainPage() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

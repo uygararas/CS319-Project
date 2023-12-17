@@ -53,7 +53,7 @@ function Navbar () {
             <div className="flex items-center justify-between pl-4 pr-4 pb-1 pt-1 w-full">
                 <div className="flex items-center space-x-9">
                     <a href='/home'>
-                        <img src="/Logo-3.pdf" className="h-14" alt="Logo" />
+                        <img src="https://campusconnectbucket.s3.eu-north-1.amazonaws.com/Logo-3.pdf" className="h-14" alt="Logo" />
                     </a>
                     <a href="/post-item" className="text-blue-hover-text hover:text-blue-text">
                         Post Product
@@ -101,7 +101,7 @@ function Navbar () {
                     <div className="flex items-center md:order-2 ml-5">
                         <button type="button" className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span className="sr-only">Open user menu</span>
-                            <img className="w-10 h-10" src="/Logo_Campus_Connect_Circular-removebg-preview.png" alt="user photo"></img>
+                            <img className="w-10 h-10" src="https://campusconnectbucket.s3.eu-north-1.amazonaws.com/Logo_Campus_Connect_Circular-removebg-preview.png" alt="user photo"></img>
                         </button>
                         <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                             <div className="px-4 py-3">

@@ -34,8 +34,8 @@ function ActivePostsPage() {
     return (
         <div>
             <Navbar />
-            <div className="px-20 py-10 bg-repeat h-screen" style={{
-                backgroundImage: "url('/bg.jpg')",
+            <div className="px-20 py-10 bg-repeat" style={{
+                backgroundImage: "url('https://campusconnectbucket.s3.eu-north-1.amazonaws.com/bg.jpg')",
                 backgroundRepeat: 'repeat',
                 backgroundAttachment: 'fixed'
             }}>

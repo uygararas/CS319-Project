@@ -291,7 +291,7 @@ function ViewDetailsPage() {
                                     <li>
                                         {comments.map((comment, index) => (
                                             <a key={index} className="flex w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
-                                                <img className="me-3 rounded-full w-11 h-11" src="/Logo_Campus_Connect_Circular-removebg-preview.png" alt="Jese Leos Avatar"></img>
+                                                <img className="me-3 rounded-full w-11 h-11" src="https://campusconnectbucket.s3.eu-north-1.amazonaws.com/Logo_Campus_Connect_Circular-removebg-preview.png" alt="Jese Leos Avatar"></img>
                                                 <div>
                                                     <p className="text-sm text-gray-500 dark:text-gray-400">New comment from <span className="font-medium text-gray-900 dark:text-white">{userEmails[comment.userId] || 'Loading username...'}</span>: {comment.text}</p>
                                                     <span className="text-xs text-blue-600 dark:text-blue-500">{formatTimestamp(comment.createdAt)}   {((product.userId === userId) || (comment.userId === userId)) && (

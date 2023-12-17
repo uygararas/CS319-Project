@@ -31,7 +31,7 @@ function PreviewProductsPages({ categoryName }) {
         <div>
             <Navbar />
             <div className="px-20 py-10 bg-repeat" style={{
-                backgroundImage: "url('/bg.jpg')",
+                backgroundImage: "url('https://campusconnectbucket.s3.eu-north-1.amazonaws.com/bg.jpg')",
                 backgroundRepeat: 'repeat',
                 backgroundAttachment: 'fixed'
             }}>
