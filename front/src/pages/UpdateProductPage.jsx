@@ -260,6 +260,9 @@ function UpdateProductPage() {
             const formData = new FormData();
             const finalLocation = location !== "" ? location : originalProductData.location;
             const finalDate = date ? formatToLocaleString(date) : formatToLocaleString(new Date(originalProductData.date));
+            const finalCondition = condition !== "" ? condition : originalProductData.condition;
+            const finalCombinedDuration = duration !== "" ? duration : originalProductData.duration;
+            const finalPrice = price > 0 ? price : originalProductData.price; // Assuming price cannot be zero
             console.log(originalProductData.date);
             console.log(finalDate);
             const postData = {
@@ -269,24 +272,24 @@ function UpdateProductPage() {
                 imageUrl: imageUrl,
                 // Conditional properties based on the type
                 ...(type === 'donatedItem' && {
-                    condition: condition,
+                    condition: finalCondition,
                 }),
                 ...(type === 'lostItem' || type === 'foundItem') && {
                     location: finalLocation,
                     dateLost: finalDate,
                 },
                 ...(type === 'lendItem' && {
-                    duration: combinedDuration,
-                    condition: condition,
+                    duration: finalCombinedDuration,
+                    condition: finalCondition,
                 }),
                 ...(type === 'rentedItem' && {
-                    condition: condition,
-                    duration: combinedDuration,
-                    price: price,
+                    condition: finalCondition,
+                    duration: finalCombinedDuration,
+                    price: finalPrice,
                 }),
                 ...(type === 'secondHandItem' && {
-                    price: price,
-                    condition: condition,
+                    price: finalPrice,
+                    condition: finalCondition,
                 }),
             };
             // Append item data as JSON string
