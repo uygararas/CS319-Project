@@ -65,7 +65,7 @@ function MainPage() {
         <div>
             <Navbar />
             <div>
-                <section className="h-screen bg-center bg-no-repeat bg-[url('https://trin.bilkent.edu.tr/wp-content/uploads/2023/03/1.jpg')] bg-gray-700 bg-blend-multiply bg-cover">
+                <section className="h-screen bg-center bg-no-repeat bg-[url('https://campusconnectbucket.s3.eu-north-1.amazonaws.com/1.jpg')] bg-gray-700 bg-blend-multiply bg-cover">
                     <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
                         <h1 className="mb-20 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Welcome to CampusConnect: Bilkent University's Social Marketplace</h1>
