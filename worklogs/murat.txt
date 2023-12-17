@@ -1,7 +1,3 @@
-1. Report on progress and issues. What you did, what worked, what you learned, where you had trouble, and where you are stuck. What did you do last week? (By individual team members) Any blockers? 
-2. Outline your plans and goals for the following week. What is your plan for next week? (By individual team members) 
-
-
 ### 25 Sep - 1 Oct
 Dockers and data grip have been configured to set the stage for the database with the help of Yasemin. 
 
@@ -18,16 +14,19 @@ I have written the class diagrams for the Message Center, User_Center and the pr
 We have received the feedback for D1. I had improved my part, but Yasmin had also done the D1 use case diagrams, and we had done the same work twice. Hopefully, she benefited from my part and finalised D1.
 
 ### 30 Oct - 5 Nov
-I have improved my parts for D1-D2 according to feedback from our TAs. 
+I have improved my parts for D1-D2 according to feedback from our TAs. This mainly included the improvement of the activity diagrams from D2.
 
 ### 6 Nov - 12 Nov
+I have finalised activity diagram for D2 and corrected the User Profile and Messaging packages in D1, which was the final version.
 
 ### 13 Nov - 19 Nov
-I have helped Uygar with the D4. 
+I have helped Uygar with the D4. We had the demo presentation to Mr Yahya. I have written the design goals for D4 (draft version).
 
 ### 20 Nov - 26 Nov
+Continued working on the deliverables and helped team discussions.
 
 ### 27 Nov - 3 Dec
+We have discussions about the design patterns for D5. I was investigating spring authentication for implementation in the project.
 
 ### 4 Dec - 10 Dec
 I have been assigned to complete D5 with the given feedback and the added class functions in development according to our group work distribution decision. Also, I have written design trade-offs for D4. Yasemin volunteered for the other part. 
