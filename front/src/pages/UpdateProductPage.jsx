@@ -63,7 +63,7 @@ function UpdateProductPage() {
                     setDuration(productData.duration);
                 }
                 else if(type === "lostItem" || type === "foundItem") {
-                    setLocation(productData.location);
+                    setLocation(productData.location.toISOString());
                     setDate(productData.date);
                 }
                 else if (type === "donatedItem") {
