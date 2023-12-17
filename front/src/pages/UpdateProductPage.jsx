@@ -49,6 +49,7 @@ function UpdateProductPage() {
                 setDescription(productData.description);
                 setImageUrl(productData.imageUrl);
 
+
                 if(type === "lendItem") {
                     setDuration(productData.duration);
                     setCondition(productData.condition);
@@ -63,8 +64,9 @@ function UpdateProductPage() {
                     setDuration(productData.duration);
                 }
                 else if(type === "lostItem" || type === "foundItem") {
+                    console.log("do not change", productData.location.toISOString(),productData.date.toISOString);
                     setLocation(productData.location.toISOString());
-                    setDate(productData.date);
+                    setDate(new Date(productData.date).toISOString);
                 }
                 else if (type === "donatedItem") {
                     setCondition(productData.condition);
@@ -256,8 +258,10 @@ function UpdateProductPage() {
 
         if (isFormValid()) {
             const formData = new FormData();
-
-            // Prepare the data to be sent
+            const finalLocation = location !== "" ? location : originalProductData.location;
+            const finalDate = date ? formatToLocaleString(date) : formatToLocaleString(new Date(originalProductData.date));
+            console.log(originalProductData.date);
+            console.log(finalDate);
             const postData = {
                 category: type,
                 title: title,
@@ -267,14 +271,10 @@ function UpdateProductPage() {
                 ...(type === 'donatedItem' && {
                     condition: condition,
                 }),
-                ...(type === 'lostItem' && {
-                    location: location,
-                    dateLost: formatToLocaleString(date),
-                }),
-                ...(type === 'foundItem' && {
-                    location: location,
-                    dateLost: formatToLocaleString(date),
-                }),
+                ...(type === 'lostItem' || type === 'foundItem') && {
+                    location: finalLocation,
+                    dateLost: finalDate,
+                },
                 ...(type === 'lendItem' && {
                     duration: combinedDuration,
                     condition: condition,
@@ -306,7 +306,7 @@ function UpdateProductPage() {
                 if (response.status === 200 || response.status === 201) {
                     console.log('Form submitted successfully:', response.data);
                     alert("Form submitted successfully");
-                    navigate('/home'); // Redirect after successful submission
+                    window.location.href = `/home`; // Redirect after successful submission
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
@@ -327,7 +327,7 @@ function UpdateProductPage() {
                 const response = await apiService.delete(`/items/${itemId}`);
                 if (response.status === 200) {
                     alert("Item deleted successfully");
-                    navigate('/active-posts'); // Redirect after successful submission
+                    window.location.href = '/active-posts'; // Redirect after successful submission
                     // Handle additional logic after deletion, like updating UI or redirecting
                 }
             } catch (error) {

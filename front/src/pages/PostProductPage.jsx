@@ -72,7 +72,7 @@ function PostProductPage() {
                 if (response.status === 200 || response.status === 201) {
                     console.log('Form submitted successfully:', response.data);
                     alert("Form submitted successfully");
-                    navigate('/home'); // Redirect or other actions after successful submission
+                    window.location.href = '/home' // Redirect or other actions after successful submission
                     return;
                 }
             } catch (error) {

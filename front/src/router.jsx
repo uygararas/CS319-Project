@@ -16,6 +16,8 @@ import PasswordForgotPage from "./pages/PasswordForgotPage.jsx";
 import PasswordResetVerificationPage from "./pages/PasswordResetVerificationPage.jsx";
 import UpdateProductPage from "./pages/UpdateProductPage.jsx";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 
 function CategoryWrapper() {
     const { categoryName } = useParams();
@@ -56,6 +58,14 @@ function Router() {
         {
             path: '/view-details/:itemId',
             element: <ViewDetailsPage />
+        },
+        {
+            path: '/about',
+            element: <AboutPage />
+        },
+        {
+            path: '/Contact',
+            element: <ContactPage />
         },
         {
             path: '/verify-email',
