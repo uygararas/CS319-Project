@@ -14,7 +14,6 @@ import java.util.Optional;
 public class UserService {
 
     private final CCuserRepository userRepository;
-    //private final PasswordEncoder passwordEncoder;
     private final EmailService emailService; // This should be your email service class that actually sends the emails
 
     @Autowired
@@ -65,7 +64,6 @@ public class UserService {
     // Register a new user
     public void registerUser(CCuser user) {
         // Encrypt the password
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         // Set the verification token
         user.generateNewVerificationToken();

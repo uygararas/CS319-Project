@@ -331,19 +331,3 @@ function ViewDetailsPage() {
     );
 }
 export default ViewDetailsPage;
-{/*<div className="form-group">
-                            <label htmlFor="private-message">Private Message</label>
-                            <input
-                                type="text"
-                                id="private-message"
-                                className="form-control"
-                                placeholder="Hello, I am interested!"
-                                value={privateMessage}
-                                onChange={handlePrivateMessageChange}
-                            />
-                        </div>
-                        <div>
-                            <button className="btn btn-default" type="button" onClick={sendPrivateMessage}>
-                                Send Private Message
-                            </button>
-                        </div>*/}

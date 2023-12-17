@@ -28,9 +28,6 @@ public class CCuser {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 
-
-    @ElementCollection
-    private List<Long> chatSessionIds = new ArrayList<>();
     // New field to store verification token
     private String verificationToken;
     @Getter

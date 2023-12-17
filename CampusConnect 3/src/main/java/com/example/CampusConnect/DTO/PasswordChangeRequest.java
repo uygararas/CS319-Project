@@ -6,6 +6,4 @@ import lombok.Getter;
 public class PasswordChangeRequest {
     private String email;
     private String newPassword;
-
-    // Getters and setters
 }

@@ -83,7 +83,6 @@ public class ItemDTO {
         item.setDescription(this.getDescription());
         item.setImageUrl(this.getImageUrl());
         item.setIsGiven(this.isGiven());
-        // ... other common fields ...
 
         // Update specific fields based on item type
         if ("donatedItem".equals(this.getCategory()) && item instanceof DonatedItem) {

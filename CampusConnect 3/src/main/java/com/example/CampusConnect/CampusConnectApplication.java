@@ -13,10 +13,4 @@ public class CampusConnectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CampusConnectApplication.class, args);
 	}
-	/*@Bean
-	public CommandLineRunner commandLineRunner(DatabaseSeeder databaseSeeder) {
-		return args -> {
-			databaseSeeder.seedDatabase();
-		};
-	}*/
 }

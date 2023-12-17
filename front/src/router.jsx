@@ -10,8 +10,6 @@ import ViewDetailsPage from "./pages/ViewDetailsPage.jsx";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
 import ActivePostsPage from "./pages/ActivePostsPage.jsx";
 import OldPostsPage from "./pages/OldPostsPage.jsx";
-import InAppChatsPage from "./pages/InAppChatsPage.jsx";
-import ChatPage from "./pages/ChatPage.jsx";
 import PasswordForgotPage from "./pages/PasswordForgotPage.jsx";
 import PasswordResetVerificationPage from "./pages/PasswordResetVerificationPage.jsx";
 import UpdateProductPage from "./pages/UpdateProductPage.jsx";
@@ -83,14 +81,6 @@ function Router() {
         {
             path: '/old-posts',
             element: <OldPostsPage />
-        },
-        {
-            path: '/chat/:sellerId',
-            element: <ChatPageWrapper /> // Wrapped ChatPage to handle dynamic route parameter
-        },
-        {
-            path: '/in-app-chats',
-            element: <InAppChatsPage />
         },
         {
             path: '/password-forgot-page',
