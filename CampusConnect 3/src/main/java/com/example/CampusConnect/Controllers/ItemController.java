@@ -23,9 +23,12 @@ public class ItemController {
     private final ItemService itemService;
     private final UserService userService;
 
-    @GetMapping("/items/search")
-    public ResponseEntity<List<ItemDTO>> searchItems(@RequestParam String q) {
-        List<ItemDTO> itemDTOs = itemService.searchItems(q);
+    @GetMapping("/items/search/{userId}")
+    public ResponseEntity<List<ItemDTO>> searchItems(
+            @PathVariable Long userId,
+            @RequestParam String q) {
+
+        List<ItemDTO> itemDTOs = itemService.searchItems(q, userId);
         return ResponseEntity.ok(itemDTOs);
     }
 
@@ -76,7 +79,6 @@ public class ItemController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     @DeleteMapping("/items/{id}")
     public ResponseEntity<?> deleteItem(@PathVariable Long id) {
@@ -133,13 +135,16 @@ public class ItemController {
 
         return new ResponseEntity<>(itemDTO, HttpStatus.OK);
     }
-    @GetMapping("/items")
-    public ResponseEntity<List<ItemDTO>> getItemsByCategory(@RequestParam(required = false) String category) {
+    @GetMapping("/items/get/{userId}")
+    public ResponseEntity<List<ItemDTO>> getItemsByCategoryAndNotUserId(
+            @PathVariable Long userId,
+            @RequestParam(required = false) String category) {
+
         List<ItemDTO> itemDTOs;
         if (category != null && !category.isEmpty()) {
-            itemDTOs = itemService.findByType(category); // Make sure this method also returns List<ItemDTO>
+            itemDTOs = itemService.findByTypeAndNotUserId(category, userId); // Updated method name
         } else {
-            itemDTOs = itemService.findAllItemsSorted();
+            itemDTOs = itemService.findAllItemsSorted(userId);
         }
         return ResponseEntity.ok(itemDTOs);
     }

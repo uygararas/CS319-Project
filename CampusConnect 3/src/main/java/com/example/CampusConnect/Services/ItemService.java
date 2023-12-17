@@ -89,14 +89,16 @@ public class ItemService {
         return itemRepository.save(existingItem);
     }
 
-    public List<ItemDTO> searchItems(String query) {
+    public List<ItemDTO> searchItems(String query, Long userId) {
         String standardizedQuery = query.toLowerCase(); // or toUpperCase()
         List<Item> items = itemRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(standardizedQuery, standardizedQuery);
 
         return items.stream()
+                .filter(item -> !item.getUser().getUserId().equals(userId)) // Assuming getUser() returns the User object
                 .map(ItemDTO::fromEntity)
                 .collect(Collectors.toList());
     }
+
 
 
     public List<ItemDTO> findItemsByUserAndIsGivenTrue(Long userId) {
@@ -136,18 +138,22 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public List<ItemDTO> findAllItemsSorted() {
+    public List<ItemDTO> findAllItemsSorted(Long userId) {
         List<Item> items = itemRepository.findAllByOrderByCreatedAtDesc();
         return items.stream()
+                .filter(item -> !item.getUser().getUserId().equals(userId)) // Assuming getUser() returns the User object associated with the item
                 .map(ItemDTO::fromEntity)
                 .collect(Collectors.toList());
     }
-    public List<ItemDTO> findByType(String category) {
+
+    public List<ItemDTO> findByTypeAndNotUserId(String category, Long userId) {
         List<Item> items = itemRepository.findByCategory(category);
         return items.stream()
+                .filter(item -> !item.getUser().getUserId().equals(userId)) // Same assumption as above
                 .map(ItemDTO::fromEntity)
                 .collect(Collectors.toList());
     }
+
     private String extractFileKeyFromUrl(String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
             try {

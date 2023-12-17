@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import apiService from '../services/apiService';
 import withBackButtonListener from "../components/withBackButtonListener.jsx";
 import Footer from "../components/Footer.jsx";
+import SessionService from "../services/sessionService.js";
 
 function MainPage() {
     const [products, setProducts] = useState([]);
@@ -41,12 +42,14 @@ function MainPage() {
         }
     };*/
 
+    const userId = SessionService.getUserId();
+
     useEffect(() => {
         getProducts();
     }, []);
     const getProducts = async () => {
         try {
-            const response = await apiService.get('/items');
+            const response = await apiService.get(`/items/get/${userId}`);
             setProducts(response.data);
         } catch (error) {
             console.error('Error fetching products:', error);
