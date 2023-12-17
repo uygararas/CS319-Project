@@ -21,9 +21,15 @@ function AuthenticationPage() {
                 sessionStorage.setItem('jwtToken', response.data.token);
                 window.location.href = '/home';
             }
+            else if(response.data.body === "Email not found" || response.data.body === "Invalid credentials"){
+                alert("Invalid credentials");
+            }
+            else if(response.data.body === "Email not verified"){
+                alert("Email not verified");
+            }
         } catch (error) {
             console.error('Login error:', error);
-            alert(error.response.data);
+            alert("Make sure you signed up or check your internet connection");
             setIsSubmitting(false);
         }
     };
